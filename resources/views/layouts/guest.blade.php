@@ -31,6 +31,7 @@
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
         }
     </style>
+
 </head>
 
 <body class="font-sans antialiased text-gray-900">
@@ -46,6 +47,8 @@
             {{ $slot }}
         </div>
     </div>
+
+
 </body>
 
 </html>

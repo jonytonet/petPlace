@@ -15,7 +15,7 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
-       .input {
+        .input {
             width: 100%;
             color: #1f2937;
             border-radius: 0.375rem;
@@ -31,6 +31,8 @@
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
         }
     </style>
+
+{{--     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script> --}}
 </head>
 
 <body class="font-sans antialiased">
@@ -51,6 +53,9 @@
             {{ $slot }}
         </main>
     </div>
+
+
+
 </body>
 
 </html>
