@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Services\customer\CustomerService;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +33,13 @@ Route::middleware('auth')->group(function () {
         Route::view('pets', 'admin.pets.index')->name('pets.index');
     });
 
+});
+
+Route::get('teste-codigo', function () {
+    $teste = app()->make(CustomerService::class)->getZipCode('83.407-420');
+
+    dd($teste);
 
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
