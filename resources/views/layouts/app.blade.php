@@ -14,23 +14,7 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
-        .input {
-            width: 100%;
-            color: #1f2937;
-            border-radius: 0.375rem;
-            border: 1px solid #d1d5db;
-            padding: 0.25rem;
-            font-size: .8rem;
-            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
 
-        .input:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
-        }
-    </style>
 
 </head>
 
@@ -51,6 +35,7 @@
         <main>
             {{ $slot }}
         </main>
+
     </div>
 
 

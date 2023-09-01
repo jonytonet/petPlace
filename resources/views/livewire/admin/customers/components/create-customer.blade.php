@@ -106,7 +106,8 @@
                         <div class="mb-4">
                             <label for="rua"
                                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Rua</label>
-                            <input type="text" id="rua" class="input" wire:model.live='address' />
+                            <input type="text" id="rua" class="input" wire:model.live='address'
+                                value="{{ $address }}" />
                         </div>
                     </div>
                 </div>
@@ -129,18 +130,19 @@
                         <div class="mb-4">
                             <label for="bairro"
                                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Bairro</label>
-                            <input type="text" id="bairro" class="input" wire:model.live='district' />
-                        </div>
+                            <input type="text" id="bairro" class="input" wire:model.live='district'
+                                value="{{ $district }}" />
+                        </div>.live
                     </div>
                     <div class="col-span-1">
                         <div class="mb-4">
                             <label for="cidade"
                                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Cidade</label>
-                            <input type="text" id="cidade" class="input" wire:model='city' />
+                            <input type="text" id="cidade" class="input" wire:model='city'
+                                value="{{ $city }}" />
                         </div>
                     </div>
                 </div>
-                {{$zipCode}}  - {{$address}}
                 <div class="flex justify-end mt-6">
                     <x-secondary-button x-on:click="$dispatch('')">
                         {{ __('Cancelar') }}

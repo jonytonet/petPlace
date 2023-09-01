@@ -7,11 +7,11 @@ use Livewire\Component;
 
 class CreateCustomer extends Component
 {
-    public ?string $zipCode;
-    public ?string $address;
-    public ?string $city;
-    public ?string $state;
-    public ?string $district;
+    public $zipCode;
+    public $address = '';
+    public $city = '';
+    public $state = '';
+    public $district = '';
     public function render()
     {
         return view('livewire.admin.customers.components.create-customer');
