@@ -27,4 +27,19 @@
             </div>
         </div>
     </div>
+    <script>
+        /*   Livewire.on('getAddress', event => {
+                console.log(event);
+            }); */
+
+        document.addEventListener('livewire:initialized', () => {
+            @this.on('getAddress', (event) => {
+                console.log(event[0]);
+                document.getElementById("rua").value = event[0].address;
+                document.getElementById("cidade").value = event[0].city;
+                document.getElementById("bairro").value = event[0].district;
+
+            });
+        });
+    </script>
 </div>

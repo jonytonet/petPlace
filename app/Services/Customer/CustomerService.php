@@ -15,7 +15,7 @@ class CustomerService
     public function getZipCode(string $zipCode): ?Fluent
     {
         $zipCode = preg_replace('/[^0-9]/', '', $zipCode);
-        $response = app()->make(GetZipCodeRepository::class)->getZipCode('83407420');
+        $response = app()->make(GetZipCodeRepository::class)->getZipCode($zipCode);
         if ($response['status'] == 'success') {
             return new Fluent($response['data']);
         }

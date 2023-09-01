@@ -2,33 +2,40 @@
 
 namespace App\Livewire\Admin\Customers\Components;
 
+use App\Livewire\Forms\Customers\CreateCustomerForm;
 use App\Services\customer\CustomerService;
 use Livewire\Component;
 
 class CreateCustomer extends Component
 {
-    public $zipCode;
-    public $address = '';
-    public $city = '';
-    public $state = '';
-    public $district = '';
+    public CreateCustomerForm $form;
+
     public function render()
     {
         return view('livewire.admin.customers.components.create-customer');
     }
 
 
-    public function getZipCode()
+    public function getZipCode(string $zipCode)
     {
-        $result = app()->make(CustomerService::class)->getZipCode($this->zipCode);
+        $result = app()->make(CustomerService::class)->getZipCode($zipCode);
 
         if ($result) {
-            $this->address = $result->logradouro;
-            $this->city = $result->localidade;
-            $this->district = $result->bairro;
-            $this->state = $result->uf;
+
+            $this->dispatch('getAddress', [
+                'address' => $result->logradouro,
+                'city' => $result->localidade,
+                'district' => $result->bairro,
+            ]);
+            $this->form->state = $result->uf;
+
         }
 
+    }
+
+    public function save(bool $goToCreatePet)
+    {
+        dd($goToCreatePet);
     }
 
 
