@@ -13,7 +13,7 @@ class GetZipCodeRepository
 
     public function getZipCode($zipcode)
     {
-        $response = Http::withOptions(['verify' => false])->get("https://viacep.com.br/ws/$zipcode/json/");
+        $response = Http::get("https://viacep.com.br/ws/$zipcode/json/");
         if ($response->status() != 200) {
             return [
                 'status' => 'error',
