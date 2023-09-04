@@ -38,19 +38,22 @@ class CreateCustomer extends Component
 
     public function save(bool $goToCreatePet)
     {
-        $this->dispatch('sweetAlert', ['msg' => 'teste', 'icon' => 'success']);
+
         $result = $this->form->createCustomer();
         if ($result['status'] == 'success') {
             $this->dispatch('sweetAlert', ['msg' => $result['msg'], 'icon' => 'success']);
+            $this->form->clearForm();
+            if ($goToCreatePet) {
+                // ir para rota de cadastro de pets
+            } else {
+                $this->dispatch('return-to-table');
+            }
 
         } else {
             $this->dispatch('sweetAlert', ['msg' => $result['msg'], 'icon' => 'error']);
         }
 
-        if($goToCreatePet){
-            // ir para rota de cadastro de pets
-        }
-        $this->dispatch('createCustomerSuccess');
+
         return;
 
     }

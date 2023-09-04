@@ -80,4 +80,24 @@ class CreateCustomerForm extends Form
             ]
         );
     }
+
+    public function clearForm()
+    {
+        $this->name = '';
+        $this->email = '';
+        $this->cpf = '';
+        $this->rg = '';
+        $this->gender = '';
+        $this->cellphone = '';
+        $this->phone = '';
+        $this->alternateContactName = '';
+        $this->alternateContactCellphone = '';
+        $this->zipCode = '';
+        $this->address = '';
+        $this->addressComplement = '';
+        $this->district = '';
+        $this->city = '';
+        $this->state = '';
+
+    }
 }

@@ -14,19 +14,10 @@ class Index extends Component
         return view('livewire.admin.customers.index');
     }
 
+    #[On('return-to-table')]
     public function toggleShowTable()
     {
         $this->showTable = !$this->showTable;
     }
 
-    #[On('createCustomerSuccess')]
-    public function visibleTable()
-    {
-        $this->showTable = true;
-    }
-    #[On('closeTable')]
-    public function closeTable()
-    {
-        $this->showTable = false;
-    }
 }

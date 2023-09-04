@@ -183,7 +183,7 @@
                     </div>
                 </div>
                 <div class="flex justify-end mt-6">
-                    <x-secondary-button wire:click="$dispatch('visibleTable')">
+                    <x-secondary-button wire:click="$dispatch('return-to-table')">
                         {{ __('Cancelar') }}
                     </x-secondary-button>
 

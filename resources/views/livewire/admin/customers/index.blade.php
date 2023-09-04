@@ -7,11 +7,11 @@
 
                     <div class="flex justify-end">
                         @if ($showTable)
-                            <x-primary-button wire:click="closeTable">
+                            <x-primary-button wire:click="toggleShowTable">
                                 {{ __('Novo Cliente') }}
                             </x-primary-button>
                         @else
-                            <x-secondary-button wire:click="visibleTable">
+                            <x-secondary-button wire:click="toggleShowTable">
                                 {{ __('Voltar') }}
                             </x-secondary-button>
                         @endif
