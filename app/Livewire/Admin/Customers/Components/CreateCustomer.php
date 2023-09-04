@@ -3,7 +3,7 @@
 namespace App\Livewire\Admin\Customers\Components;
 
 use App\Livewire\Forms\Customers\CreateCustomerForm;
-use App\Services\customer\CustomerService;
+use App\Services\CustomerService;
 use Livewire\Component;
 
 class CreateCustomer extends Component
@@ -14,7 +14,6 @@ class CreateCustomer extends Component
     {
         return view('livewire.admin.customers.components.create-customer');
     }
-
 
     public function getZipCode(string $zipCode)
     {
@@ -37,7 +36,4 @@ class CreateCustomer extends Component
     {
         dd($goToCreatePet);
     }
-
-
-
 }

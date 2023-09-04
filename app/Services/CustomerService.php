@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\customer;
+namespace App\Services;
 
 use App\Repositories\Api\GetZipCodeRepository;
 use Illuminate\Support\Fluent;
