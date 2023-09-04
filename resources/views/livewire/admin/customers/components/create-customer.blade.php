@@ -1,10 +1,8 @@
 <div>
     <section class="space-y-6">
 
-
-
         <div class="w-full">
-            <form class="p-6">
+            <div class="p-6">
                 <div class="mb-4">
                     <h6>Dados do Cliente</h6>
                     <hr>
@@ -177,8 +175,7 @@
                         <div class="mb-4">
                             <label for="cidade"
                                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Cidade</label>
-                            <input type="text" id="cidade" class="input" wire:model='form.city'
-                               />
+                            <input type="text" id="cidade" class="input" wire:model='form.city' />
                             @error('form.city')
                                 <div class="text-sm font-bold text-red-400">{{ $message }}</div>
                             @enderror
@@ -186,7 +183,7 @@
                     </div>
                 </div>
                 <div class="flex justify-end mt-6">
-                    <x-secondary-button x-on:click="$dispatch('')">
+                    <x-secondary-button wire:click="$dispatch('visibleTable')">
                         {{ __('Cancelar') }}
                     </x-secondary-button>
 
@@ -197,7 +194,7 @@
                         {{ __('Salvar e Cadastrar Pet') }}
                     </x-primary-button>
                 </div>
-            </form>
+            </div>
         </div>
 
     </section>

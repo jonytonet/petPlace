@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Customers;
 
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class Index extends Component
 {
@@ -15,6 +16,17 @@ class Index extends Component
 
     public function toggleShowTable()
     {
-        $this->showTable = ! $this->showTable;
+        $this->showTable = !$this->showTable;
+    }
+
+    #[On('createCustomerSuccess')]
+    public function visibleTable()
+    {
+        $this->showTable = true;
+    }
+    #[On('closeTable')]
+    public function closeTable()
+    {
+        $this->showTable = false;
     }
 }

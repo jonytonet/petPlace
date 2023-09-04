@@ -6,8 +6,10 @@ use App\Models\UserAddress;
 
 class UserAddressRepository extends BaseRepository
 {
-    public function __construct(protected UserAddress $model)
+    protected $model;
+    public function __construct( UserAddress $model)
     {
+        $this->model = $model;
     }
 
     public function getFieldsSearchable(): array

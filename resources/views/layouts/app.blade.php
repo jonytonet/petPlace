@@ -44,8 +44,23 @@
 
         </div>
 
-        <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 
+        <script>
+
+            /* window.onload = function() {
+
+                 Livewire.on('sweetAlert', event => {
+                     swal.fire({
+                         position: 'top-end',
+                         text: event.msg,
+                         icon: event.icon,
+                         showConfirmButton: false,
+                         timer: 3000,
+                     });
+                 });
+
+             };*/
+        </script>
     </body>
 
 </html>

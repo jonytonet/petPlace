@@ -17,42 +17,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr
-                            class="transition duration-300 ease-in-out border-b hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                            <td class="px-6 py-4 font-medium whitespace-nowrap">1</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                        </tr>
-                        <tr
-                            class="transition duration-300 ease-in-out border-b hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                            <td class="px-6 py-4 font-medium whitespace-nowrap ">2</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap ">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap ">Cell</td>
-                        </tr>
-                        <tr
-                            class="transition duration-300 ease-in-out border-b hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                            <td class="px-6 py-4 font-medium whitespace-nowrap ">3</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                            <td class="px-6 py-4 whitespace-nowrap">Cell</td>
-                        </tr>
+                        @foreach ($customers as $customer)
+                            <tr
+                                class="transition duration-300 ease-in-out border-b hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+                                <td class="px-6 py-4 font-medium whitespace-nowrap">1</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{$customer->name}}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{$customer->cpf}}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{$customer->cellphone_number}}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{$customer->phone_number}}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{$customer->alternate_contact_name}}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{$customer->alternate_contact_cellphone_number}}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">#</td>
+                                <td class="px-6 py-4 whitespace-nowrap">#</td>
+                            </tr>
+                        @endforeach
+
+
                     </tbody>
                 </table>
             </div>
