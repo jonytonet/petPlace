@@ -1,6 +1,6 @@
 <div class="flex flex-col ">
     <div class="flex justify-between mt-3">
-        <input type="text" id="complemento" class=" input" style="max-width: 300px" placeholder="Pesquise"
+        <input type="text" class=" input" style="max-width: 300px" placeholder="Pesquise"
             wire:model.live='searchTerms' />
 
         <button type="button"
