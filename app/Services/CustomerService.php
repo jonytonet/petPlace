@@ -4,8 +4,9 @@ namespace App\Services;
 
 use App\Repositories\Api\GetZipCodeRepository;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Fluent;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Fluent;
 
 class CustomerService
 {
@@ -25,7 +26,6 @@ class CustomerService
         return null;
     }
 
-
     public function createCustomer(array $dataUser, array $dataAddess)
     {
         try {
@@ -34,13 +34,15 @@ class CustomerService
             $dataAddess['user_id'] = $user->id;
             app()->make(UserAddressService::class)->create($dataAddess);
             DB::commit();
+
             return [
                 'status' => 'success',
                 'data' => $user,
-                'msg' => 'Cliente cadastrado com sucesso!'
+                'msg' => 'Cliente cadastrado com sucesso!',
             ];
         } catch (\Exception $e) {
             DB::rollBack();
+
             return [
                 'status' => 'error',
                 'data' => null,
@@ -50,11 +52,14 @@ class CustomerService
 
     }
 
-    public function getCustomers() : Collection
+    public function getCustomers(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit = 15): LengthAwarePaginator
     {
-        return app()->make(UserService::class)->getCustomers();
+        return app()->make(UserService::class)->getCustomers($searchTerms, $filters, $orderBy, $orderDirection, $limit);
     }
 
+    public function destroyCustomer(int $id)
+    {
 
-
+        dd('aqui');
+    }
 }

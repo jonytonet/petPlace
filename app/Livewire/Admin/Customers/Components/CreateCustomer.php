@@ -4,7 +4,6 @@ namespace App\Livewire\Admin\Customers\Components;
 
 use App\Livewire\Forms\Customers\CreateCustomerForm;
 use App\Services\CustomerService;
-use Illuminate\Support\Fluent;
 use Livewire\Component;
 
 class CreateCustomer extends Component
@@ -52,9 +51,6 @@ class CreateCustomer extends Component
         } else {
             $this->dispatch('sweetAlert', ['msg' => $result['msg'], 'icon' => 'error']);
         }
-
-
-        return;
 
     }
 }

@@ -2,18 +2,18 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 abstract class BaseService
 {
-
     protected $repository;
+
     protected $nameRepo;
 
     public function __construct(string $nameRepo)
     {
-        $this->repository = App::make('App\Repositories\\' . $nameRepo);
+        $this->repository = App::make('App\Repositories\\'.$nameRepo);
     }
 
     public function getDados(Request $request): mixed
@@ -27,6 +27,7 @@ abstract class BaseService
                 $dados = ($request->get('relations') != 'Relacao') ? ($this->getAllComRelations($request)) : ($this->getAllSemRelations($request));
             }
         }
+
         return $dados;
     }
 
@@ -34,7 +35,7 @@ abstract class BaseService
     {
         return $this->repository
             ->advancedSearch($request, explode(',', $request->get('relations')))
-            ->orderByRaw(($request->get('order') ?? 'id') . ' ' . ($request->get('direction') ?? 'DESC'))
+            ->orderByRaw(($request->get('order') ?? 'id').' '.($request->get('direction') ?? 'DESC'))
             ->paginate($request->get('limit'));
     }
 
@@ -42,7 +43,7 @@ abstract class BaseService
     {
         return $this->repository
             ->advancedSearch($request)
-            ->orderByRaw(($request->get('order') ?? 'id') . ' ' . ($request->get('direction') ?? 'DESC'))
+            ->orderByRaw(($request->get('order') ?? 'id').' '.($request->get('direction') ?? 'DESC'))
             ->paginate($request->get('limit'));
     }
 
@@ -50,7 +51,7 @@ abstract class BaseService
     {
         return $this->repository
             ->SearchLike($request, explode(',', $request->get('relations')))
-            ->orderByRaw(($request->get('order') ?? 'id') . ' ' . ($request->get('direction') ?? 'DESC'))
+            ->orderByRaw(($request->get('order') ?? 'id').' '.($request->get('direction') ?? 'DESC'))
             ->paginate($request->get('limit'));
     }
 
@@ -58,7 +59,7 @@ abstract class BaseService
     {
         return $this->repository
             ->SearchLike($request)
-            ->orderByRaw(($request->get('order') ?? 'id') . ' ' . ($request->get('direction') ?? 'DESC'))
+            ->orderByRaw(($request->get('order') ?? 'id').' '.($request->get('direction') ?? 'DESC'))
             ->paginate($request->get('limit'));
     }
 
@@ -66,7 +67,7 @@ abstract class BaseService
     {
         return $this->repository
             ->findAllFieldsAnd($request, explode(',', $request->get('relations')))
-            ->orderByRaw(($request->get('order') ?? 'id') . ' ' . ($request->get('direction') ?? 'DESC'))
+            ->orderByRaw(($request->get('order') ?? 'id').' '.($request->get('direction') ?? 'DESC'))
             ->paginate($request->get('limit'));
     }
 
@@ -74,7 +75,7 @@ abstract class BaseService
     {
         return $this->repository
             ->findAllFieldsAnd($request)
-            ->orderByRaw(($request->get('order') ?? 'id') . ' ' . ($request->get('direction') ?? 'DESC'))
+            ->orderByRaw(($request->get('order') ?? 'id').' '.($request->get('direction') ?? 'DESC'))
             ->paginate($request->get('limit'));
     }
 
@@ -96,8 +97,9 @@ abstract class BaseService
     public function update(array $input, int $id): mixed
     {
         $res = $this->find($id);
-        if (!empty($res))
+        if (! empty($res)) {
             return $this->repository->update($input, $id);
+        }
     }
 
     public function show(int $id): mixed
@@ -108,13 +110,13 @@ abstract class BaseService
     public function destroy(int $id): mixed
     {
         $res = $this->find($id);
-        if (!empty($res))
+        if (! empty($res)) {
             return $res->delete();
+        }
     }
 
     public function truncate()
     {
         return $this->repository->truncate();
     }
-
 }

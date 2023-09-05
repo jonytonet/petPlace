@@ -19,43 +19,59 @@
                         <tr>
                             <th scope="col" class="px-6 py-4"><span role="button"
                                     wire:click="toggleOrder('id')">#</span></th>
+                            <th scope="col" class="px-6 py-4">Tutor</th>
                             <th scope="col" class="px-6 py-4"><span role="button"
                                     wire:click="toggleOrder('name')">Nome</span></th>
                             <th scope="col" class="px-6 py-4"><span role="button"
-                                    wire:click="toggleOrder('cpf')">Cpf</span></th>
+                                    wire:click="toggleOrder('species')">Especie</span></th>
                             <th scope="col" class="px-6 py-4"><span role="button"
-                                    wire:click="toggleOrder('cellphone_number')">Celular
-                                </span></th>
+                                    wire:click="toggleOrder('breed')">Raça</span></th>
                             <th scope="col" class="px-6 py-4"><span role="button"
-                                    wire:click="toggleOrder('alternate_contact_name')">Cont.Alternativo
-                                </span></th>
+                                    wire:click="toggleOrder('gender')">Gênero</span></th>
                             <th scope="col" class="px-6 py-4"><span role="button"
-                                    wire:click="toggleOrder('alternate_contact_cellphone_number')">Celular
-                                    Cont.Alternativo
-                                </span></th>
-                            <th scope="col" class="px-6 py-4">Pets</th>
+                                    wire:click="toggleOrder('fur')">Pelagem</span></th>
+                            <th scope="col" class="px-6 py-4"><span role="button"
+                                    wire:click="toggleOrder('size')">Tam.</span></th>
+                            <th scope="col" class="px-6 py-4"><span role="button"
+                                    wire:click="toggleOrder('date_of_birth')">Data Nasc.</span></th>
+                            <th scope="col" class="px-6 py-4"><span role="button"
+                                    wire:click="toggleOrder('microchip')">Microchip</span></th>
                             <th scope="col" class="px-6 py-4">Ações</th>
                         </tr>
                     </thead>
                     <tbody class="text-xs">
-                        @foreach ($customers as $customer)
+                        @foreach ($pets as $pet)
                             <tr
                                 class="transition duration-300 ease-in-out border-b hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
                                 <td class="px-6 py-4 font-medium whitespace-nowrap">1</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $customer->name }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $customer->cpf }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $customer->cellphone_number }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{ Illuminate\Support\Str::limit($customer->alternate_contact_name, 15, '...') }}
+                                    {{ Illuminate\Support\Str::limit($pet->user->name, 10, '...') }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $pet->name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $pet->species }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{ $pet->breed }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{ $customer->alternate_contact_cellphone_number }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap"> {{ $customer->pets->count() }}</td>
+                                    {{ $pet->gender }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{ $pet->fur }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{ $pet->size }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {{ Carbon\Carbon::parse($pet->date_of_birth)->format('d/m/Y') }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @if ($pet->microchip = 'yes')
+                                        Sim
+                                    @else
+                                        Não
+                                    @endif
+
+                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <x-secondary-button wire:click="">
                                         <i class="fas fa-binoculars"></i>
                                     </x-secondary-button>
-                                    <x-danger-button wire:click="destroyCustomer({{ $customer->id }})">
+                                    <x-danger-button wire:click="destroyPet({{ $pet->id }})">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </x-danger-button>
                                 </td>
@@ -65,7 +81,7 @@
                 </table>
 
             </div>
-            {{ $customers->links() }}
+            {{ $pets->links() }}
         </div>
     </div>
     <div wire:ignore.defer data-te-modal-init
@@ -131,7 +147,7 @@
                                                 </tr>
                                                 <tr class="border-b dark:border-neutral-500">
 
-                                                    <td class="px-6 py-4 whitespace-nowrap">Email</td>
+                                                    <td class="px-6 py-4 whitespace-nowrap">Especie</td>
                                                     <td class="px-6 py-4 whitespace-nowrap">
                                                         <select id="opcao" class="input text-neutral-700"
                                                             wire:model.live='filters.email.filter'>
@@ -150,7 +166,7 @@
                                                 </tr>
                                                 <tr class="border-b dark:border-neutral-500">
 
-                                                    <td class="px-6 py-4 whitespace-nowrap">Cpf</td>
+                                                    <td class="px-6 py-4 whitespace-nowrap">Raça</td>
                                                     <td class="px-6 py-4 whitespace-nowrap">
                                                         <select id="opcao" class="input text-neutral-700"
                                                             wire:model.live='filters.cpf.filter'>
@@ -168,25 +184,7 @@
                                                             wire:model.live='filters.cpf.term' /></td>
                                                 </tr>
 
-                                                <tr class="border-b dark:border-neutral-500">
 
-                                                    <td class="px-6 py-4 whitespace-nowrap">Rg</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        <select id="opcao" class="input text-neutral-700"
-                                                            wire:model.live='filters.rg.filter'>
-                                                            <option value="">selecione</option>
-                                                            <option value="=">igual a</option>
-                                                            <option value="LIKE">contém</option>
-                                                            <option value=">">maior que</option>
-                                                            <option value=">=">maior ou igual a</option>
-                                                            <option value="<">menor que</option>
-                                                            <option value="<=">menor ou igual a</option>
-                                                        </select>
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap"> <input type="text"
-                                                            class="input" x-mask="99.999.999-9"
-                                                            wire:model.live='filters.rg.term' /></td>
-                                                </tr>
                                                 <tr class="border-b dark:border-neutral-500">
 
                                                     <td class="px-6 py-4 whitespace-nowrap">Gênero</td>
@@ -206,14 +204,14 @@
                                                             class="input text-neutral-700"
                                                             wire:model.live='filters.gender.term'>
                                                             <option value="">Selecione</option>
-                                                            <option value="female">Feminino</option>
-                                                            <option value="male">Masculino</option>
-                                                            <option value="undefined">Não Declarado</option>
+                                                            <option value="female">Fêmea</option>
+                                                            <option value="male">Macho</option>
+
                                                         </select></td>
                                                 </tr>
                                                 <tr class="border-b dark:border-neutral-500">
 
-                                                    <td class="px-6 py-4 whitespace-nowrap">Contato Alternativo</td>
+                                                    <td class="px-6 py-4 whitespace-nowrap">Pelagem</td>
                                                     <td class="px-6 py-4 whitespace-nowrap">
                                                         <select id="opcao" class="input text-neutral-700"
                                                             wire:model.live='filters.alternateContactName.filter'>

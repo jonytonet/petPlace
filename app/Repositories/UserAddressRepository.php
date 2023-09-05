@@ -3,11 +3,13 @@
 namespace App\Repositories;
 
 use App\Models\UserAddress;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserAddressRepository extends BaseRepository
 {
     protected $model;
-    public function __construct( UserAddress $model)
+
+    public function __construct(UserAddress $model)
     {
         $this->model = $model;
     }
@@ -21,4 +23,6 @@ class UserAddressRepository extends BaseRepository
     {
         return UserAddress::class;
     }
+
+
 }

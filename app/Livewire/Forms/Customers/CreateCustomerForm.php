@@ -51,10 +51,10 @@ class CreateCustomerForm extends Form
 
     public $addressComplement;
 
-
     public function createCustomer()
     {
         $this->validate();
+
         return app()->make(CustomerService::class)->createCustomer(
             [
                 'name' => $this->name,

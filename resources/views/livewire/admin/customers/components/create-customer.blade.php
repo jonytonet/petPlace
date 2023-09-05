@@ -40,9 +40,9 @@
                                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Gênero</label>
                             <select id="opcao" class="input text-neutral-700" wire:model='form.gender'>
                                 <option value="">Selecione</option>
-                                <option value="F">Feminino</option>
-                                <option value="M">Masculino</option>
-                                <option value="I">Não Declarado</option>
+                                <option value="female">Feminino</option>
+                                <option value="male">Masculino</option>
+                                <option value="undefined">Não Declarado</option>
                             </select>
                             @error('form.gender')
                                 <div class="text-sm font-bold text-red-400">{{ $message }}</div>

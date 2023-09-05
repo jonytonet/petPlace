@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Livewire\Admin\Customers\Components;
+namespace App\Livewire\Admin\Pets\Components;
 
-use App\Services\CustomerService;
+use App\Services\PetService;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
+
 
 class Table extends Component
 {
@@ -26,18 +27,11 @@ class Table extends Component
     public function render()
     {
         return view(
-            'livewire.admin.customers.components.table',
-            ['customers' => app()->make(CustomerService::class)->getCustomers($this->searchTerms, $this->filtersFormatted, $this->orderBy, $this->orderDirection, $this->limit)]
+            'livewire.admin.pets.components.table',
+            ['pets' => app()->make(PetService::class)->getPetsToTable($this->searchTerms, $this->filtersFormatted, $this->orderBy, $this->orderDirection, $this->limit)]
         );
     }
 
-
-    public function destroyCustomer($customerId)
-    {
-        if (app()->make(CustomerService::class)->destroyCustomer($customerId)) {
-
-        }
-    }
 
     public function getFilters()
     {
@@ -76,5 +70,4 @@ class Table extends Component
             $this->orderBy = $orderBy;
         }
     }
-
 }
