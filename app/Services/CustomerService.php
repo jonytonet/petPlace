@@ -52,14 +52,19 @@ class CustomerService
 
     }
 
-    public function getCustomers(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit = 15): LengthAwarePaginator
+    public function getCustomersToTable(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit = 15): LengthAwarePaginator
     {
-        return app()->make(UserService::class)->getCustomers($searchTerms, $filters, $orderBy, $orderDirection, $limit);
+        return app()->make(UserService::class)->getCustomersToTable($searchTerms, $filters, $orderBy, $orderDirection, $limit);
     }
 
     public function destroyCustomer(int $id)
     {
 
         dd('aqui');
+    }
+
+    public function getAllCustomers(): Collection
+    {
+        return app()->make(UserService::class)->getAllCustomers();
     }
 }

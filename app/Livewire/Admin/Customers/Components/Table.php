@@ -27,7 +27,7 @@ class Table extends Component
     {
         return view(
             'livewire.admin.customers.components.table',
-            ['customers' => app()->make(CustomerService::class)->getCustomers($this->searchTerms, $this->filtersFormatted, $this->orderBy, $this->orderDirection, $this->limit)]
+            ['customers' => app()->make(CustomerService::class)->getCustomersToTable($this->searchTerms, $this->filtersFormatted, $this->orderBy, $this->orderDirection, $this->limit)]
         );
     }
 

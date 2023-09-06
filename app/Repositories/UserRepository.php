@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserRepository extends BaseRepository
@@ -24,7 +25,7 @@ class UserRepository extends BaseRepository
         return User::class;
     }
 
-    public function getCustomers(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit = 15): LengthAwarePaginator
+    public function getCustomersToTable(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit = 15): LengthAwarePaginator
     {
         $query = $this->model->where('user_type_id', 4);
         if ($searchTerms) {
@@ -37,5 +38,9 @@ class UserRepository extends BaseRepository
         }
 
         return $query->orderBy($orderBy, $orderDirection)->paginate($limit);
+    }
+    public function getAllCustomers(): Collection
+    {
+        return $this->model->where('user_type_id', 4)->orderBy('name', 'DESC')->get();
     }
 }
