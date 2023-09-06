@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::view('clientes', 'admin.customers.index')->name('customers.index');
         Route::view('pets', 'admin.pets.index')->name('pets.index');
+        Route::view('cadastros', 'admin.miscellaneous-records.index')->name('miscellaneous-records.index');
     });
 
 });
