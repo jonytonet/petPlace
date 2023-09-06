@@ -3,19 +3,17 @@
 namespace App\Livewire\Admin\Pets\Components;
 
 use App\Services\PetService;
-use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
-
 
 class Table extends Component
 {
     use WithPagination;
 
-
     public $searchTerms;
 
     public $filters = [];
+
     public $filtersFormatted = [];
 
     public $orderBy = 'id';
@@ -32,7 +30,6 @@ class Table extends Component
         );
     }
 
-
     public function getFilters()
     {
         $filterArray = [];
@@ -41,7 +38,7 @@ class Table extends Component
                 continue;
             }
             if ($filter['filter'] == 'LIKE') {
-                $filter['term'] = '%' . $filter['term'] . '%';
+                $filter['term'] = '%'.$filter['term'].'%';
             }
             $filterArray[] = [$key, $filter['filter'], $filter['term']];
         }

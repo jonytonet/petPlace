@@ -30,15 +30,16 @@ class UserRepository extends BaseRepository
         $query = $this->model->where('user_type_id', 4);
         if ($searchTerms) {
             $query = $query->where(function ($query) use ($searchTerms) {
-                $query->where('name', 'LIKE', '%' . $searchTerms . '%')->orWhere('email', 'LIKE', '%' . $searchTerms . '%')->orWhere('alternate_contact_name', 'LIKE', '%' . $searchTerms . '%');
+                $query->where('name', 'LIKE', '%'.$searchTerms.'%')->orWhere('email', 'LIKE', '%'.$searchTerms.'%')->orWhere('alternate_contact_name', 'LIKE', '%'.$searchTerms.'%');
             });
         }
-        if (!empty($filters)) {
+        if (! empty($filters)) {
             $query = $query->where($filters);
         }
 
         return $query->orderBy($orderBy, $orderDirection)->paginate($limit);
     }
+
     public function getAllCustomers(): Collection
     {
         return $this->model->where('user_type_id', 4)->orderBy('name', 'DESC')->get();

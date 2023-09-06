@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\UserAddress;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserAddressRepository extends BaseRepository
 {
@@ -23,6 +22,4 @@ class UserAddressRepository extends BaseRepository
     {
         return UserAddress::class;
     }
-
-
 }

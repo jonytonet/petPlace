@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Repositories\PetRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-
 class PetService extends BaseService
 {
     public function __construct(protected PetRepository $petRepository)

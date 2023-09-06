@@ -3,7 +3,6 @@
 namespace App\Livewire\Admin\Customers\Components;
 
 use App\Services\CustomerService;
-use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -11,10 +10,10 @@ class Table extends Component
 {
     use WithPagination;
 
-
     public $searchTerms;
 
     public $filters = [];
+
     public $filtersFormatted = [];
 
     public $orderBy = 'id';
@@ -31,7 +30,6 @@ class Table extends Component
         );
     }
 
-
     public function destroyCustomer($customerId)
     {
         if (app()->make(CustomerService::class)->destroyCustomer($customerId)) {
@@ -47,7 +45,7 @@ class Table extends Component
                 continue;
             }
             if ($filter['filter'] == 'LIKE') {
-                $filter['term'] = '%' . $filter['term'] . '%';
+                $filter['term'] = '%'.$filter['term'].'%';
             }
             $filterArray[] = [$key, $filter['filter'], $filter['term']];
         }
@@ -76,5 +74,4 @@ class Table extends Component
             $this->orderBy = $orderBy;
         }
     }
-
 }
