@@ -16,7 +16,7 @@ class Breed extends Model
         'description',
     ];
 
-    public function specie():BelongsTo
+    public function specie(): BelongsTo
     {
         return $this->belongsTo(Specie::class);
     }

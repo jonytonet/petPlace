@@ -20,7 +20,8 @@
                             <label for="tutor"
                                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Tutor</label>
 
-                            <select class="input" data-te-select-init data-te-select-filter="true" wire:model='form.userId'>
+                            <select class="input" data-te-select-init data-te-select-filter="true"
+                                wire:model='form.userId'>
                                 <option value="">Selecione</option>
                                 @foreach ($customers as $customer)
                                     <option value="{{ $customer->id }}">{{ $customer->name }}</option>
@@ -89,8 +90,9 @@
                         <div class="mb-4">
                             <label for="image"
                                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Foto</label>
-                            <input type="file" id="image" class="input" wire:model.live='photo' />
-                            @error('form.photo')
+                            <input type="file" id="image" class="input" wire:model.live='photo'
+                                accept="image/*" />
+                            @error('photo')
                                 <div class="text-sm font-bold text-red-400">{{ $message }}</div>
                             @enderror
                         </div>

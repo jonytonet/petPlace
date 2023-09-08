@@ -9,12 +9,14 @@ use Livewire\Form;
 class CreateOrEditBreedForm extends Form
 {
     public $breedId;
+
     #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
     public $specieId;
+
     #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
     public $name;
-    public $description;
 
+    public $description;
 
     public function save()
     {
@@ -22,14 +24,18 @@ class CreateOrEditBreedForm extends Form
         if ($this->breedId) {
             if (app()->make(BreedService::class)->update(['name' => $this->name, 'description' => $this->description, 'specie_id' => $this->specieId], $this->breedId)) {
                 $this->clearProprieties();
+
                 return true;
             }
+
             return false;
         } else {
             if (app()->make(BreedService::class)->create(['name' => $this->name, 'description' => $this->description, 'specie_id' => $this->specieId])) {
                 $this->clearProprieties();
+
                 return true;
             }
+
             return false;
         }
 
@@ -42,5 +48,4 @@ class CreateOrEditBreedForm extends Form
         $this->description = '';
         $this->specieId = '';
     }
-
 }

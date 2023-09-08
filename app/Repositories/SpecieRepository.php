@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-
 use App\Models\Specie;
 use Illuminate\Pagination\LengthAwarePaginator;
 

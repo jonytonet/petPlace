@@ -9,10 +9,11 @@ use Livewire\Form;
 class CreateOrEditSpecieForm extends Form
 {
     public $specieId;
+
     #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
     public $name;
-    public $description;
 
+    public $description;
 
     public function save()
     {
@@ -20,14 +21,18 @@ class CreateOrEditSpecieForm extends Form
         if ($this->specieId) {
             if (app()->make(SpecieService::class)->update(['name' => $this->name, 'description' => $this->description], $this->specieId)) {
                 $this->clearProprieties();
+
                 return true;
             }
+
             return false;
         } else {
             if (app()->make(SpecieService::class)->create(['name' => $this->name, 'description' => $this->description])) {
                 $this->clearProprieties();
+
                 return true;
             }
+
             return false;
         }
 

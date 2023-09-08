@@ -6,6 +6,7 @@ use App\Livewire\Forms\Pet\CreatePetForm;
 use App\Services\BreedService;
 use App\Services\CustomerService;
 use App\Services\SpecieService;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -16,9 +17,13 @@ class CreatePet extends Component
 
     #[Rule('image|max:1024')] // 1MB Max
     public $photo;
+
     public $customers = [];
+
     public $species = [];
+
     public $breeds = [];
+
     public CreatePetForm $form;
 
     public function render()
@@ -35,7 +40,17 @@ class CreatePet extends Component
 
     public function save()
     {
+        $this->form->validate();
 
+        $directory = 'public/assets/images/pets';
+        if (! Storage::exists($directory)) {
+            Storage::makeDirectory($directory);
+        }
+
+        $filename = uniqid().'.'.$this->photo->getClientOriginalExtension();
+        $path = $this->photo->storeAs($directory, $filename);
+        dd($filename, $path);
+        $this->form->image = $path;
         $this->form->save();
     }
 }

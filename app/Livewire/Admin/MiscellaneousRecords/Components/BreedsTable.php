@@ -23,16 +23,15 @@ class BreedsTable extends Component
     public $orderDirection = 'ASC';
 
     public $limit = 15;
+
     public $species = [];
 
-
     public CreateOrEditBreedForm $formBreed;
-
-
 
     public function render()
     {
         $this->species = app()->make(SpecieService::class)->all();
+
         return view(
             'livewire.admin.miscellaneous-records.components.breeds-table',
             ['breeds' => app()->make(BreedService::class)->getBreedsToTable($this->searchTermsBreed, $this->filtersFormatted, $this->orderBy, $this->orderDirection, $this->limit)]
@@ -43,10 +42,11 @@ class BreedsTable extends Component
     {
         if ($this->formBreed->save()) {
             $this->dispatch('sweetAlert', ['msg' => 'Registro salvo com sucesso', 'icon' => 'success']);
+
             return /* redirect(request()->header('Referer')) */;
         }
         $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao tentar gravar a Raça! Tente novamente.', 'icon' => 'error']);
-        return;
+
     }
 
     public function editBreed(int $id)
@@ -58,6 +58,7 @@ class BreedsTable extends Component
             $this->formBreed->name = $breed->name;
             $this->formBreed->description = $breed->description;
             $this->dispatch('editBreed', $breed);
+
             return;
         }
 
@@ -68,10 +69,12 @@ class BreedsTable extends Component
     {
         if (app()->make(BreedService::class)->destroy($id)) {
             $this->dispatch('sweetAlert', ['msg' => 'Registro deletado com sucesso', 'icon' => 'success']);
+
             return;
         }
         $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao tentar deletar a Raça! Tente novamente.', 'icon' => 'error']);
     }
+
     public function addBreed()
     {
         $this->formBreed->breedId = '';

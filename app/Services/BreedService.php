@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-
 use App\Repositories\BreedRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 

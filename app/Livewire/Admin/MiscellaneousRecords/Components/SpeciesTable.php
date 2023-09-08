@@ -22,12 +22,10 @@ class SpeciesTable extends Component
     public $orderDirection = 'ASC';
 
     public $limit = 15;
-    public $modalLabel = "Cadastrar Especie";
+
+    public $modalLabel = 'Cadastrar Especie';
 
     public CreateOrEditSpecieForm $form;
-
-
-
 
     public function render()
     {
@@ -41,6 +39,7 @@ class SpeciesTable extends Component
     {
         if ($this->form->save()) {
             $this->dispatch('sweetAlert', ['msg' => 'Registro salvo com sucesso', 'icon' => 'success']);
+
             return /* redirect(request()->header('Referer')) */;
         }
         $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao tentar gravar a Especie! Tente novamente.', 'icon' => 'error']);
@@ -56,6 +55,7 @@ class SpeciesTable extends Component
             $this->form->name = $specie->name;
             $this->form->description = $specie->description;
             $this->dispatch('editSpecie', $specie);
+
             return;
         }
 
@@ -66,19 +66,19 @@ class SpeciesTable extends Component
     {
         if (app()->make(SpecieService::class)->destroy($id)) {
             $this->dispatch('sweetAlert', ['msg' => 'Registro deletado com sucesso', 'icon' => 'success']);
+
             return;
         }
         $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao tentar deletar a Especie! Tente novamente.', 'icon' => 'error']);
 
     }
+
     public function addSpecie(): void
     {
-        $this->modalLabel = "Cadastrar Especie";
+        $this->modalLabel = 'Cadastrar Especie';
         $this->form->specieId = '';
         $this->form->name = '';
         $this->form->description = '';
         $this->dispatch('addSpecie');
     }
-
-
 }
