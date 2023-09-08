@@ -20,16 +20,14 @@
                             <label for="tutor"
                                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Tutor</label>
 
-                            <select class="input" data-te-select-init data-te-select-filter="true">
+                            <select class="input" data-te-select-init data-te-select-filter="true" wire:model='form.userId'>
                                 <option value="">Selecione</option>
                                 @foreach ($customers as $customer)
                                     <option value="{{ $customer->id }}">{{ $customer->name }}</option>
                                 @endforeach
 
                             </select>
-
-
-                            @error('form.name')
+                            @error('form.userId')
                                 <div class="text-sm font-bold text-red-400">{{ $message }}</div>
                             @enderror
                         </div>
@@ -37,41 +35,43 @@
                             <label for="name"
                                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Nome do
                                 Pet</label>
-                            <input type="text" class="input" id="name" wire:model='' />
-                            @error('form.cellphone')
+                            <input type="text" class="input" id="name" wire:model='form.name' />
+                            @error('form.name')
                                 <div class="text-sm font-bold text-red-400">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-4">
                             <label for="raca"
                                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Raça</label>
-                            <select id="raca" class="input text-neutral-700" wire:model=''>
+                            <select id="raca" class="input text-neutral-700" wire:model='form.breed'>
                                 <option value="">Selecione</option>
-                                <option value="">YorkShire</option>
-                                <option value="">Pug</option>
-                                <option value="">Outros</option>
+                                @foreach ($breeds as $breed)
+                                    @if ($form->specieId == $breed->specie_id)
+                                        <option value="{{ $breed->name }}">{{ $breed->name }}</option>
+                                    @endif
+                                @endforeach
                             </select>
-                            @error('form.cpf')
+                            @error('form.breed')
                                 <div class="text-sm font-bold text-red-400">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-4">
                             <label for="pelagem"
                                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Pelagem</label>
-                            <select id="pelagem" class="input text-neutral-700" wire:model='form.gender'>
+                            <select id="pelagem" class="input text-neutral-700" wire:model='form.fur'>
                                 <option value="">Selecione</option>
                                 <option value="short">Curto</option>
                                 <option value="average">Médio</option>
                                 <option value="long ">Longo</option>
                             </select>
-                            @error('form.gender')
+                            @error('form.fur')
                                 <div class="text-sm font-bold text-red-400">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-4">
                             <label for="porte"
                                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Porte</label>
-                            <select id="porte" class="input text-neutral-700" wire:model='form.gender'>
+                            <select id="porte" class="input text-neutral-700" wire:model='form.size'>
                                 <option value="">Selecione</option>
                                 <option value="short">Mini</option>
                                 <option value="average">Pequeno</option>
@@ -79,7 +79,7 @@
                                 <option value="long ">Grande</option>
                                 <option value="long ">Gigante</option>
                             </select>
-                            @error('form.gender')
+                            @error('form.size')
                                 <div class="text-sm font-bold text-red-400">{{ $message }}</div>
                             @enderror
                         </div>
@@ -90,21 +90,21 @@
                             <label for="image"
                                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Foto</label>
                             <input type="file" id="image" class="input" wire:model.live='photo' />
-                            @error('form.email')
+                            @error('form.photo')
                                 <div class="text-sm font-bold text-red-400">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-4">
                             <label for="especie"
                                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Especie</label>
-                            <select id="especie" class="input text-neutral-700" wire:model='form.gender'>
+                            <select id="especie" class="input text-neutral-700" wire:model.live='form.specieId'>
                                 <option value="">Selecione</option>
-                                <option value="canine">Canina</option>
-                                <option value="feline">Felina</option>
-                                <option value="others">Outros</option>
+                                @foreach ($species as $specie)
+                                    <option value="{{ $specie->name }}">{{ $specie->name }}</option>
+                                @endforeach
                             </select>
 
-                            @error('form.phone')
+                            @error('form.specieId')
                                 <div class="text-sm font-bold text-red-400">{{ $message }}</div>
                             @enderror
                         </div>
@@ -123,21 +123,21 @@
                         <div class="mb-4">
                             <label for="aniversario"
                                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Aniversário</label>
-                            <input type="date" id="aniversario" class="input" wire:model='' />
-                            @error('form.gender')
+                            <input type="date" id="aniversario" class="input" wire:model='form.dateOfBirth' />
+                            @error('form.dateOfBirth')
                                 <div class="text-sm font-bold text-red-400">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-4">
-                            <label for="especie"
+                            <label for="microchip"
                                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Microchip</label>
-                            <select id="especie" class="input text-neutral-700" wire:model='form.gender'>
+                            <select id="microchip" class="input text-neutral-700" wire:model='form.microchip'>
                                 <option value="">Selecione</option>
                                 <option value="yes">Sim</option>
                                 <option value="no">Não</option>
                             </select>
 
-                            @error('form.phone')
+                            @error('form.microchip')
                                 <div class="text-sm font-bold text-red-400">{{ $message }}</div>
                             @enderror
                         </div>
