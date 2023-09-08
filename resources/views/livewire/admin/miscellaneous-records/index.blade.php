@@ -38,7 +38,7 @@
     </div>
     <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
     <script>
-        document.addEventListener('livewire:initialized', () => {
+        window.addEventListener('livewire:initialized', () => {
 
             @this.on('sweetAlert', (event) => {
                 swal.fire({
@@ -49,6 +49,26 @@
                     timer: 3000,
                 });
             });
+
+            @this.on('editSpecie', (event) => {
+                document.getElementById("name-specie").value = event[0].name;
+                document.getElementById("description-specie").value = event[0].description;
+            })
+            @this.on('addSpecie', (event) => {
+                document.getElementById("name-specie").value = '';
+                document.getElementById("description-specie").value = '';
+            })
+            @this.on('editBreed', (event) => {
+                document.getElementById("name-breed").value = event[0].name;
+                document.getElementById("specie-id-breed").value = event[0].specie_id;
+                document.getElementById("description-breed").value = event[0].description;
+            })
+            @this.on('addBreed', (event) => {
+                document.getElementById("name-breed").value = '';
+                document.getElementById("specie-id-breed").value = '';
+                document.getElementById("description-breed").value = '';
+            })
+
         });
     </script>
 </div>
