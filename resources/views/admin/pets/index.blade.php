@@ -9,6 +9,9 @@
             </div>
         </div>
     </x-slot>
-
-    @livewire('admin.pets.index')
+    @if (isset($customersId))
+        @livewire('admin.pets.index', ['customersId', $customersId])
+    @else
+        @livewire('admin.pets.index')
+    @endif
 </x-app-layout>

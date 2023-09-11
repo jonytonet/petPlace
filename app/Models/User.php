@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -64,9 +65,11 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function setPasswordAttribute($value)
+    public function password(): Attribute
     {
-        $this->attributes['password'] = Hash::make($value);
+        return Attribute::make(
+            set: fn (string $value) => Hash::make($value),
+        );
     }
 
     public function userType()

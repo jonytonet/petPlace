@@ -43,7 +43,7 @@ class CreateCustomer extends Component
             $this->dispatch('sweetAlert', ['msg' => $result['msg'], 'icon' => 'success']);
             $this->form->clearForm();
             if ($goToCreatePet) {
-                // ir para rota de cadastro de pets
+                $this->redirectRoute('pets.index', ['customersId' => $result['data']['id']]);
             } else {
                 $this->dispatch('return-to-table');
             }

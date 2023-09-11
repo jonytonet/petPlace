@@ -7,6 +7,7 @@ use App\Services\BreedService;
 use App\Services\CustomerService;
 use App\Services\SpecieService;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -38,19 +39,36 @@ class CreatePet extends Component
         $this->breeds = app()->make(BreedService::class)->all();
     }
 
-    public function save()
+    public function save(bool $newPet)
     {
-        $this->form->validate();
-
         $directory = 'public/assets/images/pets';
         if (! Storage::exists($directory)) {
             Storage::makeDirectory($directory);
         }
-
         $filename = uniqid().'.'.$this->photo->getClientOriginalExtension();
         $path = $this->photo->storeAs($directory, $filename);
-        dd($filename, $path);
         $this->form->image = $path;
-        $this->form->save();
+        $this->form->validate();
+        if ($this->form->save()) {
+
+            $this->dispatch('sweetAlert', ['msg' => 'Pet cadastrado com sucesso!', 'icon' => 'success']);
+            $this->photo = null;
+            $this->form->clearForm();
+            if ($newPet) {
+                $this->dispatch('clearForm');
+
+                return;
+            }
+
+            return redirect(request()->header('Referer'));
+        }
+
+        $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao cadastrar o pet!', 'icon' => 'success']);
+    }
+
+    #[On('createPetForCustomer')]
+    public function createPetForCustomer($data)
+    {
+        $this->form->userId = $data[0]['customersId'];
     }
 }

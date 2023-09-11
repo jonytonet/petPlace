@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('image')->nullable();
             $table->string('name');
-            $table->string('species');
-            $table->string('breed');
+            $table->unsignedBigInteger('specie_id');
+            $table->unsignedBigInteger('breed_id');
             $table->enum('gender', ['male', 'female']);
             $table->date('date_of_birth')->nullable();
             $table->string('fur');

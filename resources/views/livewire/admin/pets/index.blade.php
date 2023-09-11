@@ -41,6 +41,11 @@
                     timer: 3000,
                 });
             });
+
+            @this.on('clearForm', (event) => {
+                let form = document.getElementById("form-create-pet");
+                form.reset();
+            });
         });
     </script>
 </div>
