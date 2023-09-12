@@ -10,7 +10,7 @@ class BathAndGroomingControl extends Model
     use HasFactory;
 
     protected $fillable = [
-        'sevice_reference_id',
+        'service_reference_id',
         'pet_id',
         'bath_and_grooming_plan_id',
         'user_id',

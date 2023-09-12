@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sevice_references', function (Blueprint $table) {
+        Schema::create('service_references', function (Blueprint $table) {
             $table->id();
             $table->string('reference')->unique();
             $table->timestamps();

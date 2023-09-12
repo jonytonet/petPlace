@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('veterinary_records', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('sevice_reference_id')->nullable();
+            $table->unsignedBigInteger('service_reference_id')->nullable();
             $table->foreignId('pet_id')->constrained()->onDelete('cascade');
             $table->foreignId('veterinarian_id')->constrained()->onDelete('cascade');
             $table->text('complaints')->nullable();

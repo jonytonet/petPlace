@@ -10,7 +10,7 @@ class Dewormer extends Model
     use HasFactory;
 
     protected $fillable = [
-        'sevice_reference_id',
+        'service_reference_id',
         'pet_id',
         'veterinarian_id',
         'given_date',

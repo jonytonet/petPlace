@@ -10,7 +10,7 @@ class Vaccine extends Model
     use HasFactory;
 
     protected $fillable = [
-        'sevice_reference_id',
+        'service_reference_id',
         'name',
         'type',
         'application_date',

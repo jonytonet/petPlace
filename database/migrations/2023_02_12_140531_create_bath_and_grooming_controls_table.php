@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('bath_and_grooming_controls', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('sevice_reference_id')->nullable();
+            $table->unsignedBigInteger('service_reference_id')->nullable();
             $table->foreignId('pet_id')->constrained();
             $table->foreignId('bath_and_grooming_plan_id')->constrained();
             $table->foreignId('user_id')->constrained();

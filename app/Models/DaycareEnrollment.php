@@ -11,7 +11,7 @@ class DaycareEnrollment extends Model
 
     protected $fillable = [
         'pet_id',
-        'sevice_reference_id',
+        'service_reference_id',
         'daycare_plan_id',
         'initial_date_plan',
     ];
