@@ -11,6 +11,7 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Url;
 
 class CreatePet extends Component
 {
@@ -18,6 +19,8 @@ class CreatePet extends Component
 
     #[Rule('image|max:1024')] // 1MB Max
     public $photo;
+    #[Url(as: 'customersId')]
+    public $customer;
 
     public $customers = [];
 
@@ -42,10 +45,10 @@ class CreatePet extends Component
     public function save(bool $newPet)
     {
         $directory = 'public/assets/images/pets';
-        if (! Storage::exists($directory)) {
+        if (!Storage::exists($directory)) {
             Storage::makeDirectory($directory);
         }
-        $filename = uniqid().'.'.$this->photo->getClientOriginalExtension();
+        $filename = uniqid() . '.' . $this->photo->getClientOriginalExtension();
         $path = $this->photo->storeAs($directory, $filename);
         $this->form->image = $path;
         $this->form->validate();
@@ -66,9 +69,5 @@ class CreatePet extends Component
         $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao cadastrar o pet!', 'icon' => 'success']);
     }
 
-    #[On('createPetForCustomer')]
-    public function createPetForCustomer($data)
-    {
-        $this->form->userId = $data[0]['customersId'];
-    }
+
 }

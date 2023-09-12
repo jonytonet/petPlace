@@ -3,9 +3,12 @@
 namespace App\Livewire\Admin\Pets;
 
 use Livewire\Component;
+use Livewire\Attributes\Url;
 
 class Index extends Component
 {
+    #[Url]
+
     public $customersId;
 
     public bool $showTable = true;
@@ -24,7 +27,6 @@ class Index extends Component
     {
         if ($this->customersId) {
             $this->showTable = false;
-            $this->dispatch('createPetForCustomer', ['customersId' => $this->customersId]);
         }
     }
 }

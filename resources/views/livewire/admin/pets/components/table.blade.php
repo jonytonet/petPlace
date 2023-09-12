@@ -91,7 +91,7 @@
 
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <x-secondary-button wire:click="">
+                                    <x-secondary-button wire:click="goToShow({{ $pet->id }})">
                                         <i class="fas fa-binoculars"></i>
                                     </x-secondary-button>
                                     <x-danger-button wire:click="destroyPet({{ $pet->id }})">

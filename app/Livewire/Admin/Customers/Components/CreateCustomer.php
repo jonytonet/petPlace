@@ -20,7 +20,10 @@ class CreateCustomer extends Component
         $result = app()->make(CustomerService::class)->getZipCode($zipCode);
 
         if ($result) {
-
+            if ($result['erro']) {
+                $this->dispatch('sweetAlert', ['msg' => 'Cep não localizado ou inválido!', 'icon' => 'error']);
+                return;
+            }
             $this->dispatch('getAddress', [
                 'address' => $result->logradouro,
                 'city' => $result->localidade,
@@ -30,7 +33,6 @@ class CreateCustomer extends Component
             $this->form->district = $result->bairro;
             $this->form->city = $result->localidade;
             $this->form->state = $result->uf;
-
         }
 
     }
@@ -43,7 +45,7 @@ class CreateCustomer extends Component
             $this->dispatch('sweetAlert', ['msg' => $result['msg'], 'icon' => 'success']);
             $this->form->clearForm();
             if ($goToCreatePet) {
-                $this->redirectRoute('pets.index', ['customersId' => $result['data']['id']]);
+                return to_route('pets.index', ['customersId' => $result['data']->id]);
             } else {
                 $this->dispatch('return-to-table');
             }

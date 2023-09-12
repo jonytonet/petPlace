@@ -6,11 +6,13 @@ use App\Services\PetService;
 use Livewire\Attributes\Rule;
 use Livewire\Form;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Url;
 
 class CreatePetForm extends Form
 {
     use WithFileUploads;
 
+    #[Url(as: 'customersId')]
     #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
     public $userId;
 

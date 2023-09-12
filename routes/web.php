@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::view('clientes', 'admin.customers.index')->name('customers.index');
         Route::view('pets', 'admin.pets.index')->name('pets.index');
+        Route::view('pet/{id}', 'admin.pets.show')->name('pets.show');
         Route::view('cadastros', 'admin.miscellaneous-records.index')->name('miscellaneous-records.index');
     });
 
@@ -43,4 +44,4 @@ Route::get('teste-codigo', function () {
 
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

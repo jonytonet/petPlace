@@ -38,7 +38,7 @@ class Table extends Component
                 continue;
             }
             if ($filter['filter'] == 'LIKE') {
-                $filter['term'] = '%'.$filter['term'].'%';
+                $filter['term'] = '%' . $filter['term'] . '%';
             }
             $filterArray[] = [$key, $filter['filter'], $filter['term']];
         }
@@ -66,5 +66,10 @@ class Table extends Component
             $this->orderDirection = 'ASC';
             $this->orderBy = $orderBy;
         }
+    }
+
+    public function goToShow($id)
+    {
+        return redirect()->to('/admin/pet/' . $id);
     }
 }

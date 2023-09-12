@@ -21,9 +21,7 @@
                             <div class="mb-4">
                                 <label for="tutor"
                                     class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Tutor</label>
-
-                                <select class="input" data-te-select-init data-te-select-filter="true"
-                                    wire:model.live='form.userId'>
+                                <select class="input" {{--    data-te-select-init data-te-select-filter="true" --}} wire:model.live='form.userId'>
                                     <option value="">Selecione</option>
                                     @foreach ($customers as $customer)
                                         <option value="{{ $customer->id }}">{{ $customer->name }}</option>
