@@ -22,7 +22,7 @@ class BreedsTable extends Component
 
     public $orderDirection = 'ASC';
 
-    public $limit = 15;
+    public $limit = 5;
 
     public $species = [];
 

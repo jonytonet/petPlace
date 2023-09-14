@@ -22,6 +22,7 @@ class CreateCustomer extends Component
         if ($result) {
             if ($result['erro']) {
                 $this->dispatch('sweetAlert', ['msg' => 'Cep não localizado ou inválido!', 'icon' => 'error']);
+
                 return;
             }
             $this->dispatch('getAddress', [

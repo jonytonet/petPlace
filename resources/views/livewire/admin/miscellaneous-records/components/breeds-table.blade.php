@@ -16,38 +16,43 @@
         <div class="sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                 <div class="overflow-x-auto">
-                    <table class="min-w-full font-light text-left">
-                        <thead class="text-sm font-medium border-b dark:border-neutral-500">
-                            <tr>
-                                <th scope="col" class="px-6 py-4"><span role="button">#</span></th>
-                                <th scope="col" class="px-6 py-4"><span role="button">Nome</span></th>
-                                <th scope="col" class="px-6 py-4"><span role="button">Especie</span></th>
-                                <th scope="col" class="px-6 py-4">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-xs">
-                            @foreach ($breeds as $breed)
-                                <tr
-                                    class="transition duration-300 ease-in-out border-b hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                                    <td class="px-6 py-4 font-medium whitespace-nowrap">{{ $breed->id }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $breed->name }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $breed->specie->name }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <x-secondary-button wire:click="editBreed({{ $breed->id }})"
-                                            data-te-toggle="modal" data-te-target="#form-create-breed"
-                                            data-te-ripple-init data-te-ripple-color="light">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </x-secondary-button>
-                                        <x-danger-button wire:click="destroyBreed({{ $breed->id }})">
-                                            <i class="fa-solid fa-trash-can"></i>
-                                        </x-danger-button>
-                                    </td>
+                    <div class="overflow-y-auto max-h-500">
+                        <table class="min-w-full font-light text-left">
+                            <thead class="text-sm font-medium border-b dark:border-neutral-500">
+                                <tr>
+                                    <th scope="col" class="px-6 py-4"><span role="button">#</span></th>
+                                    <th scope="col" class="px-6 py-4"><span role="button">Nome</span></th>
+                                    <th scope="col" class="px-6 py-4"><span role="button">Especie</span></th>
+                                    <th scope="col" class="px-6 py-4">Ações</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody class="text-xs">
+                                @foreach ($breeds as $breed)
+                                    <tr
+                                        class="transition duration-300 ease-in-out border-b hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+                                        <td class="px-6 py-4 font-medium whitespace-nowrap">{{ $breed->id }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $breed->name }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $breed->specie->name }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <x-secondary-button wire:click="editBreed({{ $breed->id }})"
+                                                data-te-toggle="modal" data-te-target="#form-create-breed"
+                                                data-te-ripple-init data-te-ripple-color="light">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </x-secondary-button>
+                                            <x-danger-button wire:click="destroyBreed({{ $breed->id }})">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </x-danger-button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                {{ $breeds->links() }}
+                <div class="mt-3">
+                    {{ $breeds->links() }}
+                </div>
+
             </div>
         </div>
         <div wire:ignore.defer data-te-modal-init
@@ -81,7 +86,7 @@
                             <div class="relative flex-auto p-4" data-te-modal-body-ref>
                                 <div class="mb-4">
                                     <label for="specie-id-breed"
-                                        class="block text-sm font-medium text-neutral-700 dark:text-neutral-200"></label>
+                                        class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Especie</label>
                                     <select id="specie-id-breed" class="input text-neutral-700"
                                         wire:model='formBreed.specieId'>
                                         <option value="">Selecione</option>

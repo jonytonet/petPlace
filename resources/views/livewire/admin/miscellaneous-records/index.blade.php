@@ -12,6 +12,27 @@
                                 <div class="grid grid-cols-2 gap-6">
                                     <div>
                                         <div class="mb-4">
+                                            <h6>Usuários</h6>
+                                            <hr>
+                                        </div>
+                                        @livewire('admin.miscellaneous-records.components.user-table')
+
+                                    </div>
+                                    <div>
+                                        <div class="mb-4">
+                                            <h6>Serviços</h6>
+                                            <hr>
+
+                                        </div>
+                                        @livewire('admin.miscellaneous-records.components.services-type-table')
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-6">
+
+                                <div class="grid grid-cols-2 gap-6">
+                                    <div>
+                                        <div class="mb-4">
                                             <h6>Especies</h6>
                                             <hr>
                                         </div>
@@ -67,6 +88,17 @@
                 document.getElementById("name-breed").value = '';
                 document.getElementById("specie-id-breed").value = '';
                 document.getElementById("description-breed").value = '';
+            })
+
+
+            @this.on('showFormVet', (event) => {
+                let div = document.getElementById("form-vet");
+                if (event[0]) {
+                    div.style.display = "block";
+                } else {
+                    div.style.display = "none";
+                }
+
             })
 
         });

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('alternate_contact_name')->nullable()->after('phone_number');
             $table->string('alternate_contact_cellphone_number')->nullable()->after('alternate_contact_name');
             $table->unsignedBigInteger('user_type_id')->after('password')->nullable();
+            $table->boolean('active')->after('user_type_id')->default(true);
             $table->foreign('user_type_id')->references('id')->on('user_types')->onDelete('set null');
         });
     }
@@ -31,6 +32,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['user_type_id']);
+            $table->dropColumn('active');
             $table->dropColumn('user_type_id');
             $table->dropColumn('alternate_contact_cellphone_number');
             $table->dropColumn('alternate_contact_name');

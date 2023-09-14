@@ -21,7 +21,7 @@ class SpeciesTable extends Component
 
     public $orderDirection = 'ASC';
 
-    public $limit = 15;
+    public $limit = 5;
 
     public $modalLabel = 'Cadastrar Especie';
 

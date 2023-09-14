@@ -104,7 +104,9 @@
                 </table>
 
             </div>
-            {{ $pets->links() }}
+            <div class="mt-3">
+                {{ $pets->links() }}
+            </div>
         </div>
     </div>
     <div wire:ignore.defer data-te-modal-init

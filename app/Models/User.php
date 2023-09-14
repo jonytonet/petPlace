@@ -32,6 +32,7 @@ class User extends Authenticatable
         'phone_number',
         'alternate_contact_name',
         'alternate_contact_cellphone_number',
+        'active',
     ];
 
     /**

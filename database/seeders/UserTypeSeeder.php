@@ -15,23 +15,28 @@ class UserTypeSeeder extends Seeder
         $userTypes = [
             [
                 'id' => 1,
-                'name' => 'admin',
+                'name' => 'Admin',
                 'permissions' => 'master',
             ],
             [
                 'id' => 2,
-                'name' => 'veterinarian',
+                'name' => 'Veterinário',
                 'permissions' => 'vets',
             ],
             [
                 'id' => 3,
-                'name' => 'groomer',
+                'name' => 'Groomer',
                 'permissions' => 'groomers',
             ],
             [
                 'id' => 4,
-                'name' => 'client',
+                'name' => 'Cliente',
                 'permissions' => 'customers',
+            ],
+            [
+                'id' => 5,
+                'name' => 'Daycare',
+                'permissions' => 'daycare',
             ],
         ];
 

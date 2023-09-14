@@ -22,4 +22,14 @@ class UserService extends BaseService
     {
         return $this->userRepository->getAllCustomers();
     }
+
+    public function getUsersToTable(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit = 15): LengthAwarePaginator
+    {
+        return $this->userRepository->getUsersToTable($searchTerms, $filters, $orderBy, $orderDirection, $limit);
+    }
+
+    public function getUsers(): Collection
+    {
+        return $this->userRepository->getUsers();
+    }
 }

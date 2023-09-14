@@ -2,13 +2,12 @@
 
 namespace App\Livewire\Admin\Pets;
 
-use Livewire\Component;
 use Livewire\Attributes\Url;
+use Livewire\Component;
 
 class Index extends Component
 {
     #[Url]
-
     public $customersId;
 
     public bool $showTable = true;

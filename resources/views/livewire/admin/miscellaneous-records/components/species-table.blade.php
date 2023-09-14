@@ -16,36 +16,41 @@
         <div class="sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                 <div class="overflow-x-auto">
-                    <table class="min-w-full font-light text-left">
-                        <thead class="text-sm font-medium border-b dark:border-neutral-500">
-                            <tr>
-                                <th scope="col" class="px-6 py-4"><span role="button">#</span></th>
-                                <th scope="col" class="px-6 py-4"><span role="button">Nome</span></th>
-                                <th scope="col" class="px-6 py-4">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-xs">
-                            @foreach ($species as $specie)
-                                <tr
-                                    class="transition duration-300 ease-in-out border-b hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
-                                    <td class="px-6 py-4 font-medium whitespace-nowrap">{{ $specie->id }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $specie->name }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <x-secondary-button wire:click="editSpecie({{ $specie->id }})"
-                                            data-te-toggle="modal" data-te-target="#form-create-specie"
-                                            data-te-ripple-init data-te-ripple-color="light">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </x-secondary-button>
-                                        <x-danger-button wire:click="destroySpecie({{ $specie->id }})">
-                                            <i class="fa-solid fa-trash-can"></i>
-                                        </x-danger-button>
-                                    </td>
+                    <div class="overflow-y-auto max-h-500">
+                        <table class="min-w-full font-light text-left">
+                            <thead class="text-sm font-medium border-b dark:border-neutral-500">
+                                <tr>
+                                    <th scope="col" class="px-6 py-4"><span role="button">#</span></th>
+                                    <th scope="col" class="px-6 py-4"><span role="button">Nome</span></th>
+                                    <th scope="col" class="px-6 py-4">Ações</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody class="text-xs">
+                                @foreach ($species as $specie)
+                                    <tr
+                                        class="transition duration-300 ease-in-out border-b hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+                                        <td class="px-6 py-4 font-medium whitespace-nowrap">{{ $specie->id }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ $specie->name }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <x-secondary-button wire:click="editSpecie({{ $specie->id }})"
+                                                data-te-toggle="modal" data-te-target="#form-create-specie"
+                                                data-te-ripple-init data-te-ripple-color="light">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </x-secondary-button>
+                                            <x-danger-button wire:click="destroySpecie({{ $specie->id }})">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </x-danger-button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-              {{ $species->links() }}
+                <div class="mt-3">
+                    {{ $species->links() }}
+                </div>
+
             </div>
         </div>
         <div wire:ignore.defer data-te-modal-init

@@ -27,7 +27,7 @@ class UserRepository extends BaseRepository
 
     public function getCustomersToTable(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit = 15): LengthAwarePaginator
     {
-        $query = $this->model->where('user_type_id', 4);
+        $query = $this->model->where('user_type_id', 4)->where('active', 1);
         if ($searchTerms) {
             $query = $query->where(function ($query) use ($searchTerms) {
                 $query->where('name', 'LIKE', '%'.$searchTerms.'%')->orWhere('email', 'LIKE', '%'.$searchTerms.'%')->orWhere('alternate_contact_name', 'LIKE', '%'.$searchTerms.'%');
@@ -42,6 +42,26 @@ class UserRepository extends BaseRepository
 
     public function getAllCustomers(): Collection
     {
-        return $this->model->where('user_type_id', 4)->orderBy('name', 'DESC')->get();
+        return $this->model->where('user_type_id', 4)->where('active', 1)->orderBy('name', 'DESC')->get();
+    }
+
+    public function getUsersToTable(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit = 15): LengthAwarePaginator
+    {
+        $query = $this->model->where('user_type_id', '!=', 4)->where('active', 1);
+        if ($searchTerms) {
+            $query = $query->where(function ($query) use ($searchTerms) {
+                $query->where('name', 'LIKE', '%'.$searchTerms.'%')->orWhere('email', 'LIKE', '%'.$searchTerms.'%');
+            });
+        }
+        if (! empty($filters)) {
+            $query = $query->where($filters);
+        }
+
+        return $query->orderBy($orderBy, $orderDirection)->paginate($limit);
+    }
+
+    public function getUsers(): Collection
+    {
+        return $this->model->where('user_type_id', '!=', 4)->where('active', 1)->orderBy('name', 'DESC')->get();
     }
 }
