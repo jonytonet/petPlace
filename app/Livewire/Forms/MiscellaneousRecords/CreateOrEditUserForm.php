@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Forms\MiscellaneousRecords;
 
+use App\Models\User;
 use App\Services\UserService;
 use App\Services\VeterinarianService;
+use Livewire\Attributes\Rule;
 use Livewire\Form;
 
 class CreateOrEditUserForm extends Form
@@ -16,7 +18,7 @@ class CreateOrEditUserForm extends Form
     #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
     public $name;
 
-    #[Rule(['required', 'unique:email', 'email'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule(['required', 'string', 'email', 'unique:'.User::class.',email'], message: 'Email já existente ou invalido!')]
     public $email;
 
     #[Rule(['min:8'], onUpdate: false, message: 'Senha deve ter no mínimo 8 caracteres!')]
@@ -41,7 +43,7 @@ class CreateOrEditUserForm extends Form
 
     public function save()
     {
-        $this->validate();
+
         if ($this->userId) {
             if ($this->password) {
                 if ($this->password != $this->password) {
@@ -87,7 +89,7 @@ class CreateOrEditUserForm extends Form
 
             return ['status' => 'error', 'message' => 'Houve um erro insperado!'];
         } else {
-
+            $this->validate();
             $createUser = app()->make(UserService::class)->create([
                 'user_type_id' => $this->userType,
                 'name' => $this->name,
@@ -134,5 +136,19 @@ class CreateOrEditUserForm extends Form
         }
 
         return false;
+    }
+
+    public function clear()
+    {
+        $this->userType = null;
+        $this->name = null;
+        $this->email = null;
+        $this->password = null;
+        $this->gender = null;
+        $this->cellphone = null;
+        $this->cpf = null;
+        $this->rg = null;
+        $this->qualification = null;
+        $this->crmv = null;
     }
 }

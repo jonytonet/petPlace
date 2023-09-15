@@ -90,7 +90,7 @@
                 document.getElementById("description-breed").value = '';
             })
             @this.on('editUser', (event) => {
-                console.log(event);
+
                 document.getElementById("user_type").value = event[0].user_type_id;
                 document.getElementById("name-user").value = event[0].name;
                 document.getElementById("email-user").value = event[0].email;
@@ -100,10 +100,22 @@
                 document.getElementById("rg-user").value = event[0].rg;
                 document.getElementById("qualification").value = event[1].qualification;
                 document.getElementById("crmv").value = event[1].crmv;
+                document.getElementById("password-user").value = '';
+                document.getElementById("password-user-confirm").value = '';
+
             })
             @this.on('addUser', (event) => {
-                let form = document.getElementById("form-create-user");
-                form.reset();
+                document.getElementById("user_type").value = '';
+                document.getElementById("name-user").value = '';
+                document.getElementById("email-user").value = '';
+                document.getElementById("gender-user").value = '';
+                document.getElementById("cell_phone-user").value = '';
+                document.getElementById("cpf-user").value = '';
+                document.getElementById("rg-user").value = '';
+                document.getElementById("qualification").value = '';
+                document.getElementById("crmv").value = '';
+                document.getElementById("password-user").value = '';
+                document.getElementById("password-user-confirm").value = '';
             });
 
             @this.on('showFormVet', (event) => {

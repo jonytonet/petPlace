@@ -95,6 +95,7 @@ class UserTable extends Component
 
     public function addUser()
     {
+        $this->formUser->clear();
         $this->dispatch('addUser');
     }
 

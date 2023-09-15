@@ -34,7 +34,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $user->name }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $user->userType->name }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <x-secondary-button wire:click="editUser{{ $user->id }})"
+                                            <x-secondary-button wire:click="editUser({{ $user->id }})"
                                                 data-te-toggle="modal" data-te-target="#form-create-user"
                                                 data-te-ripple-init data-te-ripple-color="light">
                                                 <i class="fas fa-pencil-alt"></i>
@@ -80,7 +80,7 @@
                             </svg>
                         </button>
                     </div>
-                    <form wire:submit='createOrEditUser' id="form-create-user">
+                    <form id="form-create-user">
                         <!--Modal body-->
                         <div class="relative flex-auto p-4" data-te-modal-body-ref>
                             <div class="mb-4">
@@ -180,7 +180,7 @@
                                 <label for="password-user"
                                     class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Senha</label>
                                 <input type="password" class="input" id="password-user"
-                                    wire:model.live='formUser.password' />
+                                    wire:model='formUser.password' />
                                 @error('formUser.password')
                                     <div class="text-sm font-bold text-red-400">{{ $message }}</div>
                                 @enderror
@@ -205,8 +205,8 @@
                                 {{ __('Cancelar') }}
                             </x-secondary-button>
 
-                            <x-primary-button class="ml-3" type='submit' data-te-modal-dismiss data-te-ripple-init
-                                data-te-ripple-color="light">
+                            <x-primary-button class="ml-3" type='button' wire:click='createOrEditUser'
+                              {{--   data-te-modal-dismiss data-te-ripple-init data-te-ripple-color="light" --}}>
                                 {{ __('Salvar') }}
                             </x-primary-button>
                         </div>
