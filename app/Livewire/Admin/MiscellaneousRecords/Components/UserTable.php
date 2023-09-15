@@ -51,6 +51,7 @@ class UserTable extends Component
         $result = $this->formUser->save();
         if ($result['status'] == 'success') {
             $this->dispatch('sweetAlert', ['msg' => $result['message'], 'icon' => 'success']);
+
             return;
         }
         $this->dispatch('sweetAlert', ['msg' => $result['message'], 'icon' => 'error']);
@@ -80,6 +81,7 @@ class UserTable extends Component
             }
 
             $this->dispatch('editUser', $user, $vet);
+
             return;
         }
 
@@ -88,7 +90,7 @@ class UserTable extends Component
 
     public function destroyUser(int $id)
     {
-       $this->formUser->destroy($id);
+        $this->formUser->destroy($id);
     }
 
     public function addUser()

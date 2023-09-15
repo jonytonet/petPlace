@@ -70,7 +70,7 @@ class User extends Authenticatable
     public function password(): Attribute
     {
         return Attribute::make(
-            set: fn(string $value) => Hash::make($value),
+            set: fn (string $value) => Hash::make($value),
         );
     }
 
@@ -108,10 +108,4 @@ class User extends Authenticatable
     {
         return $this->hasOne(Veterinarian::class, 'user_id', 'id');
     }
-
-
-
-
-
-
 }

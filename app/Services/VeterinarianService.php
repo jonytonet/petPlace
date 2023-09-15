@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Repositories\VeterinarianRepository;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class VeterinarianService extends BaseService
 {
@@ -11,6 +10,4 @@ class VeterinarianService extends BaseService
     {
         parent::__construct('VeterinarianRepository');
     }
-
-
 }

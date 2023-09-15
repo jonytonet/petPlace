@@ -18,8 +18,10 @@ class CreateOrEditUserForm extends Form
 
     #[Rule(['required', 'unique:email', 'email'], onUpdate: false, message: 'Campo obrigatório!')]
     public $email;
+
     #[Rule(['min:8'], onUpdate: false, message: 'Senha deve ter no mínimo 8 caracteres!')]
     public $password;
+
     #[Rule(['min:8'], onUpdate: false, message: 'Senha deve ter no mínimo 8 caracteres!')]
     public $passwordConfirm;
 
@@ -56,7 +58,6 @@ class CreateOrEditUserForm extends Form
                     'cpf' => $this->cpf,
                     'rg' => $this->rg,
 
-
                 ], $this->userId);
 
             } else {
@@ -80,6 +81,7 @@ class CreateOrEditUserForm extends Form
                     $veterinarian->crmv = $this->crmv;
                     $veterinarian->update();
                 }
+
                 return ['status' => 'success', 'message' => 'Cadastro atualizado com sucesso!'];
             }
 
@@ -108,10 +110,11 @@ class CreateOrEditUserForm extends Form
                             'user_id' => $createUser->id,
                         ]
                     );
-                    if (!$vet) {
+                    if (! $vet) {
                         return ['status' => 'error', 'message' => 'Houve um erro ao cadastra dados do Veterinário(a)!'];
                     }
                 }
+
                 return ['status' => 'success', 'message' => 'Cadastro realizado com sucesso!'];
             }
 
@@ -129,6 +132,7 @@ class CreateOrEditUserForm extends Form
         ) {
             return true;
         }
+
         return false;
     }
 }

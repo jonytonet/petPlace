@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Veterinarian;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class VeterinarianRepository extends BaseRepository
 {
@@ -23,6 +22,4 @@ class VeterinarianRepository extends BaseRepository
     {
         return Veterinarian::class;
     }
-
-
 }
