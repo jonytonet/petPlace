@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
@@ -69,7 +70,7 @@ class User extends Authenticatable
     public function password(): Attribute
     {
         return Attribute::make(
-            set: fn (string $value) => Hash::make($value),
+            set: fn(string $value) => Hash::make($value),
         );
     }
 
@@ -102,4 +103,15 @@ class User extends Authenticatable
     {
 
     }
+
+    public function veterinarian(): HasOne
+    {
+        return $this->hasOne(Veterinarian::class, 'user_id', 'id');
+    }
+
+
+
+
+
+
 }

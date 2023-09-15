@@ -89,7 +89,22 @@
                 document.getElementById("specie-id-breed").value = '';
                 document.getElementById("description-breed").value = '';
             })
-
+            @this.on('editUser', (event) => {
+                console.log(event);
+                document.getElementById("user_type").value = event[0].user_type_id;
+                document.getElementById("name-user").value = event[0].name;
+                document.getElementById("email-user").value = event[0].email;
+                document.getElementById("gender-user").value = event[0].gender;
+                document.getElementById("cell_phone-user").value = event[0].cellphone_number;
+                document.getElementById("cpf-user").value = event[0].cpf;
+                document.getElementById("rg-user").value = event[0].rg;
+                document.getElementById("qualification").value = event[1].qualification;
+                document.getElementById("crmv").value = event[1].crmv;
+            })
+            @this.on('addUser', (event) => {
+                let form = document.getElementById("form-create-user");
+                form.reset();
+            });
 
             @this.on('showFormVet', (event) => {
                 let div = document.getElementById("form-vet");

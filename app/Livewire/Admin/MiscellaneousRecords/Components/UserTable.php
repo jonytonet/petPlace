@@ -48,39 +48,52 @@ class UserTable extends Component
 
     public function createOrEditUser()
     {
-        if ($this->formBreed->save()) {
-            $this->dispatch('sweetAlert', ['msg' => 'Registro salvo com sucesso', 'icon' => 'success']);
-
+        $result = $this->formUser->save();
+        if ($result['status'] == 'success') {
+            $this->dispatch('sweetAlert', ['msg' => $result['message'], 'icon' => 'success']);
             return;
         }
-        $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao tentar gravar a Raça! Tente novamente.', 'icon' => 'error']);
+        $this->dispatch('sweetAlert', ['msg' => $result['message'], 'icon' => 'error']);
 
     }
 
     public function editUser(int $id)
     {
-        /*  $breed = app()->make(BreedService::class)->find($id);
-         if ($breed) {
-             $this->formBreed->breedId = $id;
-             $this->formBreed->specieId = $breed->specie_id;
-             $this->formBreed->name = $breed->name;
-             $this->formBreed->description = $breed->description;
-             $this->dispatch('editBreed', $breed);
+        $vet = ['qualification' => null, 'crmv' => null];
+        $user = app()->make(UserService::class)->find($id);
+        if ($user) {
+            $this->formUser->userType = $user->user_type_id;
+            $this->formUser->userId = $user->id;
+            $this->formUser->name = $user->name;
+            $this->formUser->email = $user->email;
+            $this->formUser->gender = $user->gender;
+            $this->formUser->password = null;
+            $this->formUser->cellphone_number = $user->cellphone_number;
+            $this->formUser->cpf = $user->cpf;
+            $this->formUser->rg = $user->rg;
+            if ($user->user_type_id == 2) {
+                $this->formUser->qualification = $user->veterinarian->qualification;
+                $this->formUser->crmv = $user->veterinarian->crmv;
+                $vet['qualification'] = $user->veterinarian->qualification;
+                $vet['crmv'] = $user->veterinarian->crmv;
+                $this->dispatch('showFormVet', true);
+            }
 
-             return;
-         }
-  */
+            $this->dispatch('editUser', $user, $vet);
+            return;
+        }
+
         $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao tentar recuperar a Raça! Tente novamente,', 'icon' => 'error']);
     }
 
     public function destroyUser(int $id)
     {
-
+       $this->formUser->destroy($id);
     }
 
     public function addUser()
     {
-
+        $this->dispatch('addUser');
     }
 
     public function checkUserType()

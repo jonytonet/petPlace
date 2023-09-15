@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms\MiscellaneousRecords;
 
 use App\Services\UserService;
+use App\Services\VeterinarianService;
 use Livewire\Form;
 
 class CreateOrEditUserForm extends Form
@@ -17,11 +18,9 @@ class CreateOrEditUserForm extends Form
 
     #[Rule(['required', 'unique:email', 'email'], onUpdate: false, message: 'Campo obrigatório!')]
     public $email;
-
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule(['min:8'], onUpdate: false, message: 'Senha deve ter no mínimo 8 caracteres!')]
     public $password;
-
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule(['min:8'], onUpdate: false, message: 'Senha deve ter no mínimo 8 caracteres!')]
     public $passwordConfirm;
 
     #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
@@ -42,23 +41,94 @@ class CreateOrEditUserForm extends Form
     {
         $this->validate();
         if ($this->userId) {
-            if (app()->make(UserService::class)->update([], $this->userId)) {
+            if ($this->password) {
+                if ($this->password != $this->password) {
+                    return ['status' => 'error', 'message' => 'Senhas não conferem!'];
+                }
 
-                /* if( $this->userType == 2){
+                $updateUser = app()->make(UserService::class)->update([
+                    'user_type_id' => $this->userType,
+                    'name' => $this->name,
+                    'email' => $this->email,
+                    'password' => $this->password,
+                    'gender' => $this->gender,
+                    'cellphone_number' => $this->cellphone,
+                    'cpf' => $this->cpf,
+                    'rg' => $this->rg,
 
-                } */
-                return true;
+
+                ], $this->userId);
+
+            } else {
+                $updateUser = app()->make(UserService::class)->update([
+                    'user_type_id' => $this->userType,
+                    'name' => $this->name,
+                    'email' => $this->email,
+                    'gender' => $this->gender,
+                    'cellphone_number' => $this->cellphone,
+                    'cpf' => $this->cpf,
+                    'rg' => $this->rg,
+
+                ], $this->userId);
+            }
+            if ($updateUser) {
+
+                if ($this->userType == 2) {
+                    $veterinarian = $updateUser->veterinarian;
+                    $veterinarian->name = $this->name;
+                    $veterinarian->qualification = $this->qualification;
+                    $veterinarian->crmv = $this->crmv;
+                    $veterinarian->update();
+                }
+                return ['status' => 'success', 'message' => 'Cadastro atualizado com sucesso!'];
             }
 
-            return false;
+            return ['status' => 'error', 'message' => 'Houve um erro insperado!'];
         } else {
-            if (app()->make(SpecieService::class)->create(['name' => $this->name])) {
 
-                return true;
+            $createUser = app()->make(UserService::class)->create([
+                'user_type_id' => $this->userType,
+                'name' => $this->name,
+                'email' => $this->email,
+                'password' => $this->password,
+                'gender' => $this->gender,
+                'cellphone_number' => $this->cellphone,
+                'cpf' => $this->cpf,
+                'rg' => $this->rg,
+            ]);
+
+            if ($createUser) {
+
+                if ($this->userType == 2) {
+                    $vet = app()->make(VeterinarianService::class)->create(
+                        [
+                            'name' => $this->name,
+                            'qualification' => $this->qualification,
+                            'crmv' => $this->crmv,
+                            'user_id' => $createUser->id,
+                        ]
+                    );
+                    if (!$vet) {
+                        return ['status' => 'error', 'message' => 'Houve um erro ao cadastra dados do Veterinário(a)!'];
+                    }
+                }
+                return ['status' => 'success', 'message' => 'Cadastro realizado com sucesso!'];
             }
 
-            return false;
+            return ['status' => 'error', 'message' => 'Houve um erro insperado!'];
         }
 
+    }
+
+    public function destroy($id)
+    {
+        if (
+            app()->make(UserService::class)->update([
+                'active' => false,
+            ], $id)
+        ) {
+            return true;
+        }
+        return false;
     }
 }
