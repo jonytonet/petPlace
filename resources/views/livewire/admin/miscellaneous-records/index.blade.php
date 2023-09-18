@@ -128,6 +128,21 @@
 
             })
 
+            @this.on('editServiceType', (event) => {
+                document.getElementById("name-serviceType").value = event[0].name;
+                document.getElementById("commission-serviceType").value = event[0].commission;
+                document.getElementById("description-serviceType").value = event[0].description;
+                document.getElementById("commission_type-serviceType").value = event[0].commission_type;
+
+            })
+            @this.on('addServiceType', (event) => {
+                document.getElementById("name-serviceType").value = '';
+                document.getElementById("commission-serviceType").value = '';
+                document.getElementById("description-serviceType").value = '';
+                document.getElementById("commission_type-serviceType").value = '';
+
+            })
+
         });
     </script>
 </div>
