@@ -5,7 +5,8 @@
             <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                    <div class="flex justify-end">
+                    <div class="flex justify-between">
+                        <h5 class="text-xl font-medium leading-tight">Planos</h5>
                         <div class="flex items-center justify-center mb-4">
                             <x-secondary-button wire:click='goToIndex'>
                                 {{ __('Voltar') }}
@@ -39,8 +40,6 @@
                                                             role="button">Nome</span></th>
                                                     <th scope="col" class="px-6 py-4"><span
                                                             role="button">Descrição</span></th>
-                                                    <th scope="col" class="px-6 py-4"><span role="button">Dias por
-                                                            Semana</span></th>
                                                     <th scope="col" class="px-6 py-4"><span role="button">Total
                                                             Dias</span></th>
                                                     <th scope="col" class="px-6 py-4"><span
@@ -59,8 +58,6 @@
                                                         <td class="px-6 py-4 whitespace-nowrap">{{ $plan->name }}</td>
                                                         <td class="px-6 py-4 whitespace-nowrap">{{ $plan->description }}
                                                         </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap">
-                                                            {{ $plan->sessions_per_week }}</td>
                                                         <td class="px-6 py-4 whitespace-nowrap">{{ $plan->days }}</td>
                                                         <td class="px-6 py-4 whitespace-nowrap">
                                                             @if ($plan->session_type == 6)
@@ -70,7 +67,7 @@
                                                             @endif
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap">
-                                                            R${{ number_format($plan->price ?? 0, 2, ',', '.') }}%
+                                                            R${{ number_format($plan->price ?? 0, 2, ',', '.') }}
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap">
@@ -130,9 +127,9 @@
                                             <div class="relative flex-auto p-4" data-te-modal-body-ref>
 
                                                 <div class="mb-4">
-                                                    <label for="name-Plan"
+                                                    <label for="name-plan"
                                                         class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Nome</label>
-                                                    <input type="text" class="input" id="name-Plan"
+                                                    <input type="text" class="input" id="name-plan"
                                                         wire:model='formPlan.name' />
                                                     @error('formPlan.name')
                                                         <div class="text-sm font-bold text-red-400">{{ $message }}
@@ -140,15 +137,16 @@
                                                     @enderror
                                                 </div>
                                                 <div class="mb-4">
-                                                    <label for="description-Plan"
+                                                    <label for="description-plan"
                                                         class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Descrição</label>
-                                                    <input type="text" class="input" id="description-Plan"
+                                                    <input type="text" class="input" id="description-plan"
                                                         wire:model='formPlan.description' />
                                                     @error('formPlan.description')
                                                         <div class="text-sm font-bold text-red-400">{{ $message }}
                                                         </div>
                                                     @enderror
                                                 </div>
+
                                                 <div class="mb-4">
                                                     <label for="days-plan"
                                                         class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Total
@@ -161,18 +159,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="mb-4">
-                                                    <label for="days-plan"
-                                                        class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Total
-                                                        dias</label>
-                                                    <input type="number" class="input" id="days-plan"
-                                                        wire:model='formPlan.days' />
-                                                    @error('formPlan.days')
-                                                        <div class="text-sm font-bold text-red-400">{{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                                <div class="mb-4">
-                                                    <label for="sessionType-lan"
+                                                    <label for="sessionType-plan"
                                                         class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Tipo
                                                         de
                                                         comissão</label>
@@ -183,19 +170,20 @@
                                                         <option value="12">Período Inteiro</option>
 
                                                     </select>
-                                                    <div class="mb-4">
-                                                        <label for="price-plan"
-                                                            class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Preço</label>
-                                                        <input type="text" class="input" id="price-plan"
-                                                            x-mask="99.99" wire:model='formPlan.price' />
-                                                        @error('formPlan.price')
-                                                            <div class="text-sm font-bold text-red-400">
-                                                                {{ $message }}
-                                                            </div>
-                                                        @enderror
-                                                    </div>
+
                                                     @error('formPlan.sessionType')
                                                         <div class="text-sm font-bold text-red-400">{{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="price-plan"
+                                                        class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Preço</label>
+                                                    <input type="text" class="input" id="price-plan"
+                                                        wire:model='formPlan.price' />
+                                                    @error('formPlan.price')
+                                                        <div class="text-sm font-bold text-red-400">
+                                                            {{ $message }}
                                                         </div>
                                                     @enderror
                                                 </div>
@@ -240,6 +228,23 @@
                         timer: 3000,
                     });
                 });
+
+                @this.on('editPlan', (event) => {
+                    document.getElementById("name-plan").value = event[0].name;
+                    document.getElementById("description-plan").value = event[0].description;
+                    document.getElementById("days-plan").value = event[0].days;
+                    document.getElementById("sessionType-plan").value = event[0].session_type;
+                    document.getElementById("price-plan").value = event[0].price;
+
+                })
+                @this.on('addPlan', (event) => {
+                    document.getElementById("name-plan").value = '';
+                    document.getElementById("description-plan").value = '';
+                    document.getElementById("days-plan").value = '';
+                    document.getElementById("sessionType-plan").value = '';
+                    document.getElementById("price-plan").value = '';
+
+                })
             });
         </script>
     </div>

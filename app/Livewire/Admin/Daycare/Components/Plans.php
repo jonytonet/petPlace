@@ -26,8 +26,10 @@ class Plans extends Component
     public CreateOrEditDaycarePlanForm $formPlan;
     public function render()
     {
-        return view('livewire.admin.daycare.components.plans' ,
-            ['plans' => app()->make(DaycarePlanService::class)->getDaycarePlansToTable($this->searchTerms, $this->filtersFormatted, $this->orderBy, $this->orderDirection, $this->limit)]);
+        return view(
+            'livewire.admin.daycare.components.plans',
+            ['plans' => app()->make(DaycarePlanService::class)->getDaycarePlansToTable($this->searchTerms, $this->filtersFormatted, $this->orderBy, $this->orderDirection, $this->limit)]
+        );
     }
 
     public function goToIndex()
@@ -53,6 +55,9 @@ class Plans extends Component
             $this->formPlan->planId = $id;
             $this->formPlan->name = $plan->name;
             $this->formPlan->description = $plan->description;
+            $this->formPlan->days = $plan->days;
+            $this->formPlan->sessionType = $plan->session_type;
+            $this->formPlan->price = $plan->price;
             $this->dispatch('editPlan', $plan);
 
             return;
@@ -72,10 +77,7 @@ class Plans extends Component
 
     public function addPlan()
     {
-        $this->formPlan->planId = '';
-        $this->formPlan->specieId = '';
-        $this->formPlan->name = '';
-        $this->formPlan->description = '';
+        $this->formPlan->clearProprieties();
         $this->dispatch('addPlan');
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->integer('days');
-            $table->integer('sessions_per_week');
+            $table->integer('sessions_per_week')->nullable();
             $table->string('session_type');
             $table->decimal('price', 10, 2);
             $table->timestamps();
