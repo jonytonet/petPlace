@@ -10,4 +10,9 @@ class Plans extends Component
     {
         return view('livewire.admin.daycare.components.plans');
     }
+
+    public function goToIndex()
+    {
+        return redirect()->route('daycare.index');
+    }
 }

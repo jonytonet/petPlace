@@ -10,4 +10,9 @@ class Enrollment extends Component
     {
         return view('livewire.admin.daycare.components.enrollment');
     }
+
+    public function goToIndex()
+    {
+        return redirect()->route('daycare.index');
+    }
 }

@@ -10,4 +10,9 @@ class Historic extends Component
     {
         return view('livewire.admin.daycare.components.historic');
     }
+
+    public function goToIndex()
+    {
+        return redirect()->route('daycare.index');
+    }
 }
