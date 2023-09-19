@@ -34,7 +34,7 @@
         </li>
         <li class="relative my-4">
             <a class="group flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-300 outline-none transition duration-300 ease-linear hover:bg-white/10 hover:outline-none focus:bg-white/10 focus:outline-none active:bg-white/10 active:outline-none data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none"
-                data-te-sidenav-link-ref title="DayCare" data-te-toggle="tooltip" href=""
+                data-te-sidenav-link-ref title="DayCare" data-te-toggle="tooltip" href="{{ route('daycare.index') }}"
                 data-te-placement="right" data-te-ripple-init data-te-ripple-color="light">
                 <span
                     class="mx-auto motion-reduce:transition-none [&>svg]:h-7 [&>svg]:w-7 [&>svg]:fill-gray-300 [&>svg]:transition [&>svg]:duration-300 [&>svg]:ease-linear group-hover:[&>svg]:fill-white group-focus:[&>svg]:fill-white group-active:[&>svg]:fill-white group-data-[te-sidenav-state-focus]:[&>svg]:fill-white">
@@ -42,7 +42,17 @@
                 </span>
             </a>
         </li>
+        <li class="relative my-4">
+            <a class="group flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-300 outline-none transition duration-300 ease-linear hover:bg-white/10 hover:outline-none focus:bg-white/10 focus:outline-none active:bg-white/10 active:outline-none data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none"
+                data-te-sidenav-link-ref title="Banho&Tosa" data-te-toggle="tooltip" href=""
+                data-te-placement="right" data-te-ripple-init data-te-ripple-color="light">
+                <span
+                    class="mx-auto motion-reduce:transition-none [&>svg]:h-7 [&>svg]:w-7 [&>svg]:fill-gray-300 [&>svg]:transition [&>svg]:duration-300 [&>svg]:ease-linear group-hover:[&>svg]:fill-white group-focus:[&>svg]:fill-white group-active:[&>svg]:fill-white group-data-[te-sidenav-state-focus]:[&>svg]:fill-white">
 
+                    <i class="fa-solid fa-bath fa-2xl"></i>
+                </span>
+            </a>
+        </li>
         <li class="relative my-4">
             <a class="group flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-300 outline-none transition duration-300 ease-linear hover:bg-white/10 hover:outline-none focus:bg-white/10 focus:outline-none active:bg-white/10 active:outline-none data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none"
                 data-te-sidenav-link-ref title="Clínica" data-te-toggle="tooltip" href=""
@@ -73,7 +83,6 @@
                 </span>
             </a>
         </li>
-
 
 
     </ul>

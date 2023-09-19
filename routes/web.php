@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Services\customer\CustomerService;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,14 +32,15 @@ Route::middleware('auth')->group(function () {
         Route::view('pets', 'admin.pets.index')->name('pets.index');
         Route::view('pet/{id}', 'admin.pets.show')->name('pets.show');
         Route::view('cadastros', 'admin.miscellaneous-records.index')->name('miscellaneous-records.index');
+        Route::view('daycare', 'admin.daycare.index')->name('daycare.index');
+        Route::view('daycare/plans', 'admin.daycare.plans')->name('daycare.plans');
+        Route::view('daycare/enrollment', 'admin.daycare.enrollment')->name('daycare.enrollment');
+        Route::view('daycare/historic', 'admin.daycare.historic')->name('daycare.historic');
     });
 
 });
 
 Route::get('teste-codigo', function () {
-    $teste = app()->make(CustomerService::class)->getZipCode('83.407-420');
-
-    dd($teste);
 
 });
 
