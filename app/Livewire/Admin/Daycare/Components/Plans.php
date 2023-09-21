@@ -24,6 +24,7 @@ class Plans extends Component
     public $limit = 15;
 
     public CreateOrEditDaycarePlanForm $formPlan;
+
     public function render()
     {
         return view(
@@ -70,6 +71,7 @@ class Plans extends Component
     {
         if (app()->make(DaycarePlanService::class)->destroy($id)) {
             $this->dispatch('sweetAlert', ['msg' => 'Registro deletado com sucesso', 'icon' => 'success']);
+
             return;
         }
         $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao tentar deletar o plano! Tente novamente.', 'icon' => 'error']);

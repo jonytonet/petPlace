@@ -15,7 +15,7 @@
         </div>
         <div class="sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                <div class="overflow-x-auto">
+                <div class="overflow-x-auto sm:max-w-[473.6px] md:max-w-full">
                     <div class="overflow-y-auto max-h-500">
                         <table class="min-w-full font-light text-left">
                             <thead class="text-sm font-medium border-b dark:border-neutral-500">

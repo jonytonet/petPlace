@@ -9,44 +9,52 @@
                         <div class="w-full">
                             <div class="p-6">
 
-                                <div class="grid grid-cols-2 gap-6">
+                                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2">
                                     <div>
                                         <div class="mb-4">
                                             <h6>Usuários</h6>
                                             <hr>
                                         </div>
                                         @livewire('admin.miscellaneous-records.components.user-table')
-
                                     </div>
                                     <div>
                                         <div class="mb-4">
-                                            <h6>Serviços</h6>
+                                            <h6>Métodos de Pagamento</h6>
                                             <hr>
-
                                         </div>
-                                        @livewire('admin.miscellaneous-records.components.services-type-table')
+                                        @livewire('admin.miscellaneous-records.components.payment-method-table')
                                     </div>
                                 </div>
                             </div>
                             <div class="p-6">
 
-                                <div class="grid grid-cols-2 gap-6">
+                                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2">
                                     <div>
                                         <div class="mb-4">
                                             <h6>Especies</h6>
                                             <hr>
                                         </div>
                                         @livewire('admin.miscellaneous-records.components.species-table')
-
                                     </div>
                                     <div>
                                         <div class="mb-4">
                                             <h6>Raças</h6>
                                             <hr>
-
                                         </div>
                                         @livewire('admin.miscellaneous-records.components.breeds-table')
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+
+                            <div class="grid grid-cols-1 gap-1 md:grid-cols-1 lg:grid-cols-1">
+                                <div>
+                                    <div class="mb-4">
+                                        <h6>Serviços</h6>
+                                        <hr>
+                                    </div>
+                                    @livewire('admin.miscellaneous-records.components.services-type-table')
                                 </div>
                             </div>
                         </div>
@@ -57,6 +65,7 @@
             </div>
         </div>
     </div>
+
     <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
     <script>
         window.addEventListener('livewire:initialized', () => {
@@ -125,7 +134,6 @@
                 } else {
                     div.style.display = "none";
                 }
-
             })
 
             @this.on('editServiceType', (event) => {
@@ -133,14 +141,28 @@
                 document.getElementById("commission-serviceType").value = event[0].commission;
                 document.getElementById("description-serviceType").value = event[0].description;
                 document.getElementById("commission_type-serviceType").value = event[0].commission_type;
-
             })
+
             @this.on('addServiceType', (event) => {
                 document.getElementById("name-serviceType").value = '';
                 document.getElementById("commission-serviceType").value = '';
                 document.getElementById("description-serviceType").value = '';
                 document.getElementById("commission_type-serviceType").value = '';
 
+            })
+
+            @this.on('editPaymentMethod', (event) => {
+                document.getElementById("name-paymentMethod").value = event[0].name;
+                document.getElementById("description-paymentMethod").value = event[0].description;
+                document.getElementById("fee-paymentMethod").value = event[0].fee;
+                document.getElementById("receiptDeadline-paymentMethod").value = event[0].receipt_deadline;
+            })
+
+            @this.on('addPaymentMethod', (event) => {
+                document.getElementById("name-paymentMethod").value = '';
+                document.getElementById("description-paymentMethod").value = '';
+                document.getElementById("fee-paymentMethod").value = '';
+                document.getElementById("receiptDeadline-paymentMethod").value = '';
             })
 
         });

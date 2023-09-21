@@ -14,6 +14,7 @@ class DaycareEnrollment extends Model
         'service_reference_id',
         'daycare_plan_id',
         'initial_date_plan',
+        'active',
     ];
 
     public function pet()

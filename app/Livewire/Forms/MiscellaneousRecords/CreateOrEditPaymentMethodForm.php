@@ -1,41 +1,39 @@
 <?php
 
-namespace App\Livewire\Forms\Daycare;
+namespace App\Livewire\Forms\MiscellaneousRecords;
 
-use App\Services\DaycarePlanService;
+use App\Services\PaymentMethodService;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Rule;
 use Livewire\Form;
 
-class CreateOrEditDaycarePlanForm extends Form
+class CreateOrEditPaymentMethodForm extends Form
 {
-    public $planId;
+    public $paymentMethodId;
 
     #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
     public $name;
 
     public $description;
 
-    public $days;
+    public $fee;
 
-    public $sessionType;
-
-    public $price;
+    public $receiptDeadline;
 
     public function save()
     {
+
         $this->validate();
-        if ($this->planId) {
+        if ($this->paymentMethodId) {
             if (
-                app()->make(DaycarePlanService::class)->update(
+                app()->make(PaymentMethodService::class)->update(
                     [
                         'name' => $this->name,
                         'description' => $this->description,
-                        'days' => $this->days,
-                        'session_type' => $this->sessionType,
-                        'price' => $this->convertToDecimal($this->price),
+                        'fee' => $this->convertToDecimal($this->fee),
+                        'receipt_deadline' => $this->receiptDeadline,
                     ],
-                    $this->planId
+                    $this->paymentMethodId
                 )
             ) {
                 $this->clearProprieties();
@@ -46,13 +44,12 @@ class CreateOrEditDaycarePlanForm extends Form
             return false;
         } else {
             if (
-                app()->make(DaycarePlanService::class)->create(
+                app()->make(PaymentMethodService::class)->create(
                     [
                         'name' => $this->name,
                         'description' => $this->description,
-                        'days' => $this->days,
-                        'session_type' => $this->sessionType,
-                        'price' => $this->convertToDecimal($this->price),
+                        'fee' => $this->convertToDecimal($this->fee),
+                        'receipt_deadline' => $this->receiptDeadline,
                     ]
                 )
             ) {
@@ -68,13 +65,11 @@ class CreateOrEditDaycarePlanForm extends Form
 
     public function clearProprieties()
     {
-        $this->planId = null;
         $this->name = null;
         $this->description = null;
-        $this->days = null;
-        $this->sessionType = null;
-        $this->price = null;
-
+        $this->fee = null;
+        $this->receiptDeadline = null;
+        $this->paymentMethodId = null;
     }
 
     private function convertToDecimal(string $value): float

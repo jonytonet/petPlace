@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('pet_id');
             $table->unsignedBigInteger('daycare_plan_id');
             $table->dateTime('initial_date_plan');
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }
