@@ -22,7 +22,7 @@ class ServiceFinancial extends Model
 
     public function serviceReference()
     {
-        return $this->belongsTo(SeviceReference::class);
+        return $this->belongsTo(ServiceReference::class);
     }
 
     public function serviceType()
