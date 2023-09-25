@@ -44,13 +44,16 @@ class CreatePet extends Component
 
     public function save(bool $newPet)
     {
-        $directory = 'public/assets/images/pets';
-        if (! Storage::exists($directory)) {
-            Storage::makeDirectory($directory);
+        if ($this->photo) {
+            $directory = 'public/assets/images/pets';
+            if (!Storage::exists($directory)) {
+                Storage::makeDirectory($directory);
+            }
+            $filename = uniqid() . '.' . $this->photo->getClientOriginalExtension();
+            $path = $this->photo->storeAs($directory, $filename);
+            $this->form->image = $path;
         }
-        $filename = uniqid().'.'.$this->photo->getClientOriginalExtension();
-        $path = $this->photo->storeAs($directory, $filename);
-        $this->form->image = $path;
+
         $this->form->validate();
         if ($this->form->save()) {
 

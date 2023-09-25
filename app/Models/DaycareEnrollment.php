@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class DaycareEnrollment extends Model
 {
@@ -11,7 +12,6 @@ class DaycareEnrollment extends Model
 
     protected $fillable = [
         'pet_id',
-        'service_reference_id',
         'daycare_plan_id',
         'initial_date_plan',
         'active',
@@ -25,5 +25,10 @@ class DaycareEnrollment extends Model
     public function daycarePlan()
     {
         return $this->belongsTo(DaycarePlan::class);
+    }
+
+    public function daycareMonthlyPayment(): HasMany
+    {
+        return $this->hasMany(DaycareMonthlyPayment::class);
     }
 }

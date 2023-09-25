@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('teste-codigo', function () {
-
+    return view('pdfs.daycare-term');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

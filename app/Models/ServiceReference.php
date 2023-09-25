@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ServiceReference extends Model
 {
@@ -17,6 +18,12 @@ class ServiceReference extends Model
         $sequence = $this->count() + 1; // Obtém o próximo número sequencial
         $sequence = str_pad($sequence, 4, '0', STR_PAD_LEFT); // Adiciona zeros à esquerda
 
-        return $year.'SLPS'.$sequence; // Concatena o prefixo com o número sequencial
+        return $year . 'SLPS' . $sequence; // Concatena o prefixo com o número sequencial
+    }
+
+
+    public function serviceFinancial(): HasOne
+    {
+        return $this->hasOne(ServiceFinancial::class, 'id', 'service_reference_id');
     }
 }

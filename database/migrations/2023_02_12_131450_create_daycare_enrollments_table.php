@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('daycare_enrollments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('service_reference_id')->nullable();
             $table->unsignedBigInteger('pet_id');
             $table->unsignedBigInteger('daycare_plan_id');
             $table->dateTime('initial_date_plan');
