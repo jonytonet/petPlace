@@ -46,10 +46,10 @@ class CreatePet extends Component
     {
         if ($this->photo) {
             $directory = 'public/assets/images/pets';
-            if (!Storage::exists($directory)) {
+            if (! Storage::exists($directory)) {
                 Storage::makeDirectory($directory);
             }
-            $filename = uniqid() . '.' . $this->photo->getClientOriginalExtension();
+            $filename = uniqid().'.'.$this->photo->getClientOriginalExtension();
             $path = $this->photo->storeAs($directory, $filename);
             $this->form->image = $path;
         }

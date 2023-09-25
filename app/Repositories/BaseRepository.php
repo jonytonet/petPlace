@@ -205,7 +205,6 @@ abstract class BaseRepository
     /**
      * Add a basic where clause to the query.
      *
-     * @param  null  $relations
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|Model
      */
     public function findAllFieldsAnd(Request $request, $relations = [])
@@ -240,7 +239,6 @@ abstract class BaseRepository
      * Busca em todos os campos da tabela pela string enviada.
      * Função utiliza OR por padrão
      *
-     * @param  null  $relations
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|Model
      */
     public function advancedSearch(Request $request, $relations = [])
@@ -286,7 +284,6 @@ abstract class BaseRepository
      * Busca em todos os campos da tabela pela string enviada.
      * Função utiliza OR por padrão
      *
-     * @param  null  $relations
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|Model
      */
     public function searchLike(Request $request, $relations = [])
@@ -412,6 +409,7 @@ abstract class BaseRepository
                 }
             }
         }
+
         /* comentado por paulo sergio para o melhor funcionamento com ralations
         /* 10/12/2021
         /*else {

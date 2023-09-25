@@ -18,9 +18,8 @@ class ServiceReference extends Model
         $sequence = $this->count() + 1; // Obtém o próximo número sequencial
         $sequence = str_pad($sequence, 4, '0', STR_PAD_LEFT); // Adiciona zeros à esquerda
 
-        return $year . 'SLPS' . $sequence; // Concatena o prefixo com o número sequencial
+        return $year.'SLPS'.$sequence; // Concatena o prefixo com o número sequencial
     }
-
 
     public function serviceFinancial(): HasOne
     {

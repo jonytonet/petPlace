@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Admin\Daycare\Components;
 
-
 use App\Services\DaycareEnrollmentService;
 use App\Services\DaycarePlanService;
 use App\Services\PetService;
@@ -12,14 +11,23 @@ use Livewire\WithPagination;
 class Enrollment extends Component
 {
     use WithPagination;
+
     public $searchTerms;
+
     public $filters = [];
+
     public $filtersFormatted = [];
+
     public $orderBy = 'id';
+
     public $orderDirection = 'ASC';
+
     public $limit = 5;
+
     public $petId;
+
     public $planId;
+
     public $start;
 
     public function render()
@@ -55,7 +63,6 @@ class Enrollment extends Component
         $Enrollment = app()->make(DaycareEnrollmentService::class)->find($id);
         if ($Enrollment) {
 
-
             return;
         }
 
@@ -77,5 +84,4 @@ class Enrollment extends Component
     {
 
     }
-
 }
