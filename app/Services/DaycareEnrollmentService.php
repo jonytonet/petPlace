@@ -16,6 +16,4 @@ class DaycareEnrollmentService extends BaseService
     {
         return $this->daycareEnrollmentRepository->getDaycareEnrollmentsToTable($searchTerms, $filters, $orderBy, $orderDirection, $limit);
     }
-
-
 }

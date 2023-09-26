@@ -30,7 +30,7 @@ class Pet extends Model
     public function name(): Attribute
     {
         return Attribute::make(
-            set: fn(string $value) => Str::title($value),
+            set: fn (string $value) => Str::title($value),
         );
     }
 

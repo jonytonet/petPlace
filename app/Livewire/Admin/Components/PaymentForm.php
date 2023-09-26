@@ -5,20 +5,29 @@ namespace App\Livewire\Admin\Components;
 use App\Services\PaymentMethodService;
 use App\Services\ServiceTypeService;
 use App\Services\UserService;
-use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\Component;
 
 class PaymentForm extends Component
 {
     public $serviceReference;
+
     public $serviceTypeId;
+
     public $serviceValue;
+
     public $paymentMethodId;
+
     public $discount;
+
     public $additionalExpenses;
+
     public $commissionValue;
+
     public $commissionBy;
+
     public $netTotal;
+
     public $valueDisabled = false;
 
     public function render()
@@ -28,7 +37,7 @@ class PaymentForm extends Component
             [
                 'serviceTypes' => app()->make(ServiceTypeService::class)->all(),
                 'paymentMethods' => app()->make(PaymentMethodService::class)->all(),
-                'users' => app()->make(UserService::class)->getUsers()
+                'users' => app()->make(UserService::class)->getUsers(),
             ]
         );
     }

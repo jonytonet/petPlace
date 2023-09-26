@@ -19,11 +19,11 @@ class DaycareMonthlyPaymentService extends BaseService
         return $this->daycareMonthlyPaymentRepository->getDaycareMonthlyPaymentsToTable($searchTerms, $filters, $orderBy, $orderDirection, $limit);
     }
 
-
     public function getDataDaycareMonthlyPayment(Pet $pet): Fluent
     {
         $enrollment = $pet->daycareEnrollment;
         $plan = $enrollment->plan;
+
         return new Fluent([
 
         ]);

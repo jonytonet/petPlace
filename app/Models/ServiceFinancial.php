@@ -36,9 +36,9 @@ class ServiceFinancial extends Model
     {
         return $this->belongsTo(PaymentMethod::class);
     }
-    public function commissionBy():BelongsTo
-    {
-        return $this->belongsTo(User::class,'commission_by', 'id' );
-    }
 
+    public function commissionBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'commission_by', 'id');
+    }
 }

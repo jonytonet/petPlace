@@ -16,10 +16,11 @@ class ServiceReference extends Model
     {
         $year = date('Y');
         $month = date('m');
-        $whereDate = date('Y-m') . '%';
+        $whereDate = date('Y-m').'%';
         $sequence = ServiceReference::whereDate('created_at', 'LIKE', $whereDate)->count() + 1;
         $sequence = str_pad($sequence, 4, '0', STR_PAD_LEFT);
-        return $year . 'SLPS' . $sequence . $month;
+
+        return $year.'SLPS'.$sequence.$month;
     }
 
     public function serviceFinancial(): HasOne
