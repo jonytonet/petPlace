@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 
 class Pet extends Model
@@ -27,37 +30,42 @@ class Pet extends Model
     public function name(): Attribute
     {
         return Attribute::make(
-            set: fn (string $value) => Str::title($value),
+            set: fn(string $value) => Str::title($value),
         );
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function specie()
+    public function specie(): BelongsTo
     {
         return $this->belongsTo(Specie::class);
     }
 
-    public function breed()
+    public function breed(): BelongsTo
     {
         return $this->belongsTo(Breed::class);
     }
 
-    public function vaccines()
+    public function vaccines(): HasMany
     {
         return $this->hasMany(Vaccine::class);
     }
 
-    public function dewormers()
+    public function dewormers(): HasMany
     {
         return $this->hasMany(Dewormer::class);
     }
 
-    public function medicalRecords()
+    public function medicalRecords(): HasMany
     {
         return $this->hasMany(MedicalRecord::class);
+    }
+
+    public function daycareEnrollment(): HasOne
+    {
+        return $this->hasOne(DaycareEnrollment::class);
     }
 }

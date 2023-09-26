@@ -7,6 +7,8 @@ use App\Services\DaycarePlanService;
 use App\Services\PetService;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Enrollment extends Component
 {
@@ -29,6 +31,7 @@ class Enrollment extends Component
     public $planId;
 
     public $start;
+    public bool $showPayment = false;
 
     public function render()
     {
@@ -47,13 +50,34 @@ class Enrollment extends Component
         return redirect()->route('daycare.index');
     }
 
-    public function createOrEditEnrollment(): void
+    public function createEnrollment()
     {
-        dd(
-            $this->petId,
-            $this->planId,
-            $this->start
-        );
+        if (!$this->petId) {
+            $this->dispatch('sweetAlert', ['msg' => 'Selecione um Pet!', 'icon' => 'error']);
+            return;
+        }
+        if (!$this->planId) {
+            $this->dispatch('sweetAlert', ['msg' => 'Selecione um Plano!', 'icon' => 'error']);
+            return;
+        }
+        if (!$this->start) {
+            $this->dispatch('sweetAlert', ['msg' => 'Defina a data de inicio!', 'icon' => 'error']);
+            return;
+        }
+        $enrollment = app()->make(DaycareEnrollmentService::class)->create(['pet_id' => $this->petId, 'daycare_plan_id' => $this->planId, 'initial_date_plan' => $this->start]);
+
+        if ($enrollment) {
+            $this->showPayment = true;
+            $pdf = Pdf::loadView(
+                'pdfs.daycare-term',
+                ['customer' => $enrollment->pet->user, 'pet' => $enrollment->pet, 'plan' => $enrollment->daycarePlan, 'enrollment' => $enrollment]
+            );
+
+
+            return response()->streamDownload(function () use ($pdf) {
+                echo $pdf->output();
+            }, 'CONTRATO_CRECHE_' . strtoupper($enrollment->pet->name) . '_' . Carbon::parse(time())->format('dmY') . '.pdf');
+        }
 
     }
 

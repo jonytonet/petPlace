@@ -29,7 +29,7 @@ class DaycareEnrollmentRepository extends BaseRepository
         $query = $this->model;
         if ($searchTerms) {
             $query = $query->where(function ($query) use ($searchTerms) {
-                $query->where('name', 'LIKE', '%'.$searchTerms.'%');
+                $query->where('id', 'LIKE', '%'.$searchTerms.'%');
             });
         }
         if (! empty($filters)) {

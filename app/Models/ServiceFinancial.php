@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ServiceFinancial extends Model
 {
@@ -17,6 +18,7 @@ class ServiceFinancial extends Model
         'discount',
         'additional_expenses',
         'commission_value',
+        'commission_by',
         'net_total',
     ];
 
@@ -34,4 +36,9 @@ class ServiceFinancial extends Model
     {
         return $this->belongsTo(PaymentMethod::class);
     }
+    public function commissionBy():BelongsTo
+    {
+        return $this->belongsTo(User::class,'commission_by', 'id' );
+    }
+
 }

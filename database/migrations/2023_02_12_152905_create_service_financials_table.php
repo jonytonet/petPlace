@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -20,6 +19,7 @@ return new class extends Migration
             $table->double('discount', 8, 2)->nullable();
             $table->double('additional_expenses', 8, 2)->nullable();
             $table->double('commission_value', 8, 2)->nullable();
+            $table->unsignedBigInteger('commission_by')->nullable();
             $table->double('net_total', 8, 2)->nullable();
             $table->timestamps();
         });

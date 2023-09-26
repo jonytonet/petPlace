@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Pet;
+use App\Models\ServiceReference;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,7 +43,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('teste-codigo', function () {
-    return view('pdfs.daycare-term');
+
+    //$pet = Pet::find(1);
+    dd(ServiceReference::generateServiceReference());
 });
 
 require __DIR__.'/auth.php';

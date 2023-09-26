@@ -12,13 +12,14 @@ class ServiceReference extends Model
 
     protected $fillable = ['reference'];
 
-    public function generateServiceReference()
+    public static function generateServiceReference()
     {
         $year = date('Y');
-        $sequence = $this->count() + 1; // Obtém o próximo número sequencial
-        $sequence = str_pad($sequence, 4, '0', STR_PAD_LEFT); // Adiciona zeros à esquerda
-
-        return $year.'SLPS'.$sequence; // Concatena o prefixo com o número sequencial
+        $month = date('m');
+        $whereDate = date('Y-m') . '%';
+        $sequence = ServiceReference::whereDate('created_at', 'LIKE', $whereDate)->count() + 1;
+        $sequence = str_pad($sequence, 4, '0', STR_PAD_LEFT);
+        return $year . 'SLPS' . $sequence . $month;
     }
 
     public function serviceFinancial(): HasOne
