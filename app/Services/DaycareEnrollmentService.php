@@ -16,4 +16,9 @@ class DaycareEnrollmentService extends BaseService
     {
         return $this->daycareEnrollmentRepository->getDaycareEnrollmentsToTable($searchTerms, $filters, $orderBy, $orderDirection, $limit);
     }
+
+    public function existActiveEnrollmentByPetId(int $petId): bool
+    {
+        return $this->daycareEnrollmentRepository->existActiveEnrollmentByPetId( $petId);
+    }
 }

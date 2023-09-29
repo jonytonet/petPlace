@@ -4,19 +4,15 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-
                     <div class="flex justify-between">
                         <div class="mb-4">
                             <h6><span>Matricula DayCare</span></h6>
-
                         </div>
                         <div class="flex items-center justify-center mb-4">
                             <x-secondary-button wire:click='goToIndex'>
                                 {{ __('Voltar') }}
                             </x-secondary-button>
-
                         </div>
-
                     </div>
                     <hr>
                     <div class="w-full">
@@ -32,7 +28,6 @@
                                         data-te-ripple-init data-te-ripple-color="light">
                                         Nova Matricula
                                     </button>
-
 
                                 </div>
                                 <div class="sm:-mx-6 lg:-mx-8">
@@ -135,11 +130,11 @@
                                                     </svg>
                                                 </button>
                                             </div>
-                                            @if (!$showPayment)
-                                                <form wire:submit='createEnrollment'>
-                                                    <!--Modal body-->
-                                                    <div class="relative flex-auto p-4" data-te-modal-body-ref>
 
+                                            <form wire:submit='createEnrollment'>
+                                                <!--Modal body-->
+                                                <div class="relative flex-auto p-4" data-te-modal-body-ref>
+                                                    <div class="enrollment">
                                                         <div class="mb-4">
                                                             <label for="pet"
                                                                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Pet</label>
@@ -187,11 +182,14 @@
                                                                     {{ $message }}</div>
                                                             @enderror
                                                         </div>
-
                                                     </div>
-                                                    <!--Modal footer-->
-                                                    <div
-                                                        class="flex flex-wrap items-center justify-end flex-shrink-0 p-4 border-t-2 border-opacity-100 rounded-b-md border-neutral-100 dark:border-opacity-50">
+
+                                                </div>
+                                                <!--Modal footer-->
+                                                <div
+                                                    class="flex flex-wrap items-center justify-end flex-shrink-0 p-4 border-t-2 border-opacity-100 rounded-b-md border-neutral-100 dark:border-opacity-50">
+                                                    <div class="enrollment">
+
                                                         <x-secondary-button type='reset' data-te-modal-dismiss
                                                             data-te-ripple-init data-te-ripple-color="light">
                                                             {{ __('Cancelar') }}
@@ -207,25 +205,14 @@
                                                             </div>
                                                         </x-primary-button>
                                                     </div>
-                                                </form>
-                                            @else
-                                                @livewire('admin.components.payment-form', ['valueDisabled' => true])
-                                            @endif
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
-
                         </div>
-
-
-
-
                     </div>
-
-
                 </div>
             </div>
         </div>

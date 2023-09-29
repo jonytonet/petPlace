@@ -29,13 +29,18 @@ class DaycareEnrollmentRepository extends BaseRepository
         $query = $this->model;
         if ($searchTerms) {
             $query = $query->where(function ($query) use ($searchTerms) {
-                $query->where('id', 'LIKE', '%'.$searchTerms.'%');
+                $query->where('id', 'LIKE', '%' . $searchTerms . '%');
             });
         }
-        if (! empty($filters)) {
+        if (!empty($filters)) {
             $query = $query->where($filters);
         }
 
         return $query->orderBy($orderBy, $orderDirection)->paginate($limit);
+    }
+
+    public function existActiveEnrollmentByPetId(int $petId): bool
+    {
+        return $this->model->where('pet_id', $petId)->exists();
     }
 }

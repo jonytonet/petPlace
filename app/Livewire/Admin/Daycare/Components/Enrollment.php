@@ -32,7 +32,6 @@ class Enrollment extends Component
 
     public $start;
 
-    public bool $showPayment = false;
 
     public function render()
     {
@@ -71,7 +70,7 @@ class Enrollment extends Component
         $enrollment = app()->make(DaycareEnrollmentService::class)->create(['pet_id' => $this->petId, 'daycare_plan_id' => $this->planId, 'initial_date_plan' => $this->start]);
 
         if ($enrollment) {
-            $this->showPayment = true;
+
             $pdf = Pdf::loadView(
                 'pdfs.daycare-term',
                 ['customer' => $enrollment->pet->user, 'pet' => $enrollment->pet, 'plan' => $enrollment->daycarePlan, 'enrollment' => $enrollment]
@@ -111,4 +110,6 @@ class Enrollment extends Component
     {
 
     }
+
+
 }
