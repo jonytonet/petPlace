@@ -19,6 +19,6 @@ class DaycareEnrollmentService extends BaseService
 
     public function existActiveEnrollmentByPetId(int $petId): bool
     {
-        return $this->daycareEnrollmentRepository->existActiveEnrollmentByPetId( $petId);
+        return $this->daycareEnrollmentRepository->existActiveEnrollmentByPetId($petId);
     }
 }

@@ -7,23 +7,35 @@ use App\Services\PaymentMethodService;
 use App\Services\ServiceTypeService;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\Component;
 
 class MonthlyPayments extends Component
 {
     public $serviceTypeId;
+
     public $serviceType;
+
     public $referenceMonth;
+
     public $paymentMethodId;
+
     public $paymentMethod;
+
     public $serviceReferenceId;
+
     public $serviceValue = 0;
+
     public $discount = 0;
+
     public $netTotal = 0;
+
     public $payDay = 15;
+
     public $daycareEnrollmentId;
+
     public $daycareEnrollment;
+
     public $fee = 0;
 
     public function mount()
@@ -48,7 +60,7 @@ class MonthlyPayments extends Component
         $discount = $this->convertToDecimal($this->discount);
 
         if ($this->referenceMonth) {
-            $day = $this->referenceMonth . '-' . $this->payDay;
+            $day = $this->referenceMonth.'-'.$this->payDay;
             $dateToPay = Carbon::parse($day);
         }
 
@@ -57,7 +69,6 @@ class MonthlyPayments extends Component
         } else {
             $delayDays = $dateToPay->diffInDays(now());
         }
-
 
         if ($delayDays > 0) {
             $fee = ($serviceValue * 0.01) + ($serviceValue * (0.02 / 30) * $delayDays);
@@ -81,7 +92,7 @@ class MonthlyPayments extends Component
             $arrayValue = explode('.', $formattedValue);
             $endElement = end($arrayValue);
             array_pop($arrayValue);
-            $formattedValue = implode('', $arrayValue) . '.' . $endElement;
+            $formattedValue = implode('', $arrayValue).'.'.$endElement;
         }
 
         return floatval($formattedValue);
