@@ -15,22 +15,16 @@ class Enrollment extends Component
     use WithPagination;
 
     public $searchTerms;
-
     public $filters = [];
-
     public $filtersFormatted = [];
-
     public $orderBy = 'id';
-
     public $orderDirection = 'ASC';
-
     public $limit = 5;
-
     public $petId;
-
     public $planId;
-
     public $start;
+    public $daycareEnrollmentId;
+
 
 
     public function render()
@@ -52,25 +46,30 @@ class Enrollment extends Component
 
     public function createEnrollment()
     {
-        if (! $this->petId) {
+        if (!$this->petId) {
             $this->dispatch('sweetAlert', ['msg' => 'Selecione um Pet!', 'icon' => 'error']);
 
             return;
         }
-        if (! $this->planId) {
+        if (!$this->planId) {
             $this->dispatch('sweetAlert', ['msg' => 'Selecione um Plano!', 'icon' => 'error']);
 
             return;
         }
-        if (! $this->start) {
+        if (!$this->start) {
             $this->dispatch('sweetAlert', ['msg' => 'Defina a data de inicio!', 'icon' => 'error']);
 
+            return;
+        }
+        if (app()->make(DaycareEnrollmentService::class)->existActiveEnrollmentByPetId($this->petId)) {
+            $this->dispatch('sweetAlert', ['msg' => 'Pet possui uma matricula ativa!', 'icon' => 'error']);
             return;
         }
         $enrollment = app()->make(DaycareEnrollmentService::class)->create(['pet_id' => $this->petId, 'daycare_plan_id' => $this->planId, 'initial_date_plan' => $this->start]);
 
         if ($enrollment) {
-
+            $this->daycareEnrollmentId = $enrollment->id;
+            $this->dispatch('get-daycare-monthly-payment', $enrollment->id);
             $pdf = Pdf::loadView(
                 'pdfs.daycare-term',
                 ['customer' => $enrollment->pet->user, 'pet' => $enrollment->pet, 'plan' => $enrollment->daycarePlan, 'enrollment' => $enrollment]
@@ -78,7 +77,7 @@ class Enrollment extends Component
 
             return response()->streamDownload(function () use ($pdf) {
                 echo $pdf->output();
-            }, 'CONTRATO_CRECHE_'.strtoupper($enrollment->pet->name).'_'.Carbon::parse(time())->format('dmY').'.pdf');
+            }, 'CONTRATO_CRECHE_' . strtoupper($enrollment->pet->name) . '_' . Carbon::parse(time())->format('dmY') . '.pdf');
         }
 
     }
@@ -99,7 +98,6 @@ class Enrollment extends Component
     {
         if (app()->make(DaycareEnrollmentService::class)->destroy($id)) {
             $this->dispatch('sweetAlert', ['msg' => 'Registro deletado com sucesso', 'icon' => 'success']);
-
             return;
         }
         $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao tentar deletar a EEnrollment! Tente novamente.', 'icon' => 'error']);
@@ -108,8 +106,20 @@ class Enrollment extends Component
 
     public function addEnrollment(): void
     {
+        $this->petId = null;
+        $this->planId = null;
+        $this->start = null;
+        $this->daycareEnrollmentId = null;
 
+        $this->dispatch('add-enrollment');
     }
+
+    public function monthlyPayment($id)
+    {
+        $this->dispatch('get-daycare-monthly-payment', $id);
+    }
+
+
 
 
 }
