@@ -29,6 +29,6 @@ class DaycareEnrollment extends Model
 
     public function daycareMonthlyPayment(): HasMany
     {
-        return $this->hasMany(DaycareMonthlyPayment::class);
+        return $this->hasMany(DaycareMonthlyPayment::class)->orderBy('id', 'DESC');
     }
 }

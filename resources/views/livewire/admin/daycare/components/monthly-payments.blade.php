@@ -24,8 +24,8 @@
         <div class="mb-4">
             <label for="service_value"
                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Valor</label>
-            <input type="text" class="input" id="service_value" disabled
-                wire:change='getNetTotal()' onkeyup="validePriceInput(event)" placeholder="{{ $serviceValue }}" />
+            <input type="text" class="input" id="service_value" disabled wire:change='getNetTotal()'
+                onkeyup="validePriceInput(event)" placeholder="{{ $serviceValue }}" />
             @error('serviceValue')
                 <div class="text-sm font-bold text-red-400">{{ $message }}</div>
             @enderror
@@ -64,8 +64,8 @@
                     <div class="w-24 mb-3 text-sm font-semibold text-center text-white rounded text-wrap bg-primary">
                         <h6>Total: R${{ number_format($netTotal ?? 0, 2, ',', '.') }} </h6>
                     </div>
-                    <x-primary-button class="ml-3" type='button'>
-                        {{ __('Salvar') }} <div wire:loading=''
+                    <x-primary-button class="ml-3" type='button' wire:click='createPayment'>
+                        {{ __('Salvar') }} <div wire:loading='createPayment'
                             class="inline-block h-3 w-3 animate-spin rounded-full border-2 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
                             role="status">
                             <span

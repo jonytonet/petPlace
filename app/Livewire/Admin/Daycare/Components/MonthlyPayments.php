@@ -2,10 +2,15 @@
 
 namespace App\Livewire\Admin\Daycare\Components;
 
+use App\Models\ServiceReference;
 use App\Services\DaycareEnrollmentService;
+use App\Services\DaycareMonthlyPaymentService;
 use App\Services\PaymentMethodService;
+use App\Services\ServiceFinancialService;
+use App\Services\ServiceReferenceService;
 use App\Services\ServiceTypeService;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -103,9 +108,92 @@ class MonthlyPayments extends Component
     {
         $enrollment = app()->make(DaycareEnrollmentService::class)->find($data);
         $this->daycareEnrollment = $enrollment;
+        $this->daycareEnrollmentId = $enrollment->id;
         $this->payDay = Carbon::parse($enrollment->initial_date_plan)->day;
         $this->serviceValue = number_format($enrollment->daycarePlan->price ?? 0, 2, ',', '.');
         $this->getNetTotal();
         $this->dispatch('serviceValueInput', $this->serviceValue);
+    }
+
+    public function createPayment()
+    {
+
+        try {
+            DB::beginTransaction();
+            if (! $this->validePayment()) {
+                return;
+            }
+            $reference = app()->make(ServiceReferenceService::class)->create(['reference' => ServiceReference::generateServiceReference()]);
+            if (! $reference) {
+                DB::rollBack();
+                $this->dispatch('sweetAlert', ['msg' => 'Houve um erro! Tente novamente.', 'icon' => 'error']);
+
+                return;
+            }
+
+            $monthlyPayment = app()->make(DaycareMonthlyPaymentService::class)->create([
+                'daycare_enrollment_id' => $this->daycareEnrollmentId,
+                'service_reference_id' => $reference->id,
+                'pay_day' => now()->format('Y-m-d'),
+                'reference_month' => $this->referenceMonth,
+            ]);
+
+            if (! $monthlyPayment) {
+                DB::rollBack();
+                $this->dispatch('sweetAlert', ['msg' => 'Houve um erro! Tente novamente.', 'icon' => 'error']);
+
+                return;
+            }
+            if (
+                ! app()->make(ServiceFinancialService::class)->create([
+                    'service_reference_id' => $reference->id,
+                    'service_type_id' => $this->serviceTypeId,
+                    'service_value' => $this->convertToDecimal($this->serviceValue),
+                    'payment_method_id' => $this->paymentMethodId,
+                    'discount' => $this->convertToDecimal($this->discount),
+                    'net_total' => $this->convertToDecimal($this->netTotal),
+                ])
+            ) {
+                DB::rollBack();
+                $this->dispatch('sweetAlert', ['msg' => 'Houve um erro! Tente novamente.', 'icon' => 'error']);
+
+            }
+            DB::commit();
+            $this->dispatch('sweetAlert', ['msg' => 'Pagamento gravado com sucesso!', 'icon' => 'success']);
+
+            return redirect(request()->header('Referer'));
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            $this->dispatch('sweetAlert', ['msg' => 'Houve um erro! Tente novamente.', 'icon' => 'error']);
+
+            return;
+        }
+
+    }
+
+    public function validePayment()
+    {
+        if (! $this->referenceMonth) {
+            $this->dispatch('sweetAlert', ['msg' => 'Defina o Mês de Referência!', 'icon' => 'error']);
+
+            return false;
+        }
+        if (! $this->serviceTypeId) {
+            $this->dispatch('sweetAlert', ['msg' => 'Defina o Serviço!', 'icon' => 'error']);
+
+            return false;
+        }
+        if (! $this->serviceValue) {
+            $this->dispatch('sweetAlert', ['msg' => 'Valor não definido!', 'icon' => 'error']);
+
+            return false;
+        }
+        if (! $this->paymentMethodId) {
+            $this->dispatch('sweetAlert', ['msg' => 'Defina o método de pagamento!', 'icon' => 'error']);
+
+            return false;
+        }
+
+        return true;
     }
 }

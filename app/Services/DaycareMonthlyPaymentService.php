@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Pet;
 use App\Repositories\DaycareMonthlyPaymentRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Fluent;
 
 class DaycareMonthlyPaymentService extends BaseService
@@ -27,5 +28,22 @@ class DaycareMonthlyPaymentService extends BaseService
         return new Fluent([
 
         ]);
+    }
+
+    public function isPaymentDelayed($dueDate, $lastPayment, $monthReference)
+    {
+        $today = Carbon::now();
+        $payDay = $today->copy()->setDay($dueDate);
+
+        if ($today > $payDay) {
+            if (Carbon::parse($lastPayment) < $payDay) {
+
+                if (Carbon::parse($monthReference)->format('Y-m') !== $today->format('Y-m')) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

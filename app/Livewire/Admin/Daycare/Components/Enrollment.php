@@ -104,12 +104,12 @@ class Enrollment extends Component
 
     public function destroyEnrollment(int $id): void
     {
-        if (app()->make(DaycareEnrollmentService::class)->destroy($id)) {
-            $this->dispatch('sweetAlert', ['msg' => 'Registro deletado com sucesso', 'icon' => 'success']);
+        if (app()->make(DaycareEnrollmentService::class)->update(['active' => false], $id)) {
+            $this->dispatch('sweetAlert', ['msg' => 'Registro Inativado com sucesso', 'icon' => 'success']);
 
             return;
         }
-        $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao tentar deletar a EEnrollment! Tente novamente.', 'icon' => 'error']);
+        $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao tentar Inativar a Matricula! Tente novamente.', 'icon' => 'error']);
 
     }
 

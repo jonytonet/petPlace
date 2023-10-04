@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('daycare_enrollment_id');
             $table->unsignedBigInteger('service_reference_id')->nullable();
             $table->date('pay_day');
-            $table->integer('reference_month');
+            $table->string('reference_month');
             $table->timestamps();
         });
     }
