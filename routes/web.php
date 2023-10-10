@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Models\Pet;
 use App\Models\ServiceReference;
+use App\Repositories\DaycareMonthlyPaymentRepository;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +39,7 @@ Route::middleware('auth')->group(function () {
         Route::view('daycare/plans', 'admin.daycare.plans')->name('daycare.plans');
         Route::view('daycare/enrollment', 'admin.daycare.enrollment')->name('daycare.enrollment');
         Route::view('daycare/historic', 'admin.daycare.historic')->name('daycare.historic');
+        Route::view('daycare/monthlyPayments/{petId}', 'admin.daycare.monthly-payments')->name('daycare.monthlyPayments');
     });
 
 });
@@ -45,7 +47,7 @@ Route::middleware('auth')->group(function () {
 Route::get('teste-codigo', function () {
 
     //$pet = Pet::find(1);
-    dd(ServiceReference::generateServiceReference());
+    dd(app()->make(DaycareMonthlyPaymentRepository::class)->getDataDaycareMonthlyPaymentByPetId(1));
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

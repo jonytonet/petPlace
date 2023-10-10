@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Pet;
 use App\Repositories\DaycareMonthlyPaymentRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Fluent;
@@ -20,14 +21,9 @@ class DaycareMonthlyPaymentService extends BaseService
         return $this->daycareMonthlyPaymentRepository->getDaycareMonthlyPaymentsToTable($searchTerms, $filters, $orderBy, $orderDirection, $limit);
     }
 
-    public function getDataDaycareMonthlyPayment(Pet $pet): Fluent
+    public function getDataDaycareMonthlyPaymentByPetId(int $petId): LengthAwarePaginator
     {
-        $enrollment = $pet->daycareEnrollment;
-        $plan = $enrollment->plan;
-
-        return new Fluent([
-
-        ]);
+        return $this->daycareMonthlyPaymentRepository->getDataDaycareMonthlyPaymentByPetId($petId);
     }
 
     public function isPaymentDelayed($dueDate, $lastPayment, $monthReference)
