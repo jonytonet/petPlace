@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Models\Pet;
-use App\Models\ServiceReference;
 use App\Repositories\DaycareMonthlyPaymentRepository;
 use Illuminate\Support\Facades\Route;
 
@@ -50,4 +49,4 @@ Route::get('teste-codigo', function () {
     dd(app()->make(DaycareMonthlyPaymentRepository::class)->getDataDaycareMonthlyPaymentByPetId(1));
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

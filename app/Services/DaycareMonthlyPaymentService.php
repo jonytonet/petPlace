@@ -2,12 +2,9 @@
 
 namespace App\Services;
 
-use App\Models\Pet;
 use App\Repositories\DaycareMonthlyPaymentRepository;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Fluent;
 
 class DaycareMonthlyPaymentService extends BaseService
 {

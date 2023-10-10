@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\DaycareMonthlyPayment;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class DaycareMonthlyPaymentRepository extends BaseRepository
@@ -30,10 +29,10 @@ class DaycareMonthlyPaymentRepository extends BaseRepository
         $query = $this->model;
         if ($searchTerms) {
             $query = $query->where(function ($query) use ($searchTerms) {
-                $query->where('name', 'LIKE', '%' . $searchTerms . '%');
+                $query->where('name', 'LIKE', '%'.$searchTerms.'%');
             });
         }
-        if (!empty($filters)) {
+        if (! empty($filters)) {
             $query = $query->where($filters);
         }
 
@@ -46,5 +45,4 @@ class DaycareMonthlyPaymentRepository extends BaseRepository
             $query->where('id', $petId);
         })->orderBy('reference_month', 'DESC')->paginate(12);
     }
-
 }

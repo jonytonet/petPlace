@@ -53,17 +53,17 @@ class Enrollment extends Component
 
     public function createEnrollment()
     {
-        if (!$this->petId) {
+        if (! $this->petId) {
             $this->dispatch('sweetAlert', ['msg' => 'Selecione um Pet!', 'icon' => 'error']);
 
             return;
         }
-        if (!$this->planId) {
+        if (! $this->planId) {
             $this->dispatch('sweetAlert', ['msg' => 'Selecione um Plano!', 'icon' => 'error']);
 
             return;
         }
-        if (!$this->start) {
+        if (! $this->start) {
             $this->dispatch('sweetAlert', ['msg' => 'Defina a data de inicio!', 'icon' => 'error']);
 
             return;
@@ -85,7 +85,7 @@ class Enrollment extends Component
 
             return response()->streamDownload(function () use ($pdf) {
                 echo $pdf->output();
-            }, 'CONTRATO_CRECHE_' . strtoupper($enrollment->pet->name) . '_' . Carbon::parse(time())->format('dmY') . '.pdf');
+            }, 'CONTRATO_CRECHE_'.strtoupper($enrollment->pet->name).'_'.Carbon::parse(time())->format('dmY').'.pdf');
         }
 
     }
