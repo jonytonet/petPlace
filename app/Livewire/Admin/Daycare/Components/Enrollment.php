@@ -28,6 +28,8 @@ class Enrollment extends Component
 
     public $petId;
 
+    public $onlyActive = false;
+
     public $planId;
 
     public $start;
@@ -36,10 +38,11 @@ class Enrollment extends Component
 
     public function render()
     {
+
         return view(
             'livewire.admin.daycare.components.enrollment',
             [
-                'enrollments' => app()->make(DaycareEnrollmentService::class)->getDaycareEnrollmentsToTable($this->searchTerms, $this->filtersFormatted, $this->orderBy, $this->orderDirection, $this->limit),
+                'enrollments' => app()->make(DaycareEnrollmentService::class)->getDaycareEnrollmentsToTable($this->searchTerms, $this->filtersFormatted, $this->orderBy, $this->orderDirection, $this->limit, $this->onlyActive),
                 'pets' => app()->make(PetService::class)->all(),
                 'plans' => app()->make(DaycarePlanService::class)->all(),
             ]

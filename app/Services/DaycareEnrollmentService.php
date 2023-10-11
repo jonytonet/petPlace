@@ -12,9 +12,9 @@ class DaycareEnrollmentService extends BaseService
         parent::__construct('DaycareEnrollmentRepository');
     }
 
-    public function getDaycareEnrollmentsToTable(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit = 15): LengthAwarePaginator
+    public function getDaycareEnrollmentsToTable(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit, bool $onlyActive): LengthAwarePaginator
     {
-        return $this->daycareEnrollmentRepository->getDaycareEnrollmentsToTable($searchTerms, $filters, $orderBy, $orderDirection, $limit);
+        return $this->daycareEnrollmentRepository->getDaycareEnrollmentsToTable($searchTerms, $filters, $orderBy, $orderDirection, $limit, $onlyActive);
     }
 
     public function existActiveEnrollmentByPetId(int $petId): bool

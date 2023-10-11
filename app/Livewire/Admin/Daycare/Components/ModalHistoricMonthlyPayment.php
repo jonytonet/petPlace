@@ -25,7 +25,7 @@ class ModalHistoricMonthlyPayment extends Component
 
     public function goToIndex()
     {
-        return redirect()->route('daycare.index');
+        return redirect()->route('daycare.enrollment');
     }
 
     public function monthlyPayment($id)

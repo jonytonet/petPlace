@@ -24,19 +24,30 @@ class DaycareEnrollmentRepository extends BaseRepository
         return DaycareEnrollment::class;
     }
 
-    public function getDaycareEnrollmentsToTable(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit = 15): LengthAwarePaginator
+    public function getDaycareEnrollmentsToTable(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit, bool $onlyActive): LengthAwarePaginator
     {
+
         $query = $this->model;
         if ($searchTerms) {
             $query = $query->where(function ($query) use ($searchTerms) {
-                $query->where('id', 'LIKE', '%'.$searchTerms.'%');
+                $query->whereHas('pet', function ($query) use ($searchTerms) {
+                    $query->where('name', 'like', '%'.$searchTerms.'%');
+                });
             });
         }
         if (! empty($filters)) {
             $query = $query->where($filters);
         }
+        if ($onlyActive) {
+            $query = $query->where('active', '=', '1');
+        }
+        $query = $query->orderBy(function ($query) {
+            $query->select('name')
+                ->from('pets')
+                ->whereColumn('pets.id', 'daycare_enrollments.pet_id');
+        }, $orderDirection);
 
-        return $query->orderBy($orderBy, $orderDirection)->paginate($limit);
+        return $query->paginate($limit);
     }
 
     public function existActiveEnrollmentByPetId(int $petId): bool
