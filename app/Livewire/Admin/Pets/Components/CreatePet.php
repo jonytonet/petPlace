@@ -51,7 +51,7 @@ class CreatePet extends Component
             }
             $filename = uniqid().'.'.$this->photo->getClientOriginalExtension();
             $path = $this->photo->storeAs($directory, $filename);
-            $this->form->image = $path;
+            $this->form->image = 'assets/images/pets/'.$filename;
         }
 
         $this->form->validate();

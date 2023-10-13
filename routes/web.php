@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Models\Pet;
-use App\Repositories\DaycareMonthlyPaymentRepository;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,7 +46,7 @@ Route::middleware('auth')->group(function () {
 Route::get('teste-codigo', function () {
 
     //$pet = Pet::find(1);
-    dd(app()->make(DaycareMonthlyPaymentRepository::class)->getDataDaycareMonthlyPaymentByPetId(1));
+    dd(Carbon::now('America/Sao_Paulo')->format('H:i:s'));
 });
 
 require __DIR__.'/auth.php';

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\DaycareBookingRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class DaycareBookingService extends BaseService
@@ -20,5 +21,10 @@ class DaycareBookingService extends BaseService
     public function isBooking(int $petId): bool
     {
         return $this->daycareBookingRepository->isBooking($petId);
+    }
+
+    public function getCheckInToday(): Collection
+    {
+        return $this->daycareBookingRepository->getCheckInToday();
     }
 }

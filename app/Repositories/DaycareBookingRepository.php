@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\DaycareBooking;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class DaycareBookingRepository extends BaseRepository
@@ -42,5 +43,10 @@ class DaycareBookingRepository extends BaseRepository
     public function isBooking(int $petId): bool
     {
         return $this->model->where('pet_id', $petId)->whereDate('date', now()->format('Y-m-d'))->whereNull('exit_time')->exists();
+    }
+
+    public function getCheckInToday(): Collection
+    {
+        return $this->model->whereDate('date', now()->format('Y-m-d'))->whereNull('exit_time')->get();
     }
 }

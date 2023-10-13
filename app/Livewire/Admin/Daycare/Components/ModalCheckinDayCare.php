@@ -55,8 +55,8 @@ class ModalCheckinDayCare extends Component
                 ! app()->make(DaycareBookingService::class)->create([
                     'pet_id' => $enrollment->pet_id,
                     'daycare_enrollment_id' => $this->enrollmentId,
-                    'date' => now()->format('Y-m-d'),
-                    'entry_time' => now()->format('h:i:s'),
+                    'date' => now('America/Sao_Paulo')->format('Y-m-d'),
+                    'entry_time' => now('America/Sao_Paulo')->format('h:i:s'),
                     'is_single_daily' => false,
                 ])
             ) {
@@ -84,8 +84,8 @@ class ModalCheckinDayCare extends Component
             if (
                 app()->make(DaycareBookingService::class)->create([
                     'pet_id' => $this->petId,
-                    'date' => now()->format('Y-m-d'),
-                    'entry_time' => now()->format('h:i:s'),
+                    'date' => now('America/Sao_Paulo')->format('Y-m-d'),
+                    'entry_time' => now('America/Sao_Paulo')->format('h:i:s'),
                     'is_single_daily' => true,
 
                 ])
