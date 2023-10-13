@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Daycare\Components;
 use App\Services\DaycareBookingService;
 use App\Services\DaycareEnrollmentService;
 use App\Services\PetService;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 
 class ModalCheckinDayCare extends Component
@@ -55,8 +56,8 @@ class ModalCheckinDayCare extends Component
                 ! app()->make(DaycareBookingService::class)->create([
                     'pet_id' => $enrollment->pet_id,
                     'daycare_enrollment_id' => $this->enrollmentId,
-                    'date' => now('America/Sao_Paulo')->format('Y-m-d'),
-                    'entry_time' => now('America/Sao_Paulo')->format('h:i:s'),
+                    'date' => Carbon::now()->format('Y-m-d'),
+                    'entry_time' => Carbon::now('America/Sao_Paulo')->format('H:i:s'),
                     'is_single_daily' => false,
                 ])
             ) {
@@ -84,8 +85,8 @@ class ModalCheckinDayCare extends Component
             if (
                 app()->make(DaycareBookingService::class)->create([
                     'pet_id' => $this->petId,
-                    'date' => now('America/Sao_Paulo')->format('Y-m-d'),
-                    'entry_time' => now('America/Sao_Paulo')->format('h:i:s'),
+                    'date' => Carbon::now()->format('Y-m-d'),
+                    'entry_time' => Carbon::now('America/Sao_Paulo')->format('H:i:s'),
                     'is_single_daily' => true,
 
                 ])
