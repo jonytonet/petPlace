@@ -18,7 +18,7 @@ class Booking extends Component
     public function checkOut($id)
     {
         $booking = app()->make(DaycareBookingService::class)->find($id);
-        $booking->exit_time = now();
+        $booking->exit_time = now('America/Sao_Paulo')->format('H:i:s');
         if ($booking->isLate()) {
             $booking->extra_time = $booking->getDelayInMinutes();
         }
@@ -29,5 +29,15 @@ class Booking extends Component
         }
 
         $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao realizar o CheckOut!', 'icon' => 'error']);
+    }
+
+    public function checkLunchTime($id)
+    {
+        if (app()->make(DaycareBookingService::class)->update(['lunch_time' => now('America/Sao_Paulo')->format('H:i:s')], $id)) {
+            $this->dispatch('sweetAlert', ['msg' => 'Almoço marcado com sucesso!', 'icon' => 'success']);
+
+            return;
+        }
+        $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao marcar o almoço!', 'icon' => 'error']);
     }
 }

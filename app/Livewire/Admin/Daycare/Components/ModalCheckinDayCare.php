@@ -49,6 +49,7 @@ class ModalCheckinDayCare extends Component
             $enrollment = app()->make(DaycareEnrollmentService::class)->find($this->enrollmentId);
             if (app()->make(DaycareBookingService::class)->isBooking($enrollment->pet_id)) {
                 $this->dispatch('sweetAlert', ['msg' => 'O pet possuí um check in em aberto!', 'icon' => 'error']);
+                $this->clearData();
 
                 return;
             }
@@ -62,11 +63,13 @@ class ModalCheckinDayCare extends Component
                 ])
             ) {
                 $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao realizar o CheckIn!', 'icon' => 'error']);
+                $this->clearData();
 
                 return;
             }
 
             $this->dispatch('sweetAlert', ['msg' => 'CheckIn realizado com sucesso!', 'icon' => 'success']);
+            $this->clearData();
 
             return redirect(request()->header('Referer'));
         }
@@ -79,11 +82,12 @@ class ModalCheckinDayCare extends Component
             }
             if (app()->make(DaycareBookingService::class)->isBooking($this->petId)) {
                 $this->dispatch('sweetAlert', ['msg' => 'O pet possuí um check in em aberto!', 'icon' => 'error']);
+                $this->clearData();
 
                 return;
             }
             if (
-                app()->make(DaycareBookingService::class)->create([
+                ! app()->make(DaycareBookingService::class)->create([
                     'pet_id' => $this->petId,
                     'date' => Carbon::now()->format('Y-m-d'),
                     'entry_time' => Carbon::now('America/Sao_Paulo')->format('H:i:s'),
@@ -92,15 +96,24 @@ class ModalCheckinDayCare extends Component
                 ])
             ) {
                 $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao realizar o CheckIn!', 'icon' => 'error']);
+                $this->clearData();
 
                 return;
             }
 
             $this->dispatch('sweetAlert', ['msg' => 'CheckIn realizado com sucesso!', 'icon' => 'success']);
+            $this->clearData();
 
             return redirect(request()->header('Referer'));
 
         }
 
+    }
+
+    public function clearData()
+    {
+        $this->checkInType = null;
+        $this->petId = null;
+        $this->enrollmentId = null;
     }
 }
