@@ -16,4 +16,9 @@ class DaycareBookingService extends BaseService
     {
         return $this->daycareBookingRepository->getDaycareBookingsToTable($searchTerms, $filters, $orderBy, $orderDirection, $limit);
     }
+
+    public function isBooking(int $petId): bool
+    {
+        return $this->daycareBookingRepository->isBooking($petId);
+    }
 }

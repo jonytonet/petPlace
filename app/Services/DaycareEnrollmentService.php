@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\DaycareEnrollmentRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class DaycareEnrollmentService extends BaseService
@@ -20,5 +21,10 @@ class DaycareEnrollmentService extends BaseService
     public function existActiveEnrollmentByPetId(int $petId): bool
     {
         return $this->daycareEnrollmentRepository->existActiveEnrollmentByPetId($petId);
+    }
+
+    public function getActiveEnrollment(): Collection
+    {
+        return $this->daycareEnrollmentRepository->getActiveEnrollment();
     }
 }

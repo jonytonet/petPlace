@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\DaycareEnrollment;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class DaycareEnrollmentRepository extends BaseRepository
@@ -53,5 +54,10 @@ class DaycareEnrollmentRepository extends BaseRepository
     public function existActiveEnrollmentByPetId(int $petId): bool
     {
         return $this->model->where('pet_id', $petId)->exists();
+    }
+
+    public function getActiveEnrollment(): Collection
+    {
+        return $this->model->where('active', '=', '1')->get();
     }
 }

@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('daycare_bookings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('daycare_enrollment_id');
+            $table->unsignedBigInteger('pet_id');
+            $table->unsignedBigInteger('daycare_enrollment_id')->nullable();
             $table->date('date');
             $table->time('entry_time');
             $table->time('exit_time')->nullable();
             $table->integer('extra_time')->nullable();
+            $table->time('lunch_time')->nullable();
+            $table->boolean('is_single_daily')->default(false);
             $table->text('notes')->nullable();
             $table->timestamps();
         });

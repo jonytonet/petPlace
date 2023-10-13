@@ -38,4 +38,9 @@ class DaycareBookingRepository extends BaseRepository
 
         return $query->orderBy($orderBy, $orderDirection)->paginate($limit);
     }
+
+    public function isBooking(int $petId): bool
+    {
+        return $this->model->where('pet_id', $petId)->whereDate('date', now()->format('Y-m-d'))->whereNull('exit_time')->exists();
+    }
 }
