@@ -39,7 +39,8 @@
                                                 data-te-ripple-init data-te-ripple-color="light">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </x-secondary-button>
-                                            <x-danger-button wire:click="destroyUser({{ $user->id }})">
+                                            <x-danger-button wire:click="destroyUser({{ $user->id }})"
+                                                wire:confirm="Tem certeza que deseja deletar o usuário?">
                                                 <i class="fa-solid fa-trash-can"></i>
                                             </x-danger-button>
                                         </td>
@@ -206,7 +207,7 @@
                             </x-secondary-button>
 
                             <x-primary-button class="ml-3" type='button' wire:click='createOrEditUser'
-                              {{--   data-te-modal-dismiss data-te-ripple-init data-te-ripple-color="light" --}}>
+                                {{--   data-te-modal-dismiss data-te-ripple-init data-te-ripple-color="light" --}}>
                                 {{ __('Salvar') }}
                             </x-primary-button>
                         </div>

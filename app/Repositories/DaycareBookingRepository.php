@@ -30,7 +30,9 @@ class DaycareBookingRepository extends BaseRepository
         $query = $this->model;
         if ($searchTerms) {
             $query = $query->where(function ($query) use ($searchTerms) {
-                $query->where('name', 'LIKE', '%'.$searchTerms.'%');
+                $query->whereHas('pet', function ($query) use ($searchTerms) {
+                    $query->where('name', 'like', '%'.$searchTerms.'%');
+                });
             });
         }
         if (! empty($filters)) {

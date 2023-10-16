@@ -24,7 +24,7 @@ class Enrollment extends Component
 
     public $orderDirection = 'ASC';
 
-    public $limit = 5;
+    public $limit = 25;
 
     public $petId;
 

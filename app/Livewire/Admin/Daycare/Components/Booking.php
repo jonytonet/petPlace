@@ -7,6 +7,10 @@ use Livewire\Component;
 
 class Booking extends Component
 {
+    public $note;
+
+    public $bookingId;
+
     public function render()
     {
 
@@ -39,5 +43,26 @@ class Booking extends Component
             return;
         }
         $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao marcar o almoço!', 'icon' => 'error']);
+    }
+
+    public function saveNote()
+    {
+        if (app()->make(DaycareBookingService::class)->update(['notes' => $this->note], $this->bookingId)) {
+            $this->note = null;
+            $this->bookingId = null;
+            $this->dispatch('booking-notes-clear');
+            $this->dispatch('sweetAlert', ['msg' => 'Observação salva com sucesso!', 'icon' => 'success']);
+
+            return;
+        }
+        $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao salvar a observação!', 'icon' => 'error']);
+    }
+
+    public function getNote($id)
+    {
+        $booking = app()->make(DaycareBookingService::class)->find($id);
+        $this->note = $booking->notes;
+        $this->bookingId = $id;
+        $this->dispatch('booking-notes', $booking->notes);
     }
 }

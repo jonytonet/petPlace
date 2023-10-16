@@ -15,21 +15,23 @@
                                     data-te-target="#check-in-modal" data-te-ripple-init data-te-ripple-color="light">
                                     <i class="fa-solid fa-paw"></i> Check-In
                                 </button>
-                                <button type="button" wire:click="goToHistoric"
-                                    class="items-center inline-block px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-800 border border-transparent dark:bg-gray-200 dark:text-gray-800 hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
-                                    data-te-ripple-init data-te-ripple-color="light">
-                                    <i class="fa-solid fa-clock-rotate-left"></i> Histórico
-                                </button>
-                                <button type="button" wire:click="goToEnrollment"
-                                    class="items-center inline-block px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-800 border border-transparent dark:bg-gray-200 dark:text-gray-800 hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
-                                    data-te-ripple-init data-te-ripple-color="light">
-                                    <i class="fa-solid fa-shield-dog"></i> Matricula
-                                </button>
-                                <button type="button" wire:click="goToPlans"
-                                    class="items-center inline-block px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-800 border border-transparent rounded-r dark:bg-gray-200 dark:text-gray-800 hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
-                                    data-te-ripple-init data-te-ripple-color="light">
-                                    <i class="fa-solid fa-list"></i> Planos
-                                </button>
+                                @if (auth()->user()->user_type_id == 1)
+                                    <button type="button" wire:click="goToHistoric"
+                                        class="items-center inline-block px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-800 border border-transparent dark:bg-gray-200 dark:text-gray-800 hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                                        data-te-ripple-init data-te-ripple-color="light">
+                                        <i class="fa-solid fa-clock-rotate-left"></i> Histórico
+                                    </button>
+                                    <button type="button" wire:click="goToEnrollment"
+                                        class="items-center inline-block px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-800 border border-transparent dark:bg-gray-200 dark:text-gray-800 hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                                        data-te-ripple-init data-te-ripple-color="light">
+                                        <i class="fa-solid fa-shield-dog"></i> Matricula
+                                    </button>
+                                    <button type="button" wire:click="goToPlans"
+                                        class="items-center inline-block px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-800 border border-transparent rounded-r dark:bg-gray-200 dark:text-gray-800 hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                                        data-te-ripple-init data-te-ripple-color="light">
+                                        <i class="fa-solid fa-list"></i> Planos
+                                    </button>
+                                @endif
                             </div>
 
                         </div>
@@ -92,6 +94,15 @@
                         timer: 3000,
                     });
                 });
+
+                @this.on('booking-notes', (event) => {
+                    document.getElementById("booking-notes").value = event[0];
+
+                });
+                @this.on('booking-notes-clear', (event) => {
+                    document.getElementById("booking-notes").value = '';
+                });
+
 
 
             });

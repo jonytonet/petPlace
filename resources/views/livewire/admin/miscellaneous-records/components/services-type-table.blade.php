@@ -48,7 +48,8 @@
                                                 data-te-ripple-init data-te-ripple-color="light">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </x-secondary-button>
-                                            <x-danger-button wire:click="destroyServiceType({{ $serviceType->id }})">
+                                            <x-danger-button wire:click="destroyServiceType({{ $serviceType->id }})"
+                                                wire:confirm="Tem certeza que deseja deletar o tipo de serviço?">
                                                 <i class="fa-solid fa-trash-can"></i>
                                             </x-danger-button>
                                         </td>
