@@ -19,6 +19,16 @@
             </select>
 
         </div>
+        <div class="mb-4" id="period" >
+            <label for="period"
+                class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Período</label>
+            <select id="period" class="input text-neutral-700"
+                wire:model='period'>
+                <option value="">Selecione</option>
+                <option value="6">6h</option>
+                <option value="12">12h</option>
+            </select>
+        </div>
     @elseif ($checkInType == 'M')
         <div class="mb-4" id="enrollment-div">
             <label for="enrollment" class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Pet</label>

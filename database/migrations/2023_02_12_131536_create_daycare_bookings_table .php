@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('extra_time')->nullable();
             $table->time('lunch_time')->nullable();
             $table->boolean('is_single_daily')->default(false);
+            $table->integer('period')->default(6);
             $table->text('notes')->nullable();
             $table->timestamps();
         });

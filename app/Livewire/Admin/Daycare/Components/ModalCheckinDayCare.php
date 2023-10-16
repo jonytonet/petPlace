@@ -20,6 +20,8 @@ class ModalCheckinDayCare extends Component
 
     public $petId;
 
+    public $period;
+
     public function render()
     {
         return view('livewire.admin.daycare.components.modal-checkin-day-care');
@@ -59,6 +61,7 @@ class ModalCheckinDayCare extends Component
                     'daycare_enrollment_id' => $this->enrollmentId,
                     'date' => Carbon::now()->format('Y-m-d'),
                     'entry_time' => Carbon::now('America/Sao_Paulo')->format('H:i:s'),
+                    'period' => $enrollment->daycarePlan->session_type,
                     'is_single_daily' => false,
                 ])
             ) {
@@ -92,6 +95,7 @@ class ModalCheckinDayCare extends Component
                     'date' => Carbon::now()->format('Y-m-d'),
                     'entry_time' => Carbon::now('America/Sao_Paulo')->format('H:i:s'),
                     'is_single_daily' => true,
+                    'period' => $this->period,
 
                 ])
             ) {

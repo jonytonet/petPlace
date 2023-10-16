@@ -29,7 +29,7 @@
                                         <div style="width: 10px"></div>
 
                                     </div>
-                                    <button type="button" wire:click="addEnrollment"
+                                    <button type="button" wire:click=""
                                         class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-800 border border-transparent rounded-md dark:bg-gray-200 dark:text-gray-800 hover:bg-gray-700 dark:hover-bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active-bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800'"
                                         data-te-toggle="modal" data-te-target="#" data-te-ripple-init
                                         data-te-ripple-color="light">Filtros</button>
@@ -51,6 +51,8 @@
                                                                     role="button">Entrada</span></th>
                                                             <th scope="col" class="px-6 py-4 text-center"><span
                                                                     role="button">Saida</span></th>
+                                                            <th scope="col" class="px-6 py-4 text-center"><span
+                                                                    role="button">Período</span></th>
                                                             <th scope="col" class="px-6 py-4 text-center"><span
                                                                     role="button">Atraso</span></th>
                                                             <th scope="col" class="px-6 py-4"><span
@@ -78,6 +80,9 @@
                                                                     {{ $historic->exit_time }}
                                                                 </td>
                                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                                    {{ $historic->period }}H
+                                                                </td>
+                                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                                     @if (!$historic->extra_time)
                                                                         Sem atraso
                                                                     @else
@@ -94,20 +99,15 @@
                                                                         data-te-toggle="tooltip">
                                                                         {{ Illuminate\Support\Str::limit($historic->notes, 10, '...') }}</span>
                                                                 </td>
-
-
-
                                                                 <td class="px-6 py-4 text-end whitespace-nowrap">
-
-                                                                    <x-primary-button wire:click=""
+                                                                    <x-primary-button
+                                                                        wire:click="editHistoric({{ $historic->id }})"
                                                                         data-te-toggle="modal"
-                                                                        data-te-target="#pay-monthly-modal"
+                                                                        data-te-target="#edit-historic"
                                                                         data-te-ripple-init
                                                                         data-te-ripple-color="light">
                                                                         <i class="fas fa-pencil-alt"></i>
                                                                     </x-primary-button>
-
-
                                                                 </td>
                                                             </tr>
                                                         @endforeach
@@ -123,8 +123,8 @@
                                 </div>
                                 <div wire:ignore.defer data-te-modal-init
                                     class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-                                    id="form-create-enrollment" tabindex="-1"
-                                    aria-labelledby="form-create-enrollmentLabel" aria-modal="true" role="dialog">
+                                    id="edit-historic" tabindex="-1" aria-labelledby="edit-historicLabel"
+                                    aria-modal="true" role="dialog">
                                     <div data-te-modal-dialog-ref
                                         class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px] min-[992px]:max-w-[800px]">
                                         <div
@@ -133,7 +133,7 @@
                                                 class="flex items-center justify-between flex-shrink-0 p-4 border-b-2 border-opacity-100 rounded-t-md border-neutral-100 dark:border-opacity-50">
                                                 <!--Modal title-->
                                                 <h5 class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
-                                                    id="form-create-enrollmentLabel">
+                                                    id="edit-historicLabel">
                                                     Editar Histórico
                                                 </h5>
                                                 <!--Close button-->
@@ -148,17 +148,43 @@
                                                     </svg>
                                                 </button>
                                             </div>
-
-
                                             <!--Modal body-->
                                             <div class="relative flex-auto p-4" data-te-modal-body-ref>
-                                                modal body
+                                                <div class="mb-4">
+                                                    <label for="entry-time"
+                                                        class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Entrada</label>
+                                                    <input type="time" class="input" id="entry-time"
+                                                        wire:model='entryTime' />
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="exit-time"
+                                                        class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Entrada</label>
+                                                    <input type="time" class="input" id="exit-time"
+                                                        wire:model='exitTime' />
+                                                </div>
+                                                <div class="mb-4" id="single-daily" style="display: none">
+                                                    <label for="period"
+                                                        class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Período</label>
+                                                    <select id="period" class="input text-neutral-700"
+                                                        wire:model='period'>
+                                                        <option value="">Selecione</option>
+                                                        <option value="6">6h</option>
+                                                        <option value="12">12h</option>
+                                                    </select>
+                                                </div>
 
-
-
-
+                                                <div class="mb-4">
+                                                    <label for="lunch-time"
+                                                        class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Almoço</label>
+                                                    <input type="time" class="input" id="lunch-time"
+                                                        wire:model='lunchTime' />
+                                                </div>
+                                                <div class="mb-4">
+                                                    <textarea class="input" id="booking-notes" wire:model='notes' rows="5"></textarea>
+                                                </div>
 
                                             </div>
+
                                             <!--Modal footer-->
                                             <div
                                                 class="flex flex-wrap items-center justify-end flex-shrink-0 p-4 border-t-2 border-opacity-100 rounded-b-md border-neutral-100 dark:border-opacity-50">
@@ -169,9 +195,10 @@
                                                         {{ __('Cancelar') }}
                                                     </x-secondary-button>
 
-                                                    <x-primary-button class="ml-3" type='submit'>
-                                                        {{ __('Gerar Contrato') }} <div
-                                                            wire:loading='createEnrollment'
+                                                    <x-primary-button class="ml-3" type='button'
+                                                        data-te-modal-dismiss data-te-ripple-init
+                                                        data-te-ripple-color="light" wire:click='updateHistoric'>
+                                                        {{ __('Salvar') }} <div wire:loading='updateHistoric'
                                                             class="inline-block h-3 w-3 animate-spin rounded-full border-2 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
                                                             role="status">
                                                             <span
@@ -207,6 +234,28 @@
                     showConfirmButton: false,
                     timer: 3000,
                 });
+            });
+
+            @this.on('edit-historic', (event) => {
+                console.log(event);
+                document.getElementById("booking-notes").value = event[0]['notes'];
+                document.getElementById("entry-time").value = event[0]['entryTime'];
+                document.getElementById("exit-time").value = event[0]['exitTime'];
+                document.getElementById("lunch-time").value = event[0]['lunchTime'];
+                document.getElementById("period").value = event[0]['period'];
+                if (event[0]['singleDaily'] == 1) {
+                    document.getElementById("single-daily").style.display = 'block';
+                }
+
+            });
+            @this.on('edit-historic-clear', (event) => {
+                document.getElementById("booking-notes").value = '';
+                document.getElementById("entry-time").value = '';
+                document.getElementById("exit-time").value = '';
+                document.getElementById("lunch-time").value = '';
+                document.getElementById("period").value = '';
+                document.getElementById("single-daily").style.display = 'none';
+
             });
         });
     </script>
