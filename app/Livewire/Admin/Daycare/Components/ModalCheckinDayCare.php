@@ -36,6 +36,7 @@ class ModalCheckinDayCare extends Component
 
     public function addCheckIn()
     {
+
         if (! $this->checkInType) {
             $this->dispatch('sweetAlert', ['msg' => 'Selecione um tipo de CheckIn!', 'icon' => 'error']);
 
@@ -85,7 +86,7 @@ class ModalCheckinDayCare extends Component
             unset($balanceDailyCredit['id']);
             unset($balanceDailyCredit['created_at']);
             unset($balanceDailyCredit['created_at']);
-            $daycareDailyCredit = app()->make(DaycareDailyCreditService::class)->create([$balanceDailyCredit]);
+            app()->make(DaycareDailyCreditService::class)->create($balanceDailyCredit);
 
             $this->dispatch('sweetAlert', ['msg' => 'CheckIn realizado com sucesso!', 'icon' => 'success']);
             $this->clearData();
@@ -125,7 +126,6 @@ class ModalCheckinDayCare extends Component
             $this->clearData();
 
             return redirect(request()->header('Referer'));
-
         }
 
     }

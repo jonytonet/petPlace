@@ -27,7 +27,7 @@ class Booking extends Component
         if ($booking->isLate()) {
             $booking->extra_time = $booking->getDelayInMinutes();
         }
-        if ($booking->extra_time > 15 && !$booking->is_single_daily) {
+        if ($booking->extra_time > 15 && ! $booking->is_single_daily) {
             $daycareDailyCredit = app()->make(DaycareDailyCreditService::class)->getValidDailyDaycareCredit($booking->daycare_enrollment_id);
             $daycareDailyCredit->daily_credit -= 1;
             $daycareDailyCredit->type = 'checkout';
@@ -35,7 +35,7 @@ class Booking extends Component
             unset($balanceDailyCredit['id']);
             unset($balanceDailyCredit['created_at']);
             unset($balanceDailyCredit['created_at']);
-            $daycareDailyCredit = app()->make(DaycareDailyCreditService::class)->create([$balanceDailyCredit]);
+            app()->make(DaycareDailyCreditService::class)->create($balanceDailyCredit);
         }
 
         if ($booking->update()) {

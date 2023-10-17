@@ -36,7 +36,8 @@ class DaycareBooking extends Model
     public function isLate()
     {
         $forecast = Carbon::createFromFormat('H:i:s', $this->entry_time)
-            ->addHours($this->daycareEnrollment->period);
+            ->addHours($this->period);
+
         $now = Carbon::now();
 
         return $now->gt($forecast);
@@ -45,7 +46,7 @@ class DaycareBooking extends Model
     public function getDelayInMinutes()
     {
         $forecast = Carbon::createFromFormat('H:i:s', $this->entry_time)
-            ->addHours($this->daycareEnrollment->period);
+            ->addHours($this->period);
         $now = Carbon::now();
         $delayInMinutes = $now->diffInMinutes($forecast);
 
