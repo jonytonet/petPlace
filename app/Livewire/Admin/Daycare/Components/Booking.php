@@ -27,7 +27,7 @@ class Booking extends Component
         if ($booking->isLate()) {
             $booking->extra_time = $booking->getDelayInMinutes();
         }
-        if ($booking->extra_time > 15) {
+        if ($booking->extra_time > 15 && !$booking->is_single_daily) {
             $daycareDailyCredit = app()->make(DaycareDailyCreditService::class)->getValidDailyDaycareCredit($booking->daycare_enrollment_id);
             $daycareDailyCredit->daily_credit -= 1;
             $daycareDailyCredit->type = 'checkout';
