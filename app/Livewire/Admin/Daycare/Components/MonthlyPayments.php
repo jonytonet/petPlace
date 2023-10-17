@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Daycare\Components;
 
 use App\Models\ServiceReference;
+use App\Services\DaycareDailyCreditService;
 use App\Services\DaycareEnrollmentService;
 use App\Services\DaycareMonthlyPaymentService;
 use App\Services\PaymentMethodService;
@@ -117,7 +118,6 @@ class MonthlyPayments extends Component
 
     public function createPayment()
     {
-
         try {
             DB::beginTransaction();
             if (! $this->validePayment()) {
@@ -144,8 +144,21 @@ class MonthlyPayments extends Component
 
                 return;
             }
-
-
+            $validity = Carbon::parse($this->daycareEnrollment->initial_date_plan);
+            $validity->month = now()->month + 1;
+            if (
+                ! app()->make(DaycareDailyCreditService::class)->create(
+                    [
+                        'daycare_enrollment_id' => $this->daycareEnrollmentId,
+                        'daily_credit' => $this->daycareEnrollment->daycarePlan->days,
+                        'type' => 'enrollment',
+                        'validity' => $validity,
+                    ]
+                )
+            ) {
+                DB::rollBack();
+                $this->dispatch('sweetAlert', ['msg' => 'Houve um erro! Tente novamente.', 'icon' => 'error']);
+            }
 
             if (
                 ! app()->make(ServiceFinancialService::class)->create([

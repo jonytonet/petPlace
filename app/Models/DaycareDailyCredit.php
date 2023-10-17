@@ -9,6 +9,5 @@ class DaycareDailyCredit extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['daycare_enrollment_id', 'daily_credit', 'validity'];
-
+    protected $fillable = ['daycare_enrollment_id', 'daily_credit', 'validity', 'type'];
 }

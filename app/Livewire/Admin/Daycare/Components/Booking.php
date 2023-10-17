@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Daycare\Components;
 
 use App\Services\DaycareBookingService;
+use App\Services\DaycareDailyCreditService;
 use Livewire\Component;
 
 class Booking extends Component
@@ -26,6 +27,17 @@ class Booking extends Component
         if ($booking->isLate()) {
             $booking->extra_time = $booking->getDelayInMinutes();
         }
+        if ($booking->extra_time > 15) {
+            $daycareDailyCredit = app()->make(DaycareDailyCreditService::class)->getValidDailyDaycareCredit($booking->daycare_enrollment_id);
+            $daycareDailyCredit->daily_credit -= 1;
+            $daycareDailyCredit->type = 'checkout';
+            $balanceDailyCredit = $daycareDailyCredit->toArray();
+            unset($balanceDailyCredit['id']);
+            unset($balanceDailyCredit['created_at']);
+            unset($balanceDailyCredit['created_at']);
+            $daycareDailyCredit = app()->make(DaycareDailyCreditService::class)->create([$balanceDailyCredit]);
+        }
+
         if ($booking->update()) {
             $this->dispatch('sweetAlert', ['msg' => 'CheckOut realizado com sucesso!', 'icon' => 'success']);
 

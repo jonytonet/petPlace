@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Daycare\Components;
 
 use App\Services\DaycareBookingService;
+use App\Services\DaycareDailyCreditService;
 use App\Services\DaycareEnrollmentService;
 use App\Services\PetService;
 use Illuminate\Support\Carbon;
@@ -48,6 +49,13 @@ class ModalCheckinDayCare extends Component
 
                 return;
             }
+            $daycareDailyCredit = app()->make(DaycareDailyCreditService::class)->getValidDailyDaycareCredit($this->enrollmentId);
+            if (! $daycareDailyCredit || $daycareDailyCredit->daily_credit <= 0) {
+                $this->dispatch('sweetAlert', ['msg' => 'Pet já excedeu os dias do pacote! Renove o pacote ou utilize diária avulsa.', 'icon' => 'error']);
+
+                return;
+            }
+
             $enrollment = app()->make(DaycareEnrollmentService::class)->find($this->enrollmentId);
             if (app()->make(DaycareBookingService::class)->isBooking($enrollment->pet_id)) {
                 $this->dispatch('sweetAlert', ['msg' => 'O pet possuí um check in em aberto!', 'icon' => 'error']);
@@ -70,6 +78,14 @@ class ModalCheckinDayCare extends Component
 
                 return;
             }
+
+            $daycareDailyCredit->daily_credit -= 1;
+            $daycareDailyCredit->type = 'checkin';
+            $balanceDailyCredit = $daycareDailyCredit->toArray();
+            unset($balanceDailyCredit['id']);
+            unset($balanceDailyCredit['created_at']);
+            unset($balanceDailyCredit['created_at']);
+            $daycareDailyCredit = app()->make(DaycareDailyCreditService::class)->create([$balanceDailyCredit]);
 
             $this->dispatch('sweetAlert', ['msg' => 'CheckIn realizado com sucesso!', 'icon' => 'success']);
             $this->clearData();

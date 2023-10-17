@@ -38,4 +38,9 @@ class DaycareDailyCreditRepository extends BaseRepository
 
         return $query->orderBy($orderBy, $orderDirection)->paginate($limit);
     }
+
+    public function getValidDailyDaycareCredit(int $enrollmentId): ?DaycareDailyCredit
+    {
+        return $this->model->where('daycare_enrollment_id', $enrollmentId)->whereDate('validity', '>=', now())->orderBy('id', 'DESC')->first();
+    }
 }
