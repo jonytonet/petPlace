@@ -144,6 +144,9 @@ class MonthlyPayments extends Component
 
                 return;
             }
+
+
+
             if (
                 ! app()->make(ServiceFinancialService::class)->create([
                     'service_reference_id' => $reference->id,
