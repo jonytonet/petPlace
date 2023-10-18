@@ -140,16 +140,22 @@ class Historic extends Component
 
     public function getFilters()
     {
+        $this->filtersFormatted = [];
         $filters = [];
         if ($this->dateStart && ! $this->dateEnd) {
-            $filters[0] = ['created_at', '>', $this->dateStart];
+            $filters[0] = ['created_at', '>=', $this->dateStart];
         }
         if (! $this->dateStart && $this->dateEnd) {
-            $filters = ['created_at', '<', $this->dateEnd];
+            $filters[0] = ['created_at', '<=', $this->dateEnd];
         }
         if ($this->dateStart && $this->dateEnd) {
-            $filters[0] = ['created_at', '<', $this->dateEnd];
-            $filters[1] = ['created_at', '>', $this->dateStart];
+            if ($this->dateStart == $this->dateEnd) {
+                $filters[0] = ['created_at', 'LIKE', $this->dateStart.'%'];
+            } else {
+                $filters[0] = ['created_at', '<', $this->dateEnd];
+                $filters[1] = ['created_at', '>', $this->dateStart];
+            }
+
         }
 
         $this->filtersFormatted = $filters;
