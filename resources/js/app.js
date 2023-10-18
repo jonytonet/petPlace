@@ -12,11 +12,12 @@ import {
     Modal,
     Sidenav,
     Tooltip,
+    Dropdown,
     Ripple,
     initTE,
   } from "tw-elements";
 
-  initTE({ Modal, Sidenav, Ripple , Tooltip,  Select, });
+  initTE({ Modal, Sidenav,Dropdown, Ripple , Tooltip,  Select, });
 
   window.addEventListener("load", () => {
     const sidenav = document.getElementById("full-screen-example");

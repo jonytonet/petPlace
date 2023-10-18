@@ -29,10 +29,52 @@
                                         <div style="width: 10px"></div>
 
                                     </div>
-                                    <button type="button" wire:click=""
-                                        class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-800 border border-transparent rounded-md dark:bg-gray-200 dark:text-gray-800 hover:bg-gray-700 dark:hover-bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active-bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800'"
-                                        data-te-toggle="modal" data-te-target="#" data-te-ripple-init
-                                        data-te-ripple-color="light">Filtros</button>
+                                    <div class="relative" data-te-dropdown-position="dropstart">
+                                        <button type="button" wire:click=""
+                                            class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-800 border border-transparent rounded-md dark:bg-gray-200 dark:text-gray-800 hover:bg-gray-700 dark:hover-bg-white focus:bg-gray-700 dark:focus:bg-white active-bg-gray-900 dark:active-bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800'"
+                                            id="dropdownMenuButton1s" data-te-dropdown-toggle-ref aria-expanded="false"
+                                            data-te-ripple-init data-te-ripple-color="light">
+                                            <span class="mr-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                    fill="currentColor" class="w-5 h-5">
+                                                    <path fill-rule="evenodd"
+                                                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </span>Filtros
+                                        </button>
+                                        <ul class="absolute z-[1000] float-left m-0 hidden min-w-[200px] p-3 list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
+                                            aria-labelledby="dropdownMenuButton1s" data-te-dropdown-menu-ref>
+                                            <li>
+                                                <div class="mb-4">
+                                                    <label for="date-start"
+                                                        class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Data
+                                                        Inicial</label>
+                                                    <input type="date" class="input" id="date-start"
+                                                        wire:model='dateStart' />
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="mb-4">
+                                                    <label for="date-end"
+                                                        class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Data
+                                                        Final</label>
+                                                    <input type="date" class="input" id="date-end"
+                                                        wire:model='dateEnd' />
+                                                </div>
+                                            </li>
+                                            <hr
+                                                class="h-0 my-2 border border-t-0 border-solid opacity-25 border-neutral-700 dark:border-neutral-200" />
+                                            <li>
+                                                <button type="button"
+                                                    class="inline-block rounded bg-neutral-50 px-6 pb-2 pt-2.5 text-xs font-medium uppercase w-full leading-normal text-neutral-800 shadow-[0_4px_9px_-4px_#cbcbcb] transition duration-150 ease-in-out hover:bg-neutral-100 hover:shadow-[0_8px_9px_-4px_rgba(203,203,203,0.3),0_4px_18px_0_rgba(203,203,203,0.2)] focus:bg-neutral-100 focus:shadow-[0_8px_9px_-4px_rgba(203,203,203,0.3),0_4px_18px_0_rgba(203,203,203,0.2)] focus:outline-none focus:ring-0 active:bg-neutral-200 active:shadow-[0_8px_9px_-4px_rgba(203,203,203,0.3),0_4px_18px_0_rgba(203,203,203,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(251,251,251,0.3)] dark:hover:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.1),0_4px_18px_0_rgba(251,251,251,0.05)] dark:focus:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.1),0_4px_18px_0_rgba(251,251,251,0.05)] dark:active:shadow-[0_8px_9px_-4px_rgba(251,251,251,0.1),0_4px_18px_0_rgba(251,251,251,0.05)]">
+                                                    Filtrar
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+
                                 </div>
 
 
