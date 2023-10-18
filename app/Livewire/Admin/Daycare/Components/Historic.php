@@ -34,6 +34,10 @@ class Historic extends Component
 
     public $singleDaily;
 
+    public $dateStart;
+
+    public $dateEnd;
+
     public function render()
     {
         return view('livewire.admin.daycare.components.historic', ['historics' => app()->make(DaycareBookingService::class)->getDaycareBookingsToTable($this->searchTerms, $this->filtersFormatted, $this->orderBy, $this->orderDirection, $this->limit)]);
@@ -132,5 +136,22 @@ class Historic extends Component
 
         $this->dispatch('sweetAlert', ['msg' => 'Houve um erro inesperado! Tente novamente.', 'icon' => 'error']);
 
+    }
+
+    public function getFilters()
+    {
+        $filters = [];
+        if ($this->dateStart && ! $this->dateEnd) {
+            $filters[0] = ['created_at', '>', $this->dateStart];
+        }
+        if (! $this->dateStart && $this->dateEnd) {
+            $filters = ['created_at', '<', $this->dateEnd];
+        }
+        if ($this->dateStart && $this->dateEnd) {
+            $filters[0] = ['created_at', '<', $this->dateEnd];
+            $filters[1] = ['created_at', '>', $this->dateStart];
+        }
+
+        $this->filtersFormatted = $filters;
     }
 }
