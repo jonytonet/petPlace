@@ -155,7 +155,6 @@ class Historic extends Component
                 $filters[0] = ['created_at', '<', $this->dateEnd];
                 $filters[1] = ['created_at', '>', $this->dateStart];
             }
-
         }
 
         $this->filtersFormatted = $filters;

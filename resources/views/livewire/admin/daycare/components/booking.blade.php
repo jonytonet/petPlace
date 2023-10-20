@@ -33,7 +33,7 @@
                             @if ($daycarePet->exit_time)
                                 {{ $daycarePet->exit_time }}
                             @else
-                                {{ \Carbon\Carbon::createFromFormat('H:i:s', $daycarePet->entry_time)->addHours($daycarePet->daycareEnrollment->daycarePlan->session_type)->format('H:i:s') }}
+                                {{ \Carbon\Carbon::createFromFormat('H:i:s', $daycarePet->entry_time)->addHours($daycarePet->period)->format('H:i:s') }}
                             @endif
                         </p>
                         @if ($daycarePet->extra_time)
