@@ -9,7 +9,16 @@ class BathAndGroomingPlan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'pet_species', 'fur_type', 'max_weight', 'price', 'baths_number', 'max_use_months'];
+    protected $fillable = [
+        'name',
+        'description',
+        'pet_species',
+        'fur_type',
+        'max_weight',
+        'price',
+        'baths_number',
+        'max_use_months',
+    ];
 
     public function pets()
     {

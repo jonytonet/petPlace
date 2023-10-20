@@ -39,6 +39,8 @@ Route::middleware('auth')->group(function () {
         Route::view('daycare/enrollment', 'admin.daycare.enrollment')->name('daycare.enrollment');
         Route::view('daycare/historic', 'admin.daycare.historic')->name('daycare.historic');
         Route::view('daycare/monthlyPayments/{petId}', 'admin.daycare.monthly-payments')->name('daycare.monthlyPayments');
+        Route::view('banho-tosa/index', 'admin.bath-and-grooming.control')->name('bathAndGrooming.index');
+        Route::view('banho-tosa/pacotes', 'admin.bath-and-grooming.plans')->name('bathAndGrooming.plans');
     });
 
 });
