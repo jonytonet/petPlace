@@ -8,6 +8,8 @@
                 @include('layouts.dropdown_menu')
             </div>
         </div>
+
+        @livewire('admin.bath-and-grooming.plan.index')
     </x-slot>
 
 </x-app-layout>

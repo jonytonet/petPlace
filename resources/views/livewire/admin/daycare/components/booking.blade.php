@@ -44,11 +44,12 @@
                                 min</p>
                         @endif
                         <div class="flex justify-center mt-4 space-x-4 text-center">
-                            <button type="button" data-te-ripple-init data-te-ripple-color="light" title="Observações"
+                            <button type="button" data-te-ripple-init data-te-ripple-color="light"
                                 wire:click='getNote({{ $daycarePet->id }})' data-te-toggle="modal"
-                                data-te-target="#note-daycare" data-te-toggle="tooltip" data-te-placement="left"
+                                data-te-target="#note-daycare"
                                 class="inline-block rounded-full  bg-primary dark:bg-transparent  p-2 uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
-                                <i class="fa-solid fa-clipboard-list "></i>
+                                <i class="fa-solid fa-clipboard-list " data-te-toggle="tooltip" data-te-placement="left"
+                                    title="Observações"></i>
                             </button>
                             <button wire:click='checkLunchTime({{ $daycarePet->id }})'
                                 @if ($daycarePet->lunch_time) disabled @endif type="button" data-te-ripple-init

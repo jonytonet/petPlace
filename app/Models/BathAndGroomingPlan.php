@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BathAndGroomingPlan extends Model
 {
@@ -24,4 +25,9 @@ class BathAndGroomingPlan extends Model
     {
         return $this->belongsToMany(Pet::class)->withTimestamps();
     }
+    public function petSpecies(): BelongsTo
+    {
+        return $this->belongsTo(Specie::class, 'pet_species', 'id');
+    }
+
 }
