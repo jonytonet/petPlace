@@ -24,7 +24,7 @@
                         </svg>
                     </button>
                 </div>
-                <form wire:submit='createOrEditPlan'>
+                <form wire:submit='createPetPlan'>
                     <!--Modal body-->
                     <div class="relative flex-auto p-4" data-te-modal-body-ref>
                         <div class="relative flex-auto p-4" data-te-modal-body-ref>
@@ -32,7 +32,7 @@
                                 <label for="pet"
                                     class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Pet</label>
                                 <select class="input" data-te-select-init data-te-select-filter="true"
-                                    wire:model.live='petId'>
+                                    wire:model='petId'  id="pet_id_plan_pet">
                                     <option value="">Selecione</option>
                                     @foreach ($pets as $pet)
                                         <option value="{{ $pet->id }}">{{ $pet->name }}</option>
@@ -45,7 +45,7 @@
                                 <label for="pet"
                                     class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Pacote</label>
                                 <select class="input" data-te-select-init data-te-select-filter="true"
-                                    wire:model.live='petId'>
+                                    wire:model='planId'  id="plan_id_plan_pet">
                                     <option value="">Selecione</option>
                                     @foreach ($plans as $plan)
                                         <option value="{{ $plan->id }}">{{ $plan->name }} - R${{ number_format( $plan->price, 2, ',', '.') }}</option>
@@ -54,6 +54,20 @@
                                 </select>
 
                             </div>
+                            <div class="mb-4">
+                                <label for="pet"
+                                    class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Tipo de Serviço</label>
+                                <select class="input" data-te-select-init data-te-select-filter="true"
+                                    wire:model='serviceTypeId'  id="service_type_id">
+                                    <option value="">Selecione</option>
+                                    @foreach ($serviceTypes as $serviceType)
+                                        <option value="{{ $serviceType->id }}">{{ $serviceType->name }} </option>
+                                    @endforeach
+
+                                </select>
+
+                            </div>
+
 
                         </div>
                     </div>
@@ -74,4 +88,5 @@
             </div>
         </div>
     </div>
+
 </div>

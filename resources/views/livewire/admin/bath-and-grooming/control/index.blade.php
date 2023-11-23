@@ -153,6 +153,12 @@
                     document.getElementById("booking-notes").value = '';
                 });
 
+                @this.on('clearPetPlan', (event) => {
+                    document.getElementById("pet_id_plan_pet").value = '';
+                    document.getElementById("plan_id_plan_pet").value = '';
+                    document.getElementById("service_type_id").value = '';
+                });
+
 
 
             });
