@@ -168,6 +168,7 @@ class MonthlyPayments extends Component
                     'payment_method_id' => $this->paymentMethodId,
                     'discount' => $this->convertToDecimal($this->discount),
                     'net_total' => $this->convertToDecimal($this->netTotal),
+                    'is_paid' => true,
                 ])
             ) {
                 DB::rollBack();

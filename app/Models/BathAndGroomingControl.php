@@ -13,13 +13,9 @@ class BathAndGroomingControl extends Model
         'service_reference_id',
         'pet_id',
         'bath_and_grooming_plan_id',
-        'user_id',
-        'bath_date',
-        'bath_time',
+        'value',
         'baths_number_plan',
         'baths_number_used',
-        'extra_services',
-        'notes',
     ];
 
     public function pet()
@@ -30,10 +26,5 @@ class BathAndGroomingControl extends Model
     public function bathAndGroomingPlan()
     {
         return $this->belongsTo(BathAndGroomingPlan::class);
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 }

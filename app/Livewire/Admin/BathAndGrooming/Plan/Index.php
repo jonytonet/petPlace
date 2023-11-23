@@ -10,7 +10,6 @@ use Livewire\WithPagination;
 
 class Index extends Component
 {
-
     use WithPagination;
 
     public $searchTerms;
@@ -29,7 +28,6 @@ class Index extends Component
 
     public $planId;
 
-
     public function render()
     {
         return view(
@@ -41,7 +39,6 @@ class Index extends Component
             ]
         );
     }
-
 
     public function goToIndex()
     {
@@ -58,15 +55,18 @@ class Index extends Component
             if (app()->make(BathAndGroomingPlanService::class)->update($this->form, $this->planId)) {
                 $this->dispatch('sweetAlert', ['msg' => 'Registro salvo com sucesso', 'icon' => 'success']);
                 $this->addPlan();
+
                 return;
             }
             $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao tentar deletar o plano! Tente novamente.', 'icon' => 'error']);
+
             return;
         }
 
         if (app()->make(BathAndGroomingPlanService::class)->create($this->form)) {
             $this->dispatch('sweetAlert', ['msg' => 'Registro salvo com sucesso', 'icon' => 'success']);
             $this->addPlan();
+
             return;
         }
         $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao tentar deletar o plano! Tente novamente.', 'icon' => 'error']);
@@ -85,6 +85,7 @@ class Index extends Component
             $this->planId = $id;
             $this->form = $plan;
             $this->dispatch('editPlan', $plan);
+
             return;
         }
         $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao tentar recuperar o plano! Tente novamente,', 'icon' => 'error']);
@@ -94,11 +95,11 @@ class Index extends Component
     {
         if (app()->make(BathAndGroomingPlanService::class)->destroy($id)) {
             $this->dispatch('sweetAlert', ['msg' => 'Registro deletado com sucesso', 'icon' => 'success']);
+
             return;
         }
         $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao tentar deletar o plano! Tente novamente.', 'icon' => 'error']);
     }
-
 
     private function convertToDecimal(string $value): float
     {
@@ -113,7 +114,7 @@ class Index extends Component
             $arrayValue = explode('.', $formattedValue);
             $endElement = end($arrayValue);
             array_pop($arrayValue);
-            $formattedValue = implode('', $arrayValue) . '.' . $endElement;
+            $formattedValue = implode('', $arrayValue).'.'.$endElement;
         }
 
         return floatval($formattedValue);

@@ -15,14 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('service_reference_id')->nullable();
             $table->foreignId('pet_id')->constrained();
-            $table->foreignId('bath_and_grooming_plan_id')->constrained();
-            $table->foreignId('user_id')->constrained();
-            $table->date('bath_date');
-            $table->time('bath_time');
-            $table->integer('baths_number_plan');
+            $table->foreignId('bath_and_grooming_plan_id')->nullable();
+            $table->decimal('value', 8, 2);
+            $table->integer('baths_number_plan')->nullable();
             $table->integer('baths_number_used')->nullable();
-            $table->text('extra_services')->nullable();
-            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

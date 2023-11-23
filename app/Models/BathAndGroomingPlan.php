@@ -25,9 +25,9 @@ class BathAndGroomingPlan extends Model
     {
         return $this->belongsToMany(Pet::class)->withTimestamps();
     }
+
     public function petSpecies(): BelongsTo
     {
         return $this->belongsTo(Specie::class, 'pet_species', 'id');
     }
-
 }

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->double('commission_value', 8, 2)->nullable();
             $table->unsignedBigInteger('commission_by')->nullable();
             $table->double('net_total', 8, 2)->nullable();
+            $table->boolean('is_paid')->default(false);
             $table->timestamps();
         });
     }

@@ -20,6 +20,7 @@ class ServiceFinancial extends Model
         'commission_value',
         'commission_by',
         'net_total',
+        'is_paid',
     ];
 
     public function serviceReference()
