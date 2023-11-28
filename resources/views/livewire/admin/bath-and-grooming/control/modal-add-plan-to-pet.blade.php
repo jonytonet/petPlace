@@ -1,5 +1,5 @@
 <div>
-    <div wire:ignore.defer data-te-modal-init
+    {{-- <div wire:ignore.defer data-te-modal-init
         class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
         id="bath-add-plan-pet-modal" tabindex="-1" aria-labelledby="bath-add-plan-pet-modalLabel" aria-modal="true"
         role="dialog">
@@ -87,6 +87,6 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
 
 </div>

@@ -13,29 +13,29 @@ class CreatePetForm extends Form
     use WithFileUploads;
 
     #[Url(as: 'customersId')]
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $userId;
 
     public $image;
 
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $name;
 
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $specieId;
 
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $breedId;
 
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $gender;
 
     public $dateOfBirth;
 
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $fur;
 
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $size;
 
     public $microchip;

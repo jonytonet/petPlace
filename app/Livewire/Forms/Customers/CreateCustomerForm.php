@@ -16,7 +16,7 @@ class CreateCustomerForm extends Form
     #[Rule('email', onUpdate: false, message: 'Email invalido!')]
     public $email;
 
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $cellphone;
 
     public $cpf;
@@ -31,22 +31,22 @@ class CreateCustomerForm extends Form
 
     public $alternateContactCellphone;
 
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $zipCode;
 
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $address;
 
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $city;
 
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $state;
 
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $district;
 
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $addressNumber;
 
     public $addressComplement;

@@ -11,7 +11,7 @@ class CreateOrEditPaymentMethodForm extends Form
 {
     public $paymentMethodId;
 
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $name;
 
     public $description;

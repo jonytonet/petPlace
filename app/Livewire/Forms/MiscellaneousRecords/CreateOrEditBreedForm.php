@@ -10,10 +10,10 @@ class CreateOrEditBreedForm extends Form
 {
     public $breedId;
 
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $specieId;
 
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $name;
 
     public $description;

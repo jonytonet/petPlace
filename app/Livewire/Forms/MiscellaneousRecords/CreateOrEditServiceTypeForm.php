@@ -10,7 +10,7 @@ class CreateOrEditServiceTypeForm extends Form
 {
     public $serviceTypeId;
 
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $name;
 
     public $commission;

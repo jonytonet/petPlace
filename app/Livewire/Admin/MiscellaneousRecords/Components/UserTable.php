@@ -34,6 +34,7 @@ class UserTable extends Component
 
     public function render()
     {
+
         return view(
             'livewire.admin.miscellaneous-records.components.user-table',
             ['users' => app()->make(UserService::class)->getUsersToTable($this->searchTermsUser, $this->filtersFormatted, $this->orderBy, $this->orderDirection, $this->limit)]
@@ -43,7 +44,7 @@ class UserTable extends Component
 
     public function mount()
     {
-        $this->userTypes = app()->make(UserTypeService::class)->all();
+       $this->userTypes = app()->make(UserTypeService::class)->all();
     }
 
     public function createOrEditUser()

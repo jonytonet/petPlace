@@ -10,7 +10,7 @@ class CreateOrEditSpecieForm extends Form
 {
     public $specieId;
 
-    #[Rule(['required'], onUpdate: false, message: 'Campo obrigatório!')]
+    #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
     public $name;
 
     public $description;
