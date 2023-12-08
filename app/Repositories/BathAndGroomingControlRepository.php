@@ -38,4 +38,9 @@ class BathAndGroomingControlRepository extends BaseRepository
 
         return $query->orderBy($orderBy, $orderDirection)->paginate($limit);
     }
+
+    public function getPlanControlByPetId(int $petId): BathAndGroomingControl
+    {
+        return $this->model->where('baths_number_used', '<', 'baths_number_plan')->where('pet_id', $petId)->first();
+    }
 }

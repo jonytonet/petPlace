@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('bath_and_grooming_plan_id')->nullable();
             $table->decimal('value', 8, 2);
             $table->integer('baths_number_plan')->nullable();
-            $table->integer('baths_number_used')->nullable();
+            $table->integer('baths_number_used')->default(0);
             $table->timestamps();
         });
     }

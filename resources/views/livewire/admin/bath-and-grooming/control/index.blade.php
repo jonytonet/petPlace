@@ -88,7 +88,7 @@
                                     <div class="mb-4">
                                         <label for="pet"
                                             class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Tipo</label>
-                                        <select class="input" data-te-select-init data-te-select-filter="true"
+                                        <select class="input" data-te-select-init data-te-select-filter="true" wire:change='checkPlan'
                                             wire:model.live='type'>
                                             <option value="">Selecione</option>
                                             <option value="single">Avulso</option>
