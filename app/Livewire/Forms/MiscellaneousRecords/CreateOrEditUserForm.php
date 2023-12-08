@@ -8,7 +8,8 @@ use App\Services\VeterinarianService;
 use Livewire\Attributes\Rule;
 use Livewire\Form;
 
-class CreateOrEditUserForm extends Form {
+class CreateOrEditUserForm extends Form
+{
     public $userId;
 
     #[Rule('required', onUpdate: false, message: 'Campo obrigatório!')]
@@ -19,7 +20,7 @@ class CreateOrEditUserForm extends Form {
 
     #[Rule('required', message: 'Campo obrigatório!')]
     #[Rule('email', message: 'Campo do tipo email!')]
-    #[Rule('unique:'.User::class .',email', message: 'Email já existente ou invalido!')]
+    #[Rule('unique:'.User::class.',email', message: 'Email já existente ou invalido!')]
     public $email;
 
     #[Rule('min:8', onUpdate: false, message: 'Senha deve ter no mínimo 8 caracteres!')]
@@ -42,11 +43,12 @@ class CreateOrEditUserForm extends Form {
 
     public $crmv;
 
-    public function save() {
+    public function save()
+    {
 
-        if($this->userId) {
-            if($this->password) {
-                if($this->password != $this->password) {
+        if ($this->userId) {
+            if ($this->password) {
+                if ($this->password != $this->password) {
                     return ['status' => 'error', 'message' => 'Senhas não conferem!'];
                 }
 
@@ -74,9 +76,9 @@ class CreateOrEditUserForm extends Form {
 
                 ], $this->userId);
             }
-            if($updateUser) {
+            if ($updateUser) {
 
-                if($this->userType == 2) {
+                if ($this->userType == 2) {
                     $veterinarian = $updateUser->veterinarian;
                     $veterinarian->name = $this->name;
                     $veterinarian->qualification = $this->qualification;
@@ -101,9 +103,9 @@ class CreateOrEditUserForm extends Form {
                 'rg' => $this->rg,
             ]);
 
-            if($createUser) {
+            if ($createUser) {
 
-                if($this->userType == 2) {
+                if ($this->userType == 2) {
                     $vet = app()->make(VeterinarianService::class)->create(
                         [
                             'name' => $this->name,
@@ -112,7 +114,7 @@ class CreateOrEditUserForm extends Form {
                             'user_id' => $createUser->id,
                         ]
                     );
-                    if(!$vet) {
+                    if (! $vet) {
                         return ['status' => 'error', 'message' => 'Houve um erro ao cadastra dados do Veterinário(a)!'];
                     }
                 }
@@ -125,8 +127,9 @@ class CreateOrEditUserForm extends Form {
 
     }
 
-    public function destroy($id) {
-        if(
+    public function destroy($id)
+    {
+        if (
             app()->make(UserService::class)->update([
                 'active' => false,
             ], $id)
@@ -137,7 +140,8 @@ class CreateOrEditUserForm extends Form {
         return false;
     }
 
-    public function clear() {
+    public function clear()
+    {
         $this->userType = null;
         $this->name = null;
         $this->email = null;

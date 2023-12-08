@@ -28,7 +28,7 @@ class ModalAddPlanToPet extends Component
             [
                 'pets' => app()->make(PetService::class)->all(),
                 'plans' => app()->make(BathAndGroomingPlanService::class)->all(),
-                'serviceTypes' => app()->make(ServiceTypeService::class)->all(),
+                'serviceTypes' => app()->make(ServiceTypeService::class)->getBathAndGroomingServices(),
             ]
         );
     }

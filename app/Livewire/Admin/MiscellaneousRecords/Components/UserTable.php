@@ -44,7 +44,7 @@ class UserTable extends Component
 
     public function mount()
     {
-       $this->userTypes = app()->make(UserTypeService::class)->all();
+        $this->userTypes = app()->make(UserTypeService::class)->all();
     }
 
     public function createOrEditUser()

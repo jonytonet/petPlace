@@ -22,6 +22,7 @@
                                     <th scope="col" class="px-6 py-4"><span role="button">Nome</span></th>
                                     <th scope="col" class="px-6 py-4"><span role="button">Comissão</span></th>
                                     <th scope="col" class="px-6 py-4"><span role="button">Tipo Comissão</span></th>
+                                    <th scope="col" class="px-6 py-4"><span role="button">Departamento</span></th>
                                     <th scope="col" class="px-6 py-4">Ações</th>
                                 </tr>
                             </thead>
@@ -40,6 +41,15 @@
                                                 A Pagar
                                             @else
                                                 Não definido
+                                            @endif
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            @if ($serviceType->department == 'daycare')
+                                                Daycare
+                                            @elseif ($serviceType->department == 'veterinarian')
+                                                Veterinário
+                                            @else
+                                                Banho & Tosa
                                             @endif
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
@@ -131,12 +141,26 @@
                                         wire:model='formServiceType.commission_type'>
                                         <option value="">Selecione</option>
                                         <option value="out">A pagar</option>
-                                        <option value="out">A receber</option>
+                                        <option value="in">A receber</option>
 
                                     </select>
-                                    @error('formServiceType.commission_type')
+                                </div>
+                                <div class="mb-4">
+                                    <label for="department_type"
+                                        class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">
+                                        Departamento</label>
+                                    <select id="department_type" class="input text-neutral-700"
+                                        wire:model='formServiceType.department'>
+                                            <option value="">Selecione</option>
+                                            <option value="bathAndGrooming">Banho & Tosa</option>
+                                            <option value="daycare"> DayCare</option>
+                                            <option value="veterinarian">Veterinário</option>
+
+                                    </select>
+                                    @error('formServiceType.department')
                                         <div class="text-sm font-bold text-red-400">{{ $message }}</div>
                                     @enderror
+
                                 </div>
                             </div>
                         </div>

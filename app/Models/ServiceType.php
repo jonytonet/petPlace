@@ -14,5 +14,6 @@ class ServiceType extends Model
         'description',
         'commission',
         'commission_type',
+        'department',
     ];
 }

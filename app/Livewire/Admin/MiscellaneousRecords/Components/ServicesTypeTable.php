@@ -50,12 +50,14 @@ class ServicesTypeTable extends Component
     public function editServiceType(int $id)
     {
         $serviceType = app()->make(ServiceTypeService::class)->find($id);
+
         if ($serviceType) {
             $this->formServiceType->serviceTypeId = $id;
             $this->formServiceType->name = $serviceType->name;
             $this->formServiceType->description = $serviceType->description;
             $this->formServiceType->commission = $serviceType->commission;
             $this->formServiceType->commission_type = $serviceType->commission_type;
+            $this->formServiceType->department = $serviceType->department;
             $this->dispatch('editServiceType', $serviceType);
 
             return;

@@ -19,6 +19,8 @@ class CreateOrEditServiceTypeForm extends Form
 
     public $description;
 
+    public $department;
+
     public function save()
     {
         $this->validate();
@@ -29,6 +31,7 @@ class CreateOrEditServiceTypeForm extends Form
                     'description' => $this->description,
                     'commission' => $this->commission,
                     'commission_type' => $this->commission_type,
+                    'department' => $this->department,
                 ], $this->serviceTypeId)
             ) {
                 $this->clearProprieties();
@@ -44,6 +47,7 @@ class CreateOrEditServiceTypeForm extends Form
                     'description' => $this->description,
                     'commission' => $this->commission,
                     'commission_type' => $this->commission_type,
+                    'department' => $this->department,
                 ])
             ) {
                 $this->clearProprieties();
@@ -63,6 +67,7 @@ class CreateOrEditServiceTypeForm extends Form
         $this->description = null;
         $this->commission = null;
         $this->commission_type = null;
+        $this->department = null;
 
     }
 }

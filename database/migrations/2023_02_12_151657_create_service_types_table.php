@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->decimal('commission', 8, 2)->nullable();
             $table->string('commission_type')->nullable();
+            $table->string('department')->nullable();
             $table->timestamps();
         });
     }

@@ -72,8 +72,12 @@ class CreateOrEditPaymentMethodForm extends Form
         $this->paymentMethodId = null;
     }
 
-    private function convertToDecimal(string $value): float
+    private function convertToDecimal(?string $value): float
     {
+        if (! $value) {
+            return 0;
+        }
+
         $cleanedValue = preg_replace('/[^0-9,.]/', '', $value);
         if (strpos($cleanedValue, ',') !== false && strpos($cleanedValue, '.') !== false) {
             $formattedValue = str_replace(['.'], '.', $cleanedValue);

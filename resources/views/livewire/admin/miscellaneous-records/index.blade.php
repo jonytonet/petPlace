@@ -141,6 +141,7 @@
                 document.getElementById("commission-serviceType").value = event[0].commission;
                 document.getElementById("description-serviceType").value = event[0].description;
                 document.getElementById("commission_type-serviceType").value = event[0].commission_type;
+                document.getElementById("department_type").value = event[0].department;
             })
 
             @this.on('addServiceType', (event) => {
@@ -148,6 +149,7 @@
                 document.getElementById("commission-serviceType").value = '';
                 document.getElementById("description-serviceType").value = '';
                 document.getElementById("commission_type-serviceType").value = '';
+                document.getElementById("department_type").value = '';
 
             })
 

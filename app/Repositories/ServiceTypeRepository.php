@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\ServiceType;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class ServiceTypeRepository extends BaseRepository
@@ -37,5 +38,10 @@ class ServiceTypeRepository extends BaseRepository
         }
 
         return $query->orderBy($orderBy, $orderDirection)->paginate($limit);
+    }
+
+    public function getBathAndGroomingServices(): Collection
+    {
+        return $this->model->where('department', 'bathAndGrooming')->orderBy('name')->get();
     }
 }
