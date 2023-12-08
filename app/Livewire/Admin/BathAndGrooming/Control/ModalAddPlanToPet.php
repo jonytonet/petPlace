@@ -49,6 +49,7 @@ class ModalAddPlanToPet extends Component
 
                 return;
             }
+
             $plan = app()->make(BathAndGroomingPlanService::class)->find($this->planId);
 
             if (
@@ -71,7 +72,6 @@ class ModalAddPlanToPet extends Component
                     'service_reference_id' => $reference->id,
                     'service_type_id' => $this->serviceTypeId,
                     'service_value' => $this->convertToDecimal($plan->price),
-                    'payment_method_id' => $this->paymentMethodId,
                     'is_paid' => false,
                 ])
             ) {
