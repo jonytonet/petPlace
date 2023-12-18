@@ -68,7 +68,7 @@
                                 </svg>
                             </button>
                         </div>
-                        <form wire:submit='createOrEditPlan'>
+                        <form wire:submit='booking'>
                             <!--Modal body-->
                             <div class="relative flex-auto p-4" data-te-modal-body-ref>
                                 <div class="relative flex-auto p-4" data-te-modal-body-ref>
@@ -88,23 +88,22 @@
                                     <div class="mb-4">
                                         <label for="pet"
                                             class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Tipo</label>
-                                        <select class="input" data-te-select-init data-te-select-filter="true" wire:change='checkPlan'
-                                            wire:model.live='type'>
+                                        <select class="input" wire:change='checkBathPlan'
+                                            wire:model.live='type' id="type_bath">
                                             <option value="">Selecione</option>
                                             <option value="single">Avulso</option>
                                             <option value="plan">Pacote</option>
                                         </select>
 
                                     </div>
-
-
                                     <div class="mb-4">
-                                        <label for="name-plan"
-                                            class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Nome</label>
-                                        <input type="text" class="input" id="name-plan" required
-                                            wire:model='form.name' />
+                                        <label for="date_time"
+                                            class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Date e Hora</label>
+                                        <input type="datetime-local" id="date_time" class="input" wire:model='date'
+                                        min="{{ now()->toDateString() }}T00:00"  required/>
 
                                     </div>
+
 
 
 
@@ -159,6 +158,10 @@
                     document.getElementById("service_type_id").value = '';
                 });
 
+                @this.on('typeClear',  (event) => {
+                    document.getElementById("type_bath").value = '';
+
+                })
 
 
             });

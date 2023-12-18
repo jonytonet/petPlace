@@ -18,7 +18,7 @@ class BathAndGroomingControlService extends BaseService
         return $this->bathAndGroomingControlRepository->getBathAndGroomingControlsToTable($searchTerms, $filters, $orderBy, $orderDirection, $limit);
     }
 
-    public function getPlanControlByPetId(int $petId): BathAndGroomingControl
+    public function getPlanControlByPetId(int $petId): BathAndGroomingControl| null
     {
         return $this->bathAndGroomingControlRepository->getPlanControlByPetId($petId);
     }
