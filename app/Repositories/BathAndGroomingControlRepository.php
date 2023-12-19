@@ -29,17 +29,17 @@ class BathAndGroomingControlRepository extends BaseRepository
         $query = $this->model;
         if ($searchTerms) {
             $query = $query->where(function ($query) use ($searchTerms) {
-                $query->where('name', 'LIKE', '%' . $searchTerms . '%');
+                $query->where('name', 'LIKE', '%'.$searchTerms.'%');
             });
         }
-        if (!empty($filters)) {
+        if (! empty($filters)) {
             $query = $query->where($filters);
         }
 
         return $query->orderBy($orderBy, $orderDirection)->paginate($limit);
     }
 
-    public function getPlanControlByPetId(int $petId): BathAndGroomingControl|null
+    public function getPlanControlByPetId(int $petId): ?BathAndGroomingControl
     {
         return $this->model
             ->whereColumn('baths_number_plan', '>', 'baths_number_used')

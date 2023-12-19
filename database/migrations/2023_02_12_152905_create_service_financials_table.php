@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('commission_by')->nullable();
             $table->decimal('net_total', 8, 2)->nullable();
             $table->boolean('is_paid')->default(false);
+            $table->date('due_date')->nullable();
             $table->timestamps();
         });
     }

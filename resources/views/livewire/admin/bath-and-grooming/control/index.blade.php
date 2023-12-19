@@ -88,8 +88,8 @@
                                     <div class="mb-4">
                                         <label for="pet"
                                             class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Tipo</label>
-                                        <select class="input" wire:change='checkBathPlan'
-                                            wire:model.live='type' id="type_bath">
+                                        <select class="input" wire:change='checkBathPlan' wire:model.live='type'
+                                            id="type_bath">
                                             <option value="">Selecione</option>
                                             <option value="single">Avulso</option>
                                             <option value="plan">Pacote</option>
@@ -98,12 +98,192 @@
                                     </div>
                                     <div class="mb-4">
                                         <label for="date_time"
-                                            class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Date e Hora</label>
+                                            class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Date
+                                            e Hora</label>
                                         <input type="datetime-local" id="date_time" class="input" wire:model='date'
-                                        min="{{ now()->toDateString() }}T00:00"  required/>
+                                            min="{{ now()->toDateString() }}T00:00" required />
 
                                     </div>
 
+                                    <div class="mb-4" id='value_display' style="display: none">
+                                        <label for="date_time"
+                                            class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Valor
+                                            Diária</label>
+                                        <input type="text" id="date_time" class="input" wire:model='singleValue'
+
+                                            onkeyup="validePriceInput(event)" />
+
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="pet"
+                                            class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Tipo
+                                            de Serviço</label>
+                                        <select class="input" data-te-select-init data-te-select-filter="true"
+                                            wire:model='serviceTypeId' id="service_type_id">
+                                            <option value="">Selecione</option>
+                                            @foreach ($serviceTypes as $serviceType)
+                                                <option value="{{ $serviceType->id }}">{{ $serviceType->name }}
+                                                </option>
+                                            @endforeach
+
+                                        </select>
+
+                                    </div>
+                                    <div class="mb-4">
+                                        <label
+                                            class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Qual
+                                            Será o Banho?</label>
+                                        <div class="mb-[0.125rem] grid grid-cols-2 gap-4">
+                                            <!-- Primeira coluna -->
+                                            <div>
+                                                <input wire:model='bathType' type="checkbox" value="Banho Simples"
+                                                    id="bath_simples" />
+                                                <label
+                                                    class="inline-block pl-[0.15rem] hover:cursor-pointer text-neutral-700 dark:text-neutral-200 text-xs"
+                                                    for="bath_simples">
+                                                    Banho Simples
+                                                </label><br>
+                                                <input wire:model='bathType' type="checkbox"
+                                                    value="Banho + Tosa Higiênica" id="bath_higienica" />
+                                                <label
+                                                    class="inline-block pl-[0.15rem] hover:cursor-pointer text-neutral-700 dark:text-neutral-200 text-xs"
+                                                    for="bath_higienica">
+                                                    Banho + Tosa Higiênica
+                                                </label><br>
+                                                <input wire:model='bathType' type="checkbox"
+                                                    value="Banho + Tosa Geral Tesoura" id="bath_geral_tesoura" />
+                                                <label
+                                                    class="inline-block pl-[0.15rem] hover:cursor-pointer text-neutral-700 dark:text-neutral-200 text-xs"
+                                                    for="bath_geral_tesoura">
+                                                    Banho + Tosa Geral Tesoura
+                                                </label><br>
+                                                <input wire:model='bathType' type="checkbox"
+                                                    value="Banho Branqueador" id="bath_branqueador" />
+                                                <label
+                                                    class="inline-block pl-[0.15rem] hover:cursor-pointer text-neutral-700 dark:text-neutral-200 text-xs"
+                                                    for="bath_branqueador">
+                                                    Banho Branqueador
+                                                </label><br>
+
+                                            </div>
+
+                                            <!-- Segunda coluna -->
+                                            <div>
+                                                <input wire:model='bathType' type="checkbox"
+                                                    value="Banho + Tosa Padrão" id="bath_padrao" />
+                                                <label
+                                                    class="inline-block pl-[0.15rem] hover:cursor-pointer text-neutral-700 dark:text-neutral-200 text-xs"
+                                                    for="bath_padrao">
+                                                    Banho + Tosa Padrão
+                                                </label><br>
+                                                <input wire:model='bathType' type="checkbox"
+                                                    value="Banho + Tosa Geral Lâmina" id="bath_geral_lamina" />
+                                                <label
+                                                    class="inline-block pl-[0.15rem] hover:cursor-pointer text-neutral-700 dark:text-neutral-200 text-xs"
+                                                    for="bath_geral_lamina">
+                                                    Banho + Tosa Geral Lâmina
+                                                </label><br>
+                                                <input wire:model='bathType' type="checkbox" value="Banho Antipulga"
+                                                    id="bath_antipulga" />
+                                                <label
+                                                    class="inline-block pl-[0.15rem] hover:cursor-pointer text-neutral-700 dark:text-neutral-200 text-xs"
+                                                    for="bath_antipulga">
+                                                    Banho Antipulga
+                                                </label><br>
+                                                <input wire:model='bathType' type="checkbox"
+                                                    value="Banho Medicamentoso" id="bath_medicamentoso" />
+                                                <label
+                                                    class="inline-block pl-[0.15rem] hover:cursor-pointer text-neutral-700 dark:text-neutral-200 text-xs"
+                                                    for="bath_medicamentoso">
+                                                    Banho Medicamentoso
+                                                </label><br>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label
+                                            class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Alguma
+                                            Finalização?</label>
+                                        <div class="mb-[0.125rem] grid grid-cols-2 gap-4">
+                                            <!-- Primeira coluna -->
+                                            <div>
+                                                <input wire:model='bathComplement' type="checkbox" value="Perfume"
+                                                    id="perfume" />
+                                                <label
+                                                    class="inline-block pl-[0.15rem] hover:cursor-pointer text-neutral-700 dark:text-neutral-200 text-xs"
+                                                    for="perfume">
+                                                    Perfume
+                                                </label><br>
+                                                <input wire:model='bathComplement' type="checkbox" value="Laço"
+                                                    id="laco" />
+                                                <label
+                                                    class="inline-block pl-[0.15rem] hover:cursor-pointer text-neutral-700 dark:text-neutral-200 text-xs"
+                                                    for="laco">
+                                                    Laço
+                                                </label><br>
+                                                <input wire:model='bathComplement' type="checkbox" value="Gravata"
+                                                    id="gravata" />
+                                                <label
+                                                    class="inline-block pl-[0.15rem] hover:cursor-pointer text-neutral-700 dark:text-neutral-200 text-xs"
+                                                    for="gravata">
+                                                    Gravata
+                                                </label><br>
+
+
+                                            </div>
+
+                                            <!-- Segunda coluna -->
+                                            <div>
+                                                <input wire:model='bathComplement' type="checkbox" value="Corte Unha"
+                                                    id="corte_unha" />
+                                                <label
+                                                    class="inline-block pl-[0.15rem] hover:cursor-pointer text-neutral-700 dark:text-neutral-200 text-xs"
+                                                    for="corte_unha">
+                                                    Corte Unha
+                                                </label><br>
+                                                <input wire:model='bathComplement' type="checkbox"
+                                                    value="Limpeza Ouvidos" id="limpeza_ouvido" />
+                                                <label
+                                                    class="inline-block pl-[0.15rem] hover:cursor-pointer text-neutral-700 dark:text-neutral-200 text-xs"
+                                                    for="limpeza_ouvido">
+                                                    Limpeza Ouvidos
+                                                </label><br>
+                                                <input wire:model='bathComplement' type="checkbox"
+                                                    value="Escovação Dentes" id="escovacao_dentes" />
+                                                <label
+                                                    class="inline-block pl-[0.15rem] hover:cursor-pointer text-neutral-700 dark:text-neutral-200 text-xs"
+                                                    for="escovacao_dentes">
+                                                    Escovação Dentes
+                                                </label><br>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for=""
+                                            class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Serviço
+                                            Extras</label>
+                                        <textarea wire:model='extraServices'
+                                            class="peer block min-h-[auto] w-full rounded border bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0  dark:border-neutral-200"
+                                            id="exampleFormControlTextarea1" rows="3" placeholder="">
+                                        </textarea>
+
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for=""
+                                            class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Observações</label>
+                                        <textarea wire:model='notes'
+                                            class="peer block min-h-[auto] w-full rounded border bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0  dark:border-neutral-200"
+                                            id="exampleFormControlTextarea1" rows="3" placeholder="">
+                                        </textarea>
+
+                                    </div>
 
 
 
@@ -132,6 +312,12 @@
 
         <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
         <script>
+            function validePriceInput(event) {
+                const input = event.target;
+                const value = input.value.replace(/[^0-9.,]/g, "");
+                input.value = value;
+            }
+
             document.addEventListener('livewire:initialized', () => {
 
                 @this.on('sweetAlert', (event) => {
@@ -158,8 +344,16 @@
                     document.getElementById("service_type_id").value = '';
                 });
 
-                @this.on('typeClear',  (event) => {
+                @this.on('typeClear', (event) => {
                     document.getElementById("type_bath").value = '';
+
+                })
+                @this.on('valueVisible', (event) => {
+                    document.getElementById("value_display").style.display = 'block';
+
+                })
+                @this.on('valueInvisible', (event) => {
+                    document.getElementById("value_display").style.display = 'none';
 
                 })
 
