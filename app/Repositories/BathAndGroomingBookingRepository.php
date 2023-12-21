@@ -24,7 +24,7 @@ class BathAndGroomingBookingRepository extends BaseRepository
         return BathAndGroomingBooking::class;
     }
 
-    public function getBathAndGroomingBookingsToTable(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit = 15): LengthAwarePaginator
+    public function getBathAndGroomingBookingsToTable(?string $searchTerms, ?array $filters, int $limit = 15): LengthAwarePaginator
     {
         $query = $this->model;
         if ($searchTerms) {
@@ -36,6 +36,6 @@ class BathAndGroomingBookingRepository extends BaseRepository
             $query = $query->where($filters);
         }
 
-        return $query->orderBy($orderBy, $orderDirection)->paginate($limit);
+        return $query->orderBy('bath_date')->orderBy('bath_time')->paginate($limit);
     }
 }

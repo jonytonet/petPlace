@@ -12,8 +12,8 @@ class BathAndGroomingBookingService extends BaseService
         parent::__construct('BathAndGroomingBookingRepository');
     }
 
-    public function getBathAndGroomingBookingsToTable(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit = 15): LengthAwarePaginator
+    public function getBathAndGroomingBookingsToTable(?string $searchTerms, ?array $filters, int $limit = 15): LengthAwarePaginator
     {
-        return $this->bathAndGroomingBookingRepository->getBathAndGroomingBookingsToTable($searchTerms, $filters, $orderBy, $orderDirection, $limit);
+        return $this->bathAndGroomingBookingRepository->getBathAndGroomingBookingsToTable($searchTerms, $filters, $limit);
     }
 }

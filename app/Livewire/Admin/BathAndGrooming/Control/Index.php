@@ -171,6 +171,53 @@ class Index extends Component
 
             return;
         }
+
+        try {
+            DB::beginTransaction();
+            $serviceValue = $this->bathPlan->value / $this->bathPlan->baths_number_plan;
+            if (
+                ! app()->make(BathAndGroomingBookingService::class)->create([
+                    'service_reference_id' => $this->bathPlan->service_reference_id,
+                    'pet_id' => $this->petId,
+                    'service_value' => $serviceValue,
+                    'bath_and_grooming_control_id' => $this->bathPlan->id,
+                    'bath_date' => Carbon::parse($this->date)->format('Y-m-d'),
+                    'bath_time' => Carbon::parse($this->date)->format('H:i'),
+                    'bath_type' => json_encode($this->bathType),
+                    'bath_complement' => json_encode($this->bathComplement),
+                    'extra_services' => $this->extraServices,
+                    'notes' => $this->notes,
+
+                ])
+            ) {
+                DB::rollBack();
+                $this->dispatch('sweetAlert', ['msg' => 'Houve um erro! Tente novamente.', 'icon' => 'error']);
+
+                return;
+            }
+
+            if (
+                ! app()->make(BathAndGroomingControlService::class)->update([
+                    'baths_number_used' => $this->bathPlan->baths_number_used + 1,
+                    'updated_at' => now(),
+                ], $this->bathPlan->id)
+            ) {
+                DB::rollBack();
+                $this->dispatch('sweetAlert', ['msg' => 'Houve um erro! Tente novamente.', 'icon' => 'error']);
+
+                return;
+            }
+
+            DB::commit();
+            $this->dispatch('sweetAlert', ['msg' => 'Banho agendado com sucesso!', 'icon' => 'success']);
+
+            return redirect(request()->header('Referer'));
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            $this->dispatch('sweetAlert', ['msg' => 'Houve um erro! Tente novamente.', 'icon' => 'error']);
+
+            return;
+        }
     }
 
     private function convertToDecimal(string $value): float

@@ -37,9 +37,10 @@
 
                     </div>
 
+                     @livewire('admin.bath-and-grooming.control.table-booking')
+
                 </div>
             </div>
-
 
 
 
@@ -305,7 +306,9 @@
 
                     </div>
                 </div>
+
             </div>
+
 
             @livewire('admin.bath-and-grooming.control.modal-add-plan-to-pet')
         </div>
