@@ -49,7 +49,8 @@
                                             Avulso
                                         @endif
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{number_format($item->service_value, 2, ',', '.') }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ number_format($item->service_value, 2, ',', '.') }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         {{ \Carbon\Carbon::parse($item->bath_date)->format('d/m/Y') }}
                                     </td>
@@ -60,10 +61,14 @@
 
 
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <x-secondary-button wire:click="goToShow({{ $item->id }})">
+                                        <x-secondary-button wire:click="goToShow({{ $item->id }})"
+                                            data-te-ripple-init data-te-ripple-color="light" data-te-toggle="modal"
+                                            data-te-target="#showBathBooking">
                                             <i class="fas fa-binoculars"></i>
                                         </x-secondary-button>
-                                        <x-danger-button wire:click="destroy({{ $item->id }})">
+                                        <x-danger-button wire:click="destroy({{ $item->id }})"
+                                            data-te-toggle="modal" data-te-target="#exampleFrameTopModal"
+                                            data-te-ripple-init data-te-ripple-color="light">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </x-danger-button>
                                     </td>
@@ -74,7 +79,37 @@
 
                 </div>
                 <div class="mt-3">
-                    {{ $bookings->links() }} F
+                    {{ $bookings->links() }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {{-- Modais --}}
+
+    @livewire('admin.bath-and-grooming.control.modal-show-bath-service')
+
+
+    <div data-te-modal-init wire:ignore.defer
+        class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+        id="exampleFrameTopModal" tabindex="-1" aria-labelledby="exampleFrameTopModalLabel" aria-hidden="true">
+        <div data-te-modal-dialog-ref
+            class="pointer-events-none relative w-full translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out">
+            <div
+                class="relative flex flex-col w-full text-current bg-white border-none shadow-lg outline-none pointer-events-auto bg-clip-padding dark:bg-neutral-600">
+                <div class="relative flex-auto py-1" data-te-modal-body-ref>
+                    <div class="flex items-center justify-center my-4">
+
+                        <p class="mx-6 my-4">
+                            Tem certeza que deseja excluir esse agendamento?
+
+                        </p>
+                        <x-danger-button> Sim</x-danger-button> &nbsp; &nbsp;
+                        <x-secondary-button data-te-modal-dismiss data-te-ripple-init data-te-ripple-color="light">
+                            {{ __('Não') }}
+                        </x-secondary-button>
+                    </div>
                 </div>
             </div>
         </div>
