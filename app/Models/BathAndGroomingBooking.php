@@ -32,9 +32,9 @@ class BathAndGroomingBooking extends Model
         return $this->belongsTo(Pet::class);
     }
 
-    public function bathAndGroomingPlan(): BelongsTo
+    public function bathAndGroomingControl(): BelongsTo
     {
-        return $this->belongsTo(BathAndGroomingPlan::class);
+        return $this->belongsTo(BathAndGroomingControl::class);
     }
 
     public function bather(): BelongsTo

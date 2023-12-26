@@ -16,4 +16,9 @@ class ServiceFinancialService extends BaseService
     {
         return $this->serviceFinancialRepository->getServiceFinancialsToTable($searchTerms, $filters, $orderBy, $orderDirection, $limit);
     }
+
+    public function destroyByServiceReference(int $serviceReferenceId): bool
+    {
+        return $this->serviceFinancialRepository->destroyByServiceReference($serviceReferenceId);
+    }
 }

@@ -38,4 +38,9 @@ class ServiceFinancialRepository extends BaseRepository
 
         return $query->orderBy($orderBy, $orderDirection)->paginate($limit);
     }
+
+    public function destroyByServiceReference(int $serviceReferenceId): bool
+    {
+        return $this->model->where('service_reference_id', $serviceReferenceId)->delete();
+    }
 }
