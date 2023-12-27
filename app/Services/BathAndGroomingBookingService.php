@@ -16,4 +16,9 @@ class BathAndGroomingBookingService extends BaseService
     {
         return $this->bathAndGroomingBookingRepository->getBathAndGroomingBookingsToTable($searchTerms, $filters, $limit, $tutorFilter, $petFilter);
     }
+
+    public function getAllBathsByPetId(int $petId): LengthAwarePaginator
+    {
+        return $this->bathAndGroomingBookingRepository->getAllBathsByPetId($petId);
+    }
 }

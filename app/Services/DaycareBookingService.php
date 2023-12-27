@@ -27,4 +27,9 @@ class DaycareBookingService extends BaseService
     {
         return $this->daycareBookingRepository->getCheckInToday();
     }
+
+    public function getAllCheckingByPet(int $petId): LengthAwarePaginator
+    {
+        return $this->daycareBookingRepository->getAllCheckingByPet($petId);
+    }
 }

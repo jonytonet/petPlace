@@ -56,8 +56,18 @@ class DaycareEnrollmentRepository extends BaseRepository
         return $this->model->where('pet_id', $petId)->exists();
     }
 
-    public function getActiveEnrollment(): Collection
+    public function getActiveEnrollments(): Collection
     {
         return $this->model->where('active', '=', '1')->get();
+    }
+
+    public function getActiveEnrollmentByPet(int $petId): ?DaycareEnrollment
+    {
+        return $this->model->where('active', '=', '1')->where('pet_id', $petId)->first();
+    }
+
+    public function getAllEnrollmentsByPet(int $petId): LengthAwarePaginator
+    {
+        return $this->model->where('pet_id', $petId)->orderBy('id', 'DESC')->paginate(30);
     }
 }

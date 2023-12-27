@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\DaycareEnrollment;
 use App\Repositories\DaycareEnrollmentRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -23,8 +24,18 @@ class DaycareEnrollmentService extends BaseService
         return $this->daycareEnrollmentRepository->existActiveEnrollmentByPetId($petId);
     }
 
-    public function getActiveEnrollment(): Collection
+    public function getActiveEnrollments(): Collection
     {
-        return $this->daycareEnrollmentRepository->getActiveEnrollment();
+        return $this->daycareEnrollmentRepository->getActiveEnrollments();
+    }
+
+    public function getActiveEnrollmentByPet(int $petId): ?DaycareEnrollment
+    {
+        return $this->daycareEnrollmentRepository->getActiveEnrollmentByPet($petId);
+    }
+
+    public function getAllEnrollmentsByPet(int $petId): LengthAwarePaginator
+    {
+        return $this->daycareEnrollmentRepository->getAllEnrollmentsByPet($petId);
     }
 }

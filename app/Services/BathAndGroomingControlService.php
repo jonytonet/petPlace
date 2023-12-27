@@ -22,4 +22,9 @@ class BathAndGroomingControlService extends BaseService
     {
         return $this->bathAndGroomingControlRepository->getPlanControlByPetId($petId);
     }
+
+    public function getAllPlanControlByPetId(int $petId): LengthAwarePaginator
+    {
+        return $this->bathAndGroomingControlRepository->getAllPlanControlByPetId($petId);
+    }
 }

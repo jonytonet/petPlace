@@ -46,4 +46,12 @@ class BathAndGroomingControlRepository extends BaseRepository
             ->where('pet_id', $petId)
             ->first();
     }
+
+    public function getAllPlanControlByPetId(int $petId): LengthAwarePaginator
+    {
+        return $this->model
+            ->where('pet_id', $petId)
+            ->orderBy('id', 'DESC')
+            ->paginate(15);
+    }
 }

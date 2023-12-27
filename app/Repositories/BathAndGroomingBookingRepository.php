@@ -52,4 +52,9 @@ class BathAndGroomingBookingRepository extends BaseRepository
 
         return $query->orderBy('bath_date')->orderBy('bath_time')->paginate($limit);
     }
+
+    public function getAllBathsByPetId(int $petId): LengthAwarePaginator
+    {
+        return $this->model->where('pet_id', $petId)->orderBy('id', 'DESC')->paginate(15);
+    }
 }

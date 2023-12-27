@@ -51,4 +51,9 @@ class DaycareBookingRepository extends BaseRepository
     {
         return $this->model->whereDate('date', now()->format('Y-m-d'))->whereNull('exit_time')->get();
     }
+
+    public function getAllCheckingByPet(int $petId): LengthAwarePaginator
+    {
+        return $this->model->where('pet_id', $petId)->orderBy('id', 'DESC')->paginate(15);
+    }
 }

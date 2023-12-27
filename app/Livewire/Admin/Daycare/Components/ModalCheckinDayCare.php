@@ -30,7 +30,7 @@ class ModalCheckinDayCare extends Component
 
     public function mount()
     {
-        $this->enrollments = app()->make(DaycareEnrollmentService::class)->getActiveEnrollment();
+        $this->enrollments = app()->make(DaycareEnrollmentService::class)->getActiveEnrollments();
         $this->pets = app()->make(PetService::class)->all();
     }
 
