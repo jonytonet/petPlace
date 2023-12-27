@@ -76,9 +76,9 @@
                                     <option value="">Selecione</option>
                                     <option value="mini">Mini</option>
                                     <option value="small">Pequeno</option>
-                                    <option value="average ">Médio</option>
-                                    <option value="big ">Grande</option>
-                                    <option value="giant ">Gigante</option>
+                                    <option value="average">Médio</option>
+                                    <option value="big">Grande</option>
+                                    <option value="giant">Gigante</option>
                                 </select>
                                 @error('form.size')
                                     <div class="text-sm font-bold text-red-400">{{ $message }}</div>

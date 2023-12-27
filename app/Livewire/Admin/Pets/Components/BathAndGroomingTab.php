@@ -10,7 +10,6 @@ class BathAndGroomingTab extends Component
 
     public function render()
     {
-        dd($this->pet);
 
         return view('livewire.admin.pets.components.bath-and-grooming-tab');
     }
