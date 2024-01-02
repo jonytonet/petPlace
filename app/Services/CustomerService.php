@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Repositories\API\GetZipCodeRepository;
+use App\Repositories\Api\GetZipCodeRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;

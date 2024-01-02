@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\API;
+namespace App\Repositories\Api;
 
 use Illuminate\Support\Facades\Http;
 
