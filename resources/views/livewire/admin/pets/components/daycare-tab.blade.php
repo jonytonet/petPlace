@@ -62,7 +62,7 @@
                         <div class="p-6">
                             <h3 class="mb-4 text-2xl font-bold text-primary dark:text-primary-400">
                                 @if ($enrollmentActive)
-                                    R${{ number_format($baths->sum('service_value'), 2, ',', '.') }}
+                                    {{--   R${{ number_format($baths->sum('service_value'), 2, ',', '.') }} --}}
                                 @else
                                     R$ 0,00
                                 @endif
@@ -103,6 +103,196 @@
             </div>
         </section>
         <!-- Section: Design Block -->
+        <section>
+            <div class="w-full">
+                <div class="p-6">
+
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2">
+                        <div>
+                            <div class="mb-4">
+                                <h6>DayCare Uso</h6>
+                                <hr>
+                                <div>
+                                    <div class="flex flex-col ">
+                                        {{--  <div class="flex justify-between mt-3">
+                                            <input type="text" class=" input" style="max-width: 200px"
+                                                placeholder="Pesquise" wire:model.live='' />
+                                        </div> --}}
+                                        <div class="sm:-mx-6 lg:-mx-8">
+                                            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                                                <div class="overflow-x-auto sm:max-w-[473.6px] md:max-w-full">
+                                                    <div class="overflow-y-auto max-h-500">
+                                                        <table class="min-w-full font-light text-left">
+                                                            <thead
+                                                                class="text-sm font-medium border-b dark:border-neutral-500">
+                                                                <tr>
+
+                                                                    <th scope="col" class="px-6 py-4 text-center">
+                                                                        <span role="button">Data</span>
+                                                                    </th>
+                                                                    <th scope="col" class="px-6 py-4 text-center">
+                                                                        <span role="button">Períod</span>
+                                                                    </th>
+                                                                    <th scope="col" class="px-6 py-4 text-center">
+                                                                        <span role="button">Ent</span>
+                                                                    </th>
+                                                                    <th scope="col" class="px-6 py-4 text-center">
+                                                                        <span role="button">Saida</span>
+                                                                    </th>
+                                                                    <th scope="col" class="px-6 py-4 text-center">
+                                                                        Extra</th>
+                                                                    <th scope="col" class="px-6 py-4 text-center">
+                                                                        Tipo</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="text-xs">
+                                                                @foreach ($bookings as $item)
+                                                                    <tr
+                                                                        class="transition duration-300 ease-in-out border-b hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+
+                                                                        <td
+                                                                            class="px-6 py-4 text-center whitespace-nowrap">
+                                                                            {{ \Carbon\Carbon::parse($item->date)->format('d/m/Y') }}
+                                                                        </td>
+                                                                        <td
+                                                                            class="px-6 py-4 text-center whitespace-nowrap">
+                                                                            {{ $item->period }}h
+                                                                        </td>
+                                                                        <td
+                                                                            class="px-6 py-4 text-center whitespace-nowrap">
+                                                                            {{ \Carbon\Carbon::parse($item->entry_time)->format('H:i') }}
+                                                                        </td>
+                                                                        <td
+                                                                            class="px-6 py-4 text-center whitespace-nowrap">
+                                                                            {{ \Carbon\Carbon::parse($item->exit_time)->format('H:i') }}
+                                                                        </td>
+                                                                        <td
+                                                                            class="px-6 py-4 text-center whitespace-nowrap">
+                                                                            @if ($item->extra_time)
+                                                                                {{ $item->extra_time }} min
+                                                                            @else
+                                                                                0
+                                                                            @endif
+
+                                                                        </td>
+                                                                        <td
+                                                                            class="px-6 py-4 text-center whitespace-nowrap">
+                                                                            @if ($item->is_single_daily)
+                                                                                Av
+                                                                            @else
+                                                                                Pc
+                                                                            @endif
+
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-3">
+                                                    {{ $bookings->links() }}
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div>
+                            <div class="mb-4">
+                                <h6>Pacotes</h6>
+                                <hr>
+                                <div>
+                                    <div class="flex flex-col ">
+                                        {{--  <div class="flex justify-between mt-3">
+                                            <input type="text" class=" input" style="max-width: 200px"
+                                                placeholder="Pesquise" wire:model.live='' />
+                                        </div> --}}
+                                        <div class="sm:-mx-6 lg:-mx-8">
+                                            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                                                <div class="overflow-x-auto sm:max-w-[473.6px] md:max-w-full">
+                                                    <div class="overflow-y-auto max-h-500">
+                                                        <table class="min-w-full font-light text-left">
+                                                            <thead
+                                                                class="text-sm font-medium border-b dark:border-neutral-500">
+                                                                <tr>
+
+                                                                    <th scope="col" class="px-6 py-4 text-center">
+                                                                        <span role="button">#</span>
+                                                                    </th>
+                                                                    <th scope="col" class="px-6 py-4 text-center">
+                                                                        <span role="button">Dias</span>
+                                                                    </th>
+
+                                                                    <th scope="col" class="px-6 py-4 text-center">
+                                                                        Período</th>
+                                                                    <th scope="col" class="px-6 py-4 text-center">
+                                                                        Valor</th>
+                                                                    <th scope="col" class="px-6 py-4 text-center">
+                                                                        Data Pagamento</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody class="text-xs">
+                                                                @foreach ($monthlyPayments as $item)
+                                                                    <tr
+                                                                        class="transition duration-300 ease-in-out border-b hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600">
+
+                                                                        <td class="px-6 py-4 whitespace-nowrap">
+                                                                            {{ $item->daycareEnrollment->id }}
+                                                                        </td>
+                                                                        <td
+                                                                            class="px-6 py-4 text-center whitespace-nowrap">
+                                                                            {{ $item->daycareEnrollment->daycarePlan->days }}
+                                                                        </td>
+                                                                        <td
+                                                                            class="px-6 py-4 text-center whitespace-nowrap">
+                                                                            {{ $item->daycareEnrollment->daycarePlan->session_type }}h
+                                                                        </td>
+
+                                                                        <td
+                                                                            class="px-6 py-4 whitespace-nowrap text-end">
+                                                                            R${{ number_format($item->daycareEnrollment->daycarePlan->price, 2, ',', '.') }}
+                                                                        </td>
+                                                                        <td
+                                                                            class="px-6 py-4 text-center whitespace-nowrap ">
+                                                                            {{ \Carbon\Carbon::parse($item->pay_day)->format('d/m/Y') }}
+                                                                        </td>
+
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-3">
+                                                    {{ $enrollments->links() }}
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
     </div>
     <!-- Container for demo purpose -->
 </div>

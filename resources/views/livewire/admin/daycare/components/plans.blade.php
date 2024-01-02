@@ -160,9 +160,7 @@
                                                 </div>
                                                 <div class="mb-4">
                                                     <label for="sessionType-plan"
-                                                        class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Tipo
-                                                        de
-                                                        comissão</label>
+                                                        class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Tipo</label>
                                                     <select id="sessionType-plan" class="input text-neutral-700"
                                                         wire:model='formPlan.sessionType'>
                                                         <option value="">Selecione</option>
