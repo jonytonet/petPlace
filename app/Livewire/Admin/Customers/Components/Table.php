@@ -74,4 +74,9 @@ class Table extends Component
             $this->orderBy = $orderBy;
         }
     }
+
+    public function goToShow($id)
+    {
+        return redirect()->to('/admin/cliente/'.$id);
+    }
 }

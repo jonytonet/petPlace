@@ -92,11 +92,6 @@ class User extends Authenticatable
         return $this->hasOne(UserAddress::class);
     }
 
-    public function enrollments()
-    {
-        return $this->hasMany(Enrollment::class);
-    }
-
     public function daycareEnrollments()
     {
         return $this->hasMany(DaycareEnrollment::class);

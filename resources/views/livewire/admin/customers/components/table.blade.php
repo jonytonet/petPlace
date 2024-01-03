@@ -51,7 +51,7 @@
                                     {{ $customer->alternate_contact_cellphone_number }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap"> {{ $customer->pets->count() }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <x-secondary-button wire:click="">
+                                    <x-secondary-button wire:click="goToShow({{ $customer->id }})">
                                         <i class="fas fa-binoculars"></i>
                                     </x-secondary-button>
                                     <x-danger-button wire:click="destroyCustomer({{ $customer->id }})">

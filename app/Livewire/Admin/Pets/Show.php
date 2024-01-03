@@ -13,4 +13,9 @@ class Show extends Component
 
         return view('livewire.admin.pets.show');
     }
+
+    public function goBack()
+    {
+        return redirect()->to('/dashboard');
+    }
 }
