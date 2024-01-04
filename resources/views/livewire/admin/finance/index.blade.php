@@ -46,7 +46,7 @@
                                             </h3>
                                             {{-- <h5 class="mb-4 text-lg font-medium">Growth</h5> --}}
                                             <p class="text-neutral-500 dark:text-neutral-300">
-                                                Esse mês.
+                                                Este mês.
                                             </p>
                                         </div>
                                     </div>
