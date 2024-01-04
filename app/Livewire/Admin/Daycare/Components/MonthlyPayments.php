@@ -168,6 +168,7 @@ class MonthlyPayments extends Component
                     'service_value' => $this->convertToDecimal($this->serviceValue),
                     'payment_method_id' => $this->paymentMethodId,
                     'discount' => $this->convertToDecimal($this->discount),
+                    'additional_expenses' => $this->convertToDecimal($this->fee),
                     'net_total' => $this->convertToDecimal($this->netTotal),
                     'is_paid' => true,
                 ])
