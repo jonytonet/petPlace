@@ -13,6 +13,7 @@ class ServiceFinancial extends Model
 
     protected $fillable = [
         'service_reference_id',
+        'user_id',
         'service_type_id',
         'service_value',
         'payment_method_id',
@@ -52,5 +53,10 @@ class ServiceFinancial extends Model
     public function commissionBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'commission_by', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

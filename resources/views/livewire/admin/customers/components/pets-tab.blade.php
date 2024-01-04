@@ -11,7 +11,7 @@
                                     <span role="button">#</span>
                                 </th>
                                 <th scope="col" class="px-6 py-4 text-center">
-                                    <span role="button">Nome</span>
+                                    <span role="button" >Nome</span>
                                 </th>
                                 <th scope="col" class="px-6 py-4 text-center">
                                     <span role="button">Especie</span>
@@ -54,7 +54,7 @@
                                         {{ $item->breed->name }}
                                     </td>
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        {{ \Carbon\Carbon::parse($item->date_of_birth)->format('Y/m/d') }}
+                                        {{ \Carbon\Carbon::parse($item->date_of_birth)->format('d/m/Y') }}
                                     </td>
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
                                         <x-secondary-button wire:click="goToPet({{ $item->id }})">

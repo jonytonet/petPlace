@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('service_reference_id')->constrained('service_references');
             $table->foreignId('service_type_id')->constrained()->nullable();
+            $table->bigInteger('user_id')->nullable();
             $table->decimal('service_value', 8, 2);
             $table->foreignId('payment_method_id')->constrained();
             $table->decimal('discount', 8, 2)->nullable();

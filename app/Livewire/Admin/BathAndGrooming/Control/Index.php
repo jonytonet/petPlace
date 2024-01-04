@@ -38,7 +38,8 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.admin.bath-and-grooming.control.index',
+        return view(
+            'livewire.admin.bath-and-grooming.control.index',
             [
                 'pets' => app()->make(PetService::class)->all(),
                 'serviceTypes' => app()->make(ServiceTypeService::class)->getBathAndGroomingServices(),
@@ -123,9 +124,11 @@ class Index extends Component
 
                 return;
             }
+            $pet = app()->make(PetService::class)->find($this->petId);
             if (
                 ! app()->make(ServiceFinancialService::class)->create([
                     'service_reference_id' => $reference->id,
+                    'user_id' => $pet->user_id,
                     'service_type_id' => $this->serviceTypeId,
                     'service_value' => $this->convertToDecimal($this->singleValue),
                     'is_paid' => false,

@@ -43,4 +43,16 @@ class ServiceFinancialRepository extends BaseRepository
     {
         return $this->model->where('service_reference_id', $serviceReferenceId)->delete();
     }
+
+    public function getServiceFinancialsByUser(int $userId, ?string $reference, ?string $orderBy, ?string $orderDirection): LengthAwarePaginator
+    {
+        $query = $this->model->where('user_id', $userId);
+        if ($reference) {
+            $query = $query->whereHas('serviceReference', function ($query) use ($reference) {
+                $query->where('reference', 'LIKE', '%'.$reference.'%');
+            });
+        }
+
+        return $query->orderBy($orderBy, $orderDirection)->paginate(50);
+    }
 }

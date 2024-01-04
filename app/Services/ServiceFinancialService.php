@@ -21,4 +21,9 @@ class ServiceFinancialService extends BaseService
     {
         return $this->serviceFinancialRepository->destroyByServiceReference($serviceReferenceId);
     }
+
+    public function getServiceFinancialsByUser(int $userId, ?string $reference, ?string $orderBy, ?string $orderDirection): LengthAwarePaginator
+    {
+        return $this->serviceFinancialRepository->getServiceFinancialsByUser($userId, $reference, $orderBy, $orderDirection);
+    }
 }

@@ -66,10 +66,11 @@ class ModalAddPlanToPet extends Component
 
                 return;
             }
-
+            $pet = app()->make(PetService::class)->find($this->petId);
             if (
                 ! app()->make(ServiceFinancialService::class)->create([
                     'service_reference_id' => $reference->id,
+                    'user_id' => $pet->user_id,
                     'service_type_id' => $this->serviceTypeId,
                     'service_value' => $this->convertToDecimal($plan->price),
                     'is_paid' => false,

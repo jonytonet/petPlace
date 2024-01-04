@@ -164,6 +164,7 @@ class MonthlyPayments extends Component
                 ! app()->make(ServiceFinancialService::class)->create([
                     'service_reference_id' => $reference->id,
                     'service_type_id' => $this->serviceTypeId,
+                    'user_id' => $this->daycareEnrollment->pet->user_id,
                     'service_value' => $this->convertToDecimal($this->serviceValue),
                     'payment_method_id' => $this->paymentMethodId,
                     'discount' => $this->convertToDecimal($this->discount),
