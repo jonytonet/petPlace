@@ -12,9 +12,9 @@ class ServiceFinancialService extends BaseService
         parent::__construct('ServiceFinancialRepository');
     }
 
-    public function getServiceFinancialsToTable(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit = 15): LengthAwarePaginator
+    public function getServiceFinancialsToTable(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit, ?array $customerFilters): LengthAwarePaginator
     {
-        return $this->serviceFinancialRepository->getServiceFinancialsToTable($searchTerms, $filters, $orderBy, $orderDirection, $limit);
+        return $this->serviceFinancialRepository->getServiceFinancialsToTable($searchTerms, $filters, $orderBy, $orderDirection, $limit, $customerFilters);
     }
 
     public function destroyByServiceReference(int $serviceReferenceId): bool

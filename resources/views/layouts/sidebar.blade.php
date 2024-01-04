@@ -66,11 +66,11 @@
         </li>
         <li class="relative my-4">
             <a class="group flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-300 outline-none transition duration-300 ease-linear hover:bg-white/10 hover:outline-none focus:bg-white/10 focus:outline-none active:bg-white/10 active:outline-none data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none"
-                data-te-sidenav-link-ref title="DayCare" data-te-toggle="tooltip" href=""
-                data-te-placement="right" data-te-ripple-init data-te-ripple-color="light">
+                data-te-sidenav-link-ref title="Financeiro" data-te-toggle="tooltip" data-te-placement="right"
+                data-te-ripple-init data-te-ripple-color="light" href="{{ route('finance.index') }}">
                 <span
                     class="mx-auto motion-reduce:transition-none [&>svg]:h-7 [&>svg]:w-7 [&>svg]:fill-gray-300 [&>svg]:transition [&>svg]:duration-300 [&>svg]:ease-linear group-hover:[&>svg]:fill-white group-focus:[&>svg]:fill-white group-active:[&>svg]:fill-white group-data-[te-sidenav-state-focus]:[&>svg]:fill-white">
-                    <i class="fa-solid fa-shield-dog fa-2xl"></i>
+                    <i class="fa-solid fa-cash-register fa-2xl"></i>
                 </span>
             </a>
         </li>

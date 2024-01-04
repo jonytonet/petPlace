@@ -24,14 +24,20 @@ class ServiceFinancialRepository extends BaseRepository
         return ServiceFinancial::class;
     }
 
-    public function getServiceFinancialsToTable(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit = 15): LengthAwarePaginator
+    public function getServiceFinancialsToTable(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit, ?array $customerFilters): LengthAwarePaginator
     {
         $query = $this->model;
         if ($searchTerms) {
-            $query = $query->where(function ($query) use ($searchTerms) {
-                $query->where('name', 'LIKE', '%'.$searchTerms.'%');
+            $query = $query->whereHas('serviceReference', function ($query) use ($searchTerms) {
+                $query->where('reference', 'LIKE', '%'.$searchTerms.'%');
             });
         }
+        if (! empty($customerFilters)) {
+            $query = $query->whereHas('user', function ($query) use ($customerFilters) {
+                $query->where($customerFilters);
+            });
+        }
+
         if (! empty($filters)) {
             $query = $query->where($filters);
         }

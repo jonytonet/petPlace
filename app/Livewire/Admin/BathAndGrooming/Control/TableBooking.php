@@ -142,6 +142,7 @@ class TableBooking extends Component
         $this->petFilter = [];
         $this->filtersFormatted = [['bath_date', Carbon::today()->format('Y-m-d')]];
         $this->targetDate = Carbon::today()->format('d/m/Y');
+        $this->filters = [];
     }
 
     public function setDestroyId($id)

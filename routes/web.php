@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
         Route::view('daycare/monthlyPayments/{petId}', 'admin.daycare.monthly-payments')->name('daycare.monthlyPayments');
         Route::view('banho-tosa/index', 'admin.bath-and-grooming.control')->name('bathAndGrooming.index');
         Route::view('banho-tosa/pacotes', 'admin.bath-and-grooming.plans')->name('bathAndGrooming.plans');
+        Route::view('financeiro/index', 'admin.finance.index')->name('finance.index');
     });
 
 });
