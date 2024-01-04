@@ -29,12 +29,14 @@ class Index extends Component
 
     public function render()
     {
+
         return view(
             'livewire.admin.finance.index',
             [
                 'services' => app()->make(ServiceTypeService::class)->all(),
                 'methodPay' => app()->make(PaymentMethodService::class)->all(),
                 'finances' => app()->make(ServiceFinancialService::class)->getServiceFinancialsToTable($this->searchTerms, $this->filtersFormatted, $this->orderBy, $this->orderDirection, $this->limit, $this->customerFilters),
+                'data' => app()->make(ServiceFinancialService::class)->getServiceFinancialData(),
             ]
         );
     }

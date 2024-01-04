@@ -61,4 +61,16 @@ class ServiceFinancialRepository extends BaseRepository
 
         return $query->orderBy($orderBy, $orderDirection)->paginate(50);
     }
+
+    public function getServiceFinancialData(): ?ServiceFinancial
+    {
+
+        return $this->model
+            ->selectRaw('SUM(CASE WHEN created_at LIKE ? THEN net_total ELSE 0 END) AS todayValue', [now()->format('Y-m-d').'%'])
+            ->selectRaw('SUM(CASE WHEN created_at LIKE ? THEN net_total ELSE 0 END) AS monthValue', [now()->format('Y-m').'%'])
+            ->selectRaw('SUM(CASE WHEN created_at LIKE ? THEN net_total ELSE 0 END) AS subMonthValue', [now()->subMonth()->format('Y-m').'%'])
+            ->selectRaw('SUM(CASE WHEN is_paid = 0 THEN service_value ELSE 0 END) AS isLate')
+            ->get()->first();
+
+    }
 }

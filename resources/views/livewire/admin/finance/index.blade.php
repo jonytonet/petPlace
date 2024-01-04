@@ -21,7 +21,7 @@
                                         </div>
                                         <div class="p-6">
                                             <h3 class="mb-4 text-2xl font-bold text-primary dark:text-primary-400">
-
+                                                {{ number_format($data->todayValue, '2', ',', '.') }}
                                             </h3>
                                             {{--  <h5 class="mb-4 text-lg font-medium">Components</h5> --}}
                                             <p class="text-neutral-500 dark:text-neutral-300">
@@ -42,7 +42,7 @@
                                         </div>
                                         <div class="p-6">
                                             <h3 class="mb-4 text-2xl font-bold text-primary dark:text-primary-400">
-
+                                                {{ number_format($data->monthValue, '2', ',', '.') }}
                                             </h3>
                                             {{-- <h5 class="mb-4 text-lg font-medium">Growth</h5> --}}
                                             <p class="text-neutral-500 dark:text-neutral-300">
@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="p-6">
                                             <h3 class="mb-4 text-2xl font-bold text-primary dark:text-primary-400">
-
+                                                {{ number_format($data->subMonthValue, '2', ',', '.') }}
 
                                             </h3>
                                             {{-- <h5 class="mb-4 text-lg font-medium">Projects</h5> --}}
@@ -85,7 +85,7 @@
                                         <div class="p-6">
                                             <h3 class="mb-4 text-2xl font-bold text-primary dark:text-primary-400">
 
-
+                                                {{ number_format($data->isLate, '2', ',', '.') }}
                                             </h3>
                                             {{--   <h5 class="mb-4 text-lg font-medium">Growth</h5> --}}
                                             <p class="text-neutral-500 dark:text-neutral-300">

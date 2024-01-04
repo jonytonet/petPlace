@@ -18,11 +18,11 @@ return new class extends Migration
             $table->bigInteger('user_id')->nullable();
             $table->decimal('service_value', 8, 2);
             $table->foreignId('payment_method_id')->constrained();
-            $table->decimal('discount', 8, 2)->nullable();
-            $table->decimal('additional_expenses', 8, 2)->nullable();
-            $table->decimal('commission_value', 8, 2)->nullable();
+            $table->decimal('discount', 8, 2)->default(0.00);
+            $table->decimal('additional_expenses', 8, 2)->default(0.00);
+            $table->decimal('commission_value', 8, 2)->default(0.00);
             $table->unsignedBigInteger('commission_by')->nullable();
-            $table->decimal('net_total', 8, 2)->nullable();
+            $table->decimal('net_total', 8, 2)->default(0.00);
             $table->boolean('is_paid')->default(false);
             $table->date('due_date')->nullable();
             $table->timestamps();

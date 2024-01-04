@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\ServiceFinancial;
 use App\Repositories\ServiceFinancialRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -25,5 +26,10 @@ class ServiceFinancialService extends BaseService
     public function getServiceFinancialsByUser(int $userId, ?string $reference, ?string $orderBy, ?string $orderDirection): LengthAwarePaginator
     {
         return $this->serviceFinancialRepository->getServiceFinancialsByUser($userId, $reference, $orderBy, $orderDirection);
+    }
+
+    public function getServiceFinancialData(): ?ServiceFinancial
+    {
+        return $this->serviceFinancialRepository->getServiceFinancialData();
     }
 }
