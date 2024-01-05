@@ -259,13 +259,17 @@
                                                                                                 </span>
                                                                                             @else
                                                                                                 <span role="button"
+                                                                                                    wire:click="getPayment({{ $item }})"
                                                                                                     class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[1.5em] font-bold leading-none text-danger-700"
                                                                                                     data-te-toggle="tooltip"
                                                                                                     data-te-placement="top"
                                                                                                     data-te-ripple-init
                                                                                                     data-te-ripple-color="light"
                                                                                                     title="Receber">
-                                                                                                    <i
+                                                                                                    <i data-te-toggle="modal"
+                                                                                                        data-te-target="#payment-modal"
+                                                                                                        data-te-ripple-init
+                                                                                                        data-te-ripple-color="light"
                                                                                                         class="fa-solid fa-cash-register"></i>
                                                                                                 </span>
                                                                                             @endif
@@ -279,7 +283,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="mt-3">
-                                                                {{--  {{ $finances->links() }} --}}
+                                                                {{ $finances->links() }}
                                                             </div>
 
                                                         </div>
@@ -613,6 +617,89 @@
                         </x-primary-button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div wire:ignore.self data-te-modal-init
+        class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+        id="payment-modal" tabindex="-1" aria-labelledby="payment-modalLabel" aria-modal="true" role="dialog">
+        <div data-te-modal-dialog-ref wire:ignore.self
+            class="pointer-events-none relative w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px] min-[992px]:max-w-[800px]">
+            <div
+                class="relative flex flex-col w-full text-current bg-white border-none rounded-md shadow-lg outline-none pointer-events-auto bg-clip-padding dark:bg-neutral-600">
+                <div
+                    class="flex items-center justify-between flex-shrink-0 p-4 border-b-2 border-opacity-100 rounded-t-md border-neutral-100 dark:border-opacity-50">
+
+                    <h5 class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
+                        id="payment-modalLabel">
+                        {{ $pay['reference'] }}
+                    </h5>
+
+                    <h5 class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
+                        id="payment-modalLabel">
+                        R${{ number_format($pay['net_total'], '2', ',', '.') }}
+                    </h5>
+
+                    <!--Close button-->
+
+                </div>
+
+                <!--Modal body-->
+                <div class="relative flex-auto p-4" data-te-modal-body-ref>
+
+
+
+                    <div class="mb-4">
+                        <label for="payment_method_id"
+                            class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Forma de
+                            Pagamento</label>
+                        <select id="payment_method_id" class="input text-neutral-700"
+                            wire:model.live='pay.payment_method_id'>
+                            <option value="">Selecione</option>
+                            @foreach ($methodPay as $payItem)
+                                <option value="{{ $payItem->id }}">{{ $payItem->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('paymentMethodId')
+                            <div class="text-sm font-bold text-red-400">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-4">
+                        <label for="discount"
+                            class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Desconto</label>
+                        <input type="text" class="input" id="discount" wire:model.live='pay.discount'
+                            wire:change='getNetTotal()' onkeyup="validePriceInput(event)" />
+                        @error('discount')
+                            <div class="text-sm font-bold text-red-400">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-4">
+                        <label for="discount"
+                            class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Acréscimo</label>
+                        <input type="text" class="input" id="discount"
+                            wire:model.live='pay.additional_expenses' wire:change='getNetTotal()'
+                            onkeyup="validePriceInput(event)" />
+                        @error('discount')
+                            <div class="text-sm font-bold text-red-400">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                </div>
+                <!--Modal footer-->
+                <div
+                    class="flex flex-wrap items-center justify-end flex-shrink-0 p-4 border-t-2 border-opacity-100 rounded-b-md border-neutral-100 dark:border-opacity-50">
+
+
+                    <x-secondary-button data-te-modal-dismiss data-te-ripple-init data-te-ripple-color="light">
+                        {{ __('Cancelar') }}
+                    </x-secondary-button>
+
+                    <x-primary-button class="ml-3" type='button' data-te-modal-dismiss data-te-ripple-init wire:click='makePayment'
+                        data-te-ripple-color="light">
+                        {{ __('Efetivar Pagamento') }}
+                    </x-primary-button>
+                </div>
             </div>
         </div>
     </div>

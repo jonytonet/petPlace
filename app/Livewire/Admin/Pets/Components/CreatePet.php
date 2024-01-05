@@ -69,6 +69,6 @@ class CreatePet extends Component
             return redirect(request()->header('Referer'));
         }
 
-        $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao cadastrar o pet!', 'icon' => 'success']);
+        $this->dispatch('sweetAlert', ['msg' => 'Houve um erro ao cadastrar o pet!', 'icon' => 'error']);
     }
 }

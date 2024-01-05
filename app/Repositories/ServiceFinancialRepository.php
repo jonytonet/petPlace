@@ -71,6 +71,5 @@ class ServiceFinancialRepository extends BaseRepository
             ->selectRaw('SUM(CASE WHEN created_at LIKE ? THEN net_total ELSE 0 END) AS subMonthValue', [now()->subMonth()->format('Y-m').'%'])
             ->selectRaw('SUM(CASE WHEN is_paid = 0 THEN service_value ELSE 0 END) AS isLate')
             ->get()->first();
-
     }
 }

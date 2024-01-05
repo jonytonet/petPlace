@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Finance;
 
+use App\Models\ServiceFinancial;
 use App\Services\PaymentMethodService;
 use App\Services\ServiceFinancialService;
 use App\Services\ServiceTypeService;
@@ -26,6 +27,16 @@ class Index extends Component
     public $limit = 50;
 
     public $targetDate;
+
+    public $pay = [
+        'id' => '',
+        'reference' => '',
+        'service_value' => 0,
+        'payment_method_id' => null,
+        'discount' => 0,
+        'additional_expenses' => 0,
+        'net_total' => 0,
+    ];
 
     public function render()
     {
@@ -120,5 +131,58 @@ class Index extends Component
         }
 
         return floatval($formattedValue);
+    }
+
+    public function getNetTotal()
+    {
+        if ($this->pay['additional_expenses'] == '') {
+            $this->pay['additional_expenses'] = 0;
+        }
+        if ($this->pay['discount'] == '') {
+            $this->pay['discount'] = 0;
+        }
+        $this->pay['net_total'] = $this->convertToDecimal($this->pay['service_value']) + $this->convertToDecimal($this->pay['additional_expenses']) - $this->convertToDecimal($this->pay['discount']);
+        // dd($this->pay);
+    }
+
+    public function getPayment(ServiceFinancial $service)
+    {
+        $this->pay['id'] = $service->id;
+        $this->pay['reference'] = $service->serviceReference->reference;
+        $this->pay['service_value'] = $service->service_value;
+        $this->pay['additional_expenses'] = $service->additional_expenses;
+        $this->pay['discount'] = $service->discount;
+        $this->pay['payment_method_id'] = $service->payment_method_id;
+        $this->getNetTotal();
+
+    }
+
+    public function makePayment()
+    {
+        if (! $this->pay['payment_method_id'] || $this->pay['payment_method_id'] == '') {
+            $this->dispatch('sweetAlert', ['msg' => 'Selecione uma forma de pagamento!', 'icon' => 'error']);
+
+            return;
+        }
+        if (
+            app()->make(ServiceFinancialService::class)->update(
+                [
+                    'service_value' => $this->convertToDecimal($this->pay['service_value']),
+                    'additional_expenses' => $this->convertToDecimal($this->pay['additional_expenses']),
+                    'discount' => $this->convertToDecimal($this->pay['discount']),
+                    'payment_method_id' => $this->pay['payment_method_id'],
+                    'net_total' => $this->convertToDecimal($this->pay['net_total']),
+                    'is_paid' => true,
+                    'updated_at' => now(),
+                ],
+                $this->pay['id']
+            )
+        ) {
+            $this->dispatch('sweetAlert', ['msg' => 'Pagamento Efetivado!', 'icon' => 'success']);
+
+            return;
+        }
+
+        $this->dispatch('sweetAlert', ['msg' => 'Houve um erro! Tente novamente', 'icon' => 'error']);
     }
 }
