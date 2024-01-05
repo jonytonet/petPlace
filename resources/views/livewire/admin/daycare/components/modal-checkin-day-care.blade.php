@@ -29,6 +29,14 @@
                 <option value="12">12h</option>
             </select>
         </div>
+        <div class="mb-4">
+            <label for="discount"
+                class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Valor</label>
+            <input type="text" class="input" id="value"
+                wire:model.live='value'
+                onkeyup="validePriceInput(event)" />
+
+        </div>
     @elseif ($checkInType == 'M')
         <div class="mb-4" id="enrollment-div">
             <label for="enrollment" class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Pet</label>

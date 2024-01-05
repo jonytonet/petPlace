@@ -53,15 +53,18 @@
                                             @endif
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
+
                                             <x-secondary-button wire:click="editServiceType({{ $serviceType->id }})"
                                                 data-te-toggle="modal" data-te-target="#form-create-Service-type"
                                                 data-te-ripple-init data-te-ripple-color="light">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </x-secondary-button>
-                                            <x-danger-button wire:click="destroyServiceType({{ $serviceType->id }})"
-                                                wire:confirm="Tem certeza que deseja deletar o tipo de serviço?">
-                                                <i class="fa-solid fa-trash-can"></i>
-                                            </x-danger-button>
+                                            @if ($serviceType->id != 1)
+                                                <x-danger-button wire:click="destroyServiceType({{ $serviceType->id }})"
+                                                    wire:confirm="Tem certeza que deseja deletar o tipo de serviço?">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </x-danger-button>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -151,10 +154,10 @@
                                         Departamento</label>
                                     <select id="department_type" class="input text-neutral-700"
                                         wire:model='formServiceType.department'>
-                                            <option value="">Selecione</option>
-                                            <option value="bathAndGrooming">Banho & Tosa</option>
-                                            <option value="daycare"> DayCare</option>
-                                            <option value="veterinarian">Veterinário</option>
+                                        <option value="">Selecione</option>
+                                        <option value="bathAndGrooming">Banho & Tosa</option>
+                                        <option value="daycare"> DayCare</option>
+                                        <option value="veterinarian">Veterinário</option>
 
                                     </select>
                                     @error('formServiceType.department')

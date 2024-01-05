@@ -103,6 +103,11 @@
                     document.getElementById("booking-notes").value = '';
                 });
 
+                function validePriceInput(event) {
+                    const input = event.target;
+                    const value = input.value.replace(/[^0-9.,]/g, "");
+                    input.value = value;
+                }
 
 
             });

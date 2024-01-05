@@ -2,11 +2,15 @@
 
 namespace App\Livewire\Admin\Daycare\Components;
 
+use App\Models\ServiceReference;
 use App\Services\DaycareBookingService;
 use App\Services\DaycareDailyCreditService;
 use App\Services\DaycareEnrollmentService;
 use App\Services\PetService;
+use App\Services\ServiceFinancialService;
+use App\Services\ServiceReferenceService;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class ModalCheckinDayCare extends Component
@@ -22,6 +26,8 @@ class ModalCheckinDayCare extends Component
     public $petId;
 
     public $period;
+
+    public $value = 0.00;
 
     public function render()
     {
@@ -106,6 +112,29 @@ class ModalCheckinDayCare extends Component
 
                 return;
             }
+            $reference = app()->make(ServiceReferenceService::class)->create(['reference' => ServiceReference::generateServiceReference()]);
+            if (! $reference) {
+
+                $this->dispatch('sweetAlert', ['msg' => 'Houve um erro! Tente novamente.', 'icon' => 'error']);
+
+                return;
+            }
+
+            $pet = app()->make(PetService::class)->find($this->petId);
+
+            if (
+                ! app()->make(ServiceFinancialService::class)->create([
+                    'service_reference_id' => $reference->id,
+                    'service_type_id' => 1,
+                    'user_id' => $pet->user_id,
+                    'service_value' => $this->convertToDecimal($this->value),
+                    'is_paid' => false,
+                ])
+            ) {
+
+                $this->dispatch('sweetAlert', ['msg' => 'Houve um erro! Tente novamente.', 'icon' => 'error']);
+
+            }
             if (
                 ! app()->make(DaycareBookingService::class)->create([
                     'pet_id' => $this->petId,
@@ -135,5 +164,24 @@ class ModalCheckinDayCare extends Component
         $this->checkInType = null;
         $this->petId = null;
         $this->enrollmentId = null;
+    }
+
+    private function convertToDecimal(string $value): float
+    {
+        $cleanedValue = preg_replace('/[^0-9,.]/', '', $value);
+        if (strpos($cleanedValue, ',') !== false && strpos($cleanedValue, '.') !== false) {
+            $formattedValue = str_replace(['.'], '.', $cleanedValue);
+            $formattedValue = str_replace(',', '.', $formattedValue);
+        } else {
+            $formattedValue = str_replace(['.', ','], ['.', '.'], $cleanedValue);
+        }
+        if (Str::contains($formattedValue, '.')) {
+            $arrayValue = explode('.', $formattedValue);
+            $endElement = end($arrayValue);
+            array_pop($arrayValue);
+            $formattedValue = implode('', $arrayValue).'.'.$endElement;
+        }
+
+        return floatval($formattedValue);
     }
 }

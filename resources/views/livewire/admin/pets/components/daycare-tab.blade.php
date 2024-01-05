@@ -5,7 +5,7 @@
         <section class="mb-16 text-center">
 
 
-            <div class="grid lg:grid-cols-4 lg:gap-x-12">
+            <div class="grid lg:grid-cols-3 lg:gap-x-12">
                 <div class="mb-8 lg:mb-2">
                     <div
                         class="block h-full rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
@@ -51,7 +51,7 @@
                     </div>
                 </div>
 
-                <div class="mb-8 lg:mb-2">
+                {{--  <div class="mb-8 lg:mb-2">
                     <div
                         class="block h-full rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                         <div class="flex justify-center">
@@ -62,19 +62,19 @@
                         <div class="p-6">
                             <h3 class="mb-4 text-2xl font-bold text-primary dark:text-primary-400">
                                 @if ($enrollmentActive)
-                                    {{--   R${{ number_format($baths->sum('service_value'), 2, ',', '.') }} --}}
+                                      R${{ number_format($baths->sum('service_value'), 2, ',', '.') }}
                                 @else
                                     R$ 0,00
                                 @endif
 
                             </h3>
-                            {{-- <h5 class="mb-4 text-lg font-medium">Projects</h5> --}}
+                           <h5 class="mb-4 text-lg font-medium">Projects</h5>
                             <p class="text-neutral-500 dark:text-neutral-300">
                                 Total valor.
                             </p>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="mb-8 lg:mb-2">
                     <div
                         class="block h-full rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
