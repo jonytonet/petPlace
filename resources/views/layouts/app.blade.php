@@ -20,47 +20,29 @@
 
 </head>
 
-<body class="font-sans antialiased">
-
-    <body class="dark:bg-zinc-800">
-        <!-- Sidenav -->
+<body class="dark:bg-zinc-800">
+    <!-- Sidenav -->
+    <div class="hidden lg:block">
         @include('layouts.sidebar')
-        <!-- Sidenav -->
+    </div>
+    <!-- Sidenav -->
 
-        <!-- Content -->
-        <div id="content" class="w-screen min-h-screen pl-20 dark:bg-zinc-800">
-            @if (isset($header))
-                <header class="bg-white shadow dark:bg-gray-800">
-                    <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+    <!-- Content -->
+    <div id="content" class="w-screen min-h-screen dark:bg-zinc-800 lg:pl-20">
+        @if (isset($header))
+            <header class="bg-white shadow dark:bg-gray-800">
+                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endif
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+        <!-- Page Content -->
+        <main>
+            {{ $slot }}
+        </main>
+    </div>
+</body>
 
-        </div>
-
-
-        <script>
-
-            /* window.onload = function() {
-
-                 Livewire.on('sweetAlert', event => {
-                     swal.fire({
-                         position: 'top-end',
-                         text: event.msg,
-                         icon: event.icon,
-                         showConfirmButton: false,
-                         timer: 3000,
-                     });
-                 });
-
-             };*/
-        </script>
-    </body>
 
 </html>
