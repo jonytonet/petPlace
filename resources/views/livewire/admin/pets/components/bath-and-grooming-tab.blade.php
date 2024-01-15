@@ -85,7 +85,7 @@
                         </div>
                         <div class="p-6">
                             <h3 class="mb-4 text-2xl font-bold text-primary dark:text-primary-400">
-                                @if ($baths)
+                                @if (count($baths) > 0)
                                     {{ \Carbon\Carbon::parse($baths->last()->bath_date)->format('d/m/Y') }}
                                 @else
                                     Nada Consta
