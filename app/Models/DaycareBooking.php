@@ -33,23 +33,56 @@ class DaycareBooking extends Model
         return $this->belongsTo(Pet::class);
     }
 
-    public function isLate()
+    public function isLate(): bool
     {
         $forecast = Carbon::createFromFormat('H:i:s', $this->entry_time)
             ->addHours($this->period);
 
         $now = Carbon::now();
+
+        if ($now->hour >= 19) {
+            return true;
+        }
 
         return $now->gt($forecast);
     }
 
-    public function getDelayInMinutes()
+
+
+    public function getDelayInMinutes(): int
     {
         $forecast = Carbon::createFromFormat('H:i:s', $this->entry_time)
             ->addHours($this->period);
         $now = Carbon::now();
+
         $delayInMinutes = $now->diffInMinutes($forecast);
+
+
+        if ($delayInMinutes <= 0 && $now->hour >= 19) {
+            $forecast = Carbon::createFromTime(19, 0, 0);
+            $delayInMinutes = $now->diffInMinutes($forecast);
+        }
 
         return $delayInMinutes;
     }
+
+    public function getCheckOutTime()
+    {
+        $now = Carbon::now();
+
+        if ($now->hour >= 19) {
+            return Carbon::createFromTime(19, 0, 0)->format('H:i:s');
+        }
+
+        $forecast = Carbon::createFromFormat('H:i:s', $this->entry_time)
+            ->addHours($this->period);
+
+        if ($forecast->hour >= 19 || $forecast->hour <= 7) {
+            $forecast = Carbon::createFromTime(19, 0, 0);
+
+        }
+
+        return $forecast->format('H:i:s');
+    }
+
 }
