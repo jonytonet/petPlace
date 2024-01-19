@@ -71,7 +71,7 @@
                         <div class="mb-4">
                             <label for="rg"
                                 class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">RG</label>
-                            <input type="text" id="rg" x-mask="99.999.999-9" class="input"
+                            <input type="text" id="rg" class="input"
                                 wire:model='form.rg' />
                             @error('form.rg')
                                 <div class="text-sm font-bold text-red-400">{{ $message }}</div>

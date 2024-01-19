@@ -45,7 +45,7 @@
 
                                 <td class="px-6 py-4 whitespace-nowrap" width='30%'>
                                     <input type="text" id="customer-rg" wire:model='customerInfo.rg'
-                                        x-mask="99.999.999-9" @if (!$customerEdit) disabled @endif
+                                      @if (!$customerEdit) disabled @endif
                                         value="{{ $customer->rg }}" class="input" />
                                 </td>
 
