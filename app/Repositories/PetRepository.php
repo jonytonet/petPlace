@@ -21,7 +21,7 @@ class PetRepository extends BaseRepository
 
     public function model(): string
     {
-        return User::class;
+        return Pet::class;
     }
 
     public function getPetsToTable(?string $searchTerms, ?array $filters, ?string $orderBy, ?string $orderDirection, int $limit = 15): LengthAwarePaginator
@@ -29,7 +29,7 @@ class PetRepository extends BaseRepository
         $query = $this->model;
         if ($searchTerms) {
             $query = $query->where(function ($query) use ($searchTerms) {
-                $query->where('name', 'LIKE', '%'.$searchTerms.'%')->orWhere('email', 'LIKE', '%'.$searchTerms.'%')->orWhere('alternate_contact_name', 'LIKE', '%'.$searchTerms.'%');
+                $query->where('name', 'LIKE', '%'.$searchTerms.'%');
             });
         }
         if (! empty($filters)) {

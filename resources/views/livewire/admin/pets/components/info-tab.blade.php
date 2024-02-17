@@ -130,7 +130,7 @@
                                             Gigante</option>
                                     </select>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap" width='20%'>Raça</td>
+                                <td class="px-6 py-4 whitespace-nowrap" width='20%'>Microship</td>
 
                                 <td class="px-6 py-4 whitespace-nowrap" width='30%'>
                                     <select id="pet-microchip" class="input text-neutral-700"

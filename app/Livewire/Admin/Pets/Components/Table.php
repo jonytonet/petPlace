@@ -68,8 +68,14 @@ class Table extends Component
         }
     }
 
-    public function goToShow($id)
+    public function destroyPet($id)
     {
-        return redirect()->to('/admin/pet/'.$id);
+        if(app()->make(PetService::class)->destroy($id)){
+            $this->dispatch('sweetAlert', ['msg' => 'Pet deletado com sucesso!', 'icon' => 'success']);
+            return;
+        }
+        $this->dispatch('sweetAlert', ['msg' => 'Houve  um erro inesperado!', 'icon' => 'error']);
     }
+
+
 }
