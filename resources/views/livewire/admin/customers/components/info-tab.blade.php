@@ -45,8 +45,8 @@
 
                                 <td class="px-6 py-4 whitespace-nowrap" width='30%'>
                                     <input type="text" id="customer-rg" wire:model='customerInfo.rg'
-                                      @if (!$customerEdit) disabled @endif
-                                        value="{{ $customer->rg }}" class="input" />
+                                        @if (!$customerEdit) disabled @endif value="{{ $customer->rg }}"
+                                        class="input" />
                                 </td>
 
                             </tr>
@@ -151,6 +151,18 @@
                                 </td>
 
 
+                            </tr>
+
+
+
+                            <tr class="border-b dark:border-neutral-500" wire:poll.2s>
+                                <td class="px-6 py-4 whitespace-nowrap">Número</td>
+
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <input type="text" class="input" id="customer-address-number"
+                                        @if (!$customerEdit) disabled @endif
+                                        wire:model='addressInfo.number' value="{{ $customer->number }}" />
+                                </td>
                             </tr>
                             <tr class="border-b dark:border-neutral-500" wire:poll.2s>
 

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('service_reference_id')->nullable();
             $table->foreignId('pet_id')->constrained()->onDelete('cascade');
-            $table->foreignId('veterinarian_id')->constrained()->onDelete('cascade');
+            $table->foreignId('veterinarian_id')->constrained()->onDelete('cascade')->nullable();
             $table->date('given_date');
             $table->float('weight');
             $table->string('medication');
