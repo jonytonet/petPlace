@@ -114,7 +114,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap" width='30%'>
                                     <input type="text" class="input"
                                         id="customer-alternate_contact_cellphone_number"
-                                        @if (!$customerEdit) disabled @endif x-mask="(99)99999-9999"
+                                        @if (!$customerEdit) disabled @endif
                                         wire:model='customerInfo.alternate_contact_cellphone_number'
                                         value="{{ $customer->alternate_contact_cellphone_number }}" />
                                 </td>

@@ -100,8 +100,8 @@
                     <div>
                         <div class="mb-4">
                             <label for="cell_phone_number_alter"
-                                class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Celular</label>
-                            <input type="text" id="cell_phone_number_alter" class="input" x-mask="(99)99999-9999"
+                                class="block text-sm font-medium text-neutral-700 dark:text-neutral-200">Telefone</label>
+                            <input type="text" id="cell_phone_number_alter" class="input"
                                 wire:model='form.alternateContactCellphone' />
                             @error('form.alternateContactCellphone')
                                 <div class="text-sm font-bold text-red-400">{{ $message }}</div>
