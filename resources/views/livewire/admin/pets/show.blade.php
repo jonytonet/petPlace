@@ -12,7 +12,8 @@
 
                     <div>
 
-                        <ul class="flex flex-row flex-wrap pl-0 mb-5 list-none border-b-0" role="tablist" data-te-nav-ref>
+                        <ul class="flex flex-row flex-wrap pl-0 mb-5 list-none border-b-0" role="tablist"
+                            data-te-nav-ref>
                             <li role="presentation">
                                 <a href="#tabs-home"
                                     class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
@@ -31,6 +32,12 @@
                                     data-te-toggle="pill" data-te-target="#tabs-messages" role="tab"
                                     aria-controls="tabs-messages" aria-selected="false">Daycare</a>
                             </li>
+                            <li role="presentation">
+                                <a href="#tabs-vet"
+                                    class="my-2 block border-x-0 border-b-2 border-t-0 border-transparent px-7 pb-3.5 pt-4 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+                                    data-te-toggle="pill" data-te-target="#tabs-vet" role="tab"
+                                    aria-controls="tabs-vet" aria-selected="false">Controle Veterinário</a>
+                            </li>
 
                         </ul>
 
@@ -38,7 +45,7 @@
                         <div class="mb-6">
                             <div class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
                                 id="tabs-home" role="tabpanel" aria-labelledby="tabs-home-tab" data-te-tab-active>
-                                @livewire('admin.pets.components.info-tab',['pet' => $pet])
+                                @livewire('admin.pets.components.info-tab', ['pet' => $pet])
                             </div>
                             <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
                                 id="tabs-profile" role="tabpanel" aria-labelledby="tabs-profile-tab">
@@ -47,6 +54,10 @@
                             <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
                                 id="tabs-messages" role="tabpanel" aria-labelledby="tabs-profile-tab">
                                 @livewire('admin.pets.components.daycare-tab', ['pet' => $pet])
+                            </div>
+                            <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[te-tab-active]:block"
+                                id="tabs-vet" role="tabpanel" aria-labelledby="tabs-profile-tab">
+                                @livewire('admin.pets.components.dewormer-tab', ['pet' => $pet])
                             </div>
 
                         </div>
@@ -71,5 +82,11 @@
 
 
         });
+
+        function validePriceInput(event) {
+                const input = event.target;
+                const value = input.value.replace(/[^0-9.,]/g, "");
+                input.value = value;
+            }
     </script>
 </div>

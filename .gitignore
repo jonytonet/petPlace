@@ -5,6 +5,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/public/build/manifest.json
 .env
 .env.backup
 .env.umbler

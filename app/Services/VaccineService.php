@@ -16,4 +16,9 @@ class VaccineService extends BaseService
     {
         return $this->vaccineRepository->getVaccinesToTable($searchTerms, $filters, $orderBy, $orderDirection, $limit);
     }
+
+    public function getByPetId(int $petId)
+    {
+        return $this->vaccineRepository->getByPetId($petId);
+    }
 }

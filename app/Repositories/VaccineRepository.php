@@ -38,4 +38,10 @@ class VaccineRepository extends BaseRepository
 
         return $query->orderBy($orderBy, $orderDirection)->paginate($limit);
     }
+
+    public function getByPetId(int $petId)
+    {
+        return $this->model->where('pet_id', $petId)->orderBy('expiration_date', 'desc')->get();
+    }
+
 }

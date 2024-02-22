@@ -16,4 +16,9 @@ class DewormerService extends BaseService
     {
         return $this->dewormerRepository->getDewormersToTable($searchTerms, $filters, $orderBy, $orderDirection, $limit);
     }
+
+    public function getByPetId(int $petId)
+    {
+        return $this->dewormerRepository->getByPetId($petId);
+    }
 }

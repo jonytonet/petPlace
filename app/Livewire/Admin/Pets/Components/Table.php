@@ -70,12 +70,11 @@ class Table extends Component
 
     public function destroyPet($id)
     {
-        if(app()->make(PetService::class)->destroy($id)){
+        if (app()->make(PetService::class)->destroy($id)) {
             $this->dispatch('sweetAlert', ['msg' => 'Pet deletado com sucesso!', 'icon' => 'success']);
+
             return;
         }
         $this->dispatch('sweetAlert', ['msg' => 'Houve  um erro inesperado!', 'icon' => 'error']);
     }
-
-
 }

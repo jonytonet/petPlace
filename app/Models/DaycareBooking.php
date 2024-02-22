@@ -47,8 +47,6 @@ class DaycareBooking extends Model
         return $now->gt($forecast);
     }
 
-
-
     public function getDelayInMinutes(): int
     {
         $forecast = Carbon::createFromFormat('H:i:s', $this->entry_time)
@@ -56,7 +54,6 @@ class DaycareBooking extends Model
         $now = Carbon::now();
 
         $delayInMinutes = $now->diffInMinutes($forecast);
-
 
         if ($delayInMinutes <= 0 && $now->hour >= 19) {
             $forecast = Carbon::createFromTime(19, 0, 0);
@@ -84,5 +81,4 @@ class DaycareBooking extends Model
 
         return $forecast->format('H:i:s');
     }
-
 }
