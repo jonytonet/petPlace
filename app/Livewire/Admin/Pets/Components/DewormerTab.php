@@ -18,7 +18,7 @@ class DewormerTab extends Component
             [
                 'dewormer' => app()->make(DewormerService::class)->getByPetId($this->pet->id),
                 'vaccines' => app()->make(VaccineService::class)->getByPetId($this->pet->id),
-                'veterinaries' => app()->make(VeterinarianService::class)->all()
+                'veterinaries' => app()->make(VeterinarianService::class)->all(),
             ]
         );
     }
